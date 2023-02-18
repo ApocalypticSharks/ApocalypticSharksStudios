@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   farmerPresenter: {fileID: 0}
+  animator: {fileID: -4818114508776585106}
 --- !u!95 &-4818114508776585106
 Animator:
   serializedVersion: 4
@@ -482,6 +483,10 @@ PrefabInstance:
     - target: {fileID: 5809717924341741966, guid: 3cb97190f08f9634084dc5e645dd9d7e, type: 3}
       propertyPath: m_Name
       value: Blood
+      objectReference: {fileID: 0}
+    - target: {fileID: 5809717924341741966, guid: 3cb97190f08f9634084dc5e645dd9d7e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cb97190f08f9634084dc5e645dd9d7e, type: 3}

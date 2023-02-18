@@ -42,8 +42,9 @@ public class FarmerPresenter: MonoBehaviour
             attackSpeed -= Time.deltaTime;
         else
         {
+            if (!attackPrepared)
+                farmer.animator.SetTrigger("Attack");
             attackPrepared = true;
-            farmer.AttackPrepared();
             if (attackPreparedTimer > 0)
                 attackPreparedTimer -= Time.deltaTime;
             else 

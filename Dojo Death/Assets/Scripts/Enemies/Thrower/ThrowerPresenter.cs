@@ -33,14 +33,15 @@ public class ThrowerPresenter : MonoBehaviour
             attackSpeed -= Time.deltaTime;
         else
         {
+            if (!attackPrepared)
+                thrower.animator.SetTrigger("Attack");
             attackPrepared = true;
-            thrower.AttackPrepared();
             if (attackPreparedTimer > 0)
                 attackPreparedTimer -= Time.deltaTime;
             else
             {
                 thrower.Slash();
-                GameObject kunaiThrown = Instantiate(kunai, Vector3.zero, Quaternion.identity) as GameObject;
+                GameObject kunaiThrown = Instantiate(kunai, thrower.transform.position, Quaternion.identity) as GameObject;
                 attackSpeed = deffaultAttackSpeed;
                 attackPreparedTimer = 0.5f;
             }

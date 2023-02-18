@@ -6,6 +6,7 @@ public class ThrowerView : MonoBehaviour
 {
 
     public ThrowerPresenter throwerPresenter;
+    public Animator animator;
 
     private void OnEnable()
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 public class FarmerView : MonoBehaviour
 {
     public FarmerPresenter farmerPresenter;
+    public Animator animator;
     // Start is called before the first frame update
 
     private void OnEnable()

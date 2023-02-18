@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwerPresenter: {fileID: 0}
+  animator: {fileID: 2798100708668317353}
 --- !u!95 &2798100708668317353
 Animator:
   serializedVersion: 4

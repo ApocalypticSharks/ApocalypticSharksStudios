@@ -11,6 +11,7 @@ public class MasterScript : MonoBehaviour
     [SerializeField] private Object weapon;
     [SerializeField] private GameObject leftBalcony, rightBalcony;
     private Vector3 firstClick;
+    [SerializeField] private Animator animator;
 
     private void Start()
     {
@@ -71,6 +72,7 @@ public class MasterScript : MonoBehaviour
 
     IEnumerator Slash(float rotation)
     {
+        //animator.SetTrigger("Attack" + Random.Range(1, 3));
         transform.rotation = transform.rotation = Quaternion.Euler(0, rotation, 0);
         transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);

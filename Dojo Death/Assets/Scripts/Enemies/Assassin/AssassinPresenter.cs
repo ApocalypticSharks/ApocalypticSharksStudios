@@ -31,8 +31,9 @@ public class AssassinPresenter : MonoBehaviour
             attackSpeed -= Time.deltaTime;
         else
         {
+            if (!attackPrepared)
+                assassin.animator.SetTrigger("Attack");
             attackPrepared = true;
-            assassin.AttackPrepared();
             if (attackPreparedTimer > 0)
                 attackPreparedTimer -= Time.deltaTime;
             else
@@ -51,7 +52,7 @@ public class AssassinPresenter : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(0.1f);
-            GameObject kunaiThrown = Instantiate(kunai, Vector3.zero, Quaternion.identity) as GameObject;
+            GameObject kunaiThrown = Instantiate(kunai, assassin.transform.position, Quaternion.identity) as GameObject;
         }
         Disable();
     }

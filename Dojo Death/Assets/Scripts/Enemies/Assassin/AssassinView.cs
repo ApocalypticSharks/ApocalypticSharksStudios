@@ -5,6 +5,7 @@ using UnityEngine;
 public class AssassinView : MonoBehaviour
 {
     public AssassinPresenter assassinPresenter;
+    public Animator animator;
 
     private void OnEnable()
     {
