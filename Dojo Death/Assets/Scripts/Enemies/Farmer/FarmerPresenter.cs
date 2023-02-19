@@ -78,8 +78,7 @@ public class FarmerPresenter: MonoBehaviour
 
     private void Die()
     {
-        farmer.Die();
-        Disable();
+        farmer.animator.SetTrigger("Death");
     }
 
     public void Disable()

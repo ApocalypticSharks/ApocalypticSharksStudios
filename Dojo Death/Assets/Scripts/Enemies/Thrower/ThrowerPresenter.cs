@@ -60,8 +60,7 @@ public class ThrowerPresenter : MonoBehaviour
 
     private void Die()
     {
-        thrower.Die();
-        Disable();
+        thrower.animator.SetTrigger("Death");
     }
 
     public void Disable()

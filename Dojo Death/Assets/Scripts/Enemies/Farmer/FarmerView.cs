@@ -28,9 +28,9 @@ public class FarmerView : MonoBehaviour
     }
     public void Die()
     {
+        farmerPresenter.Disable();
         transform.parent = null;
         gameObject.SetActive(false);
-        this.gameObject.GetComponent<Renderer>().material.color = new Color(255, 15, 15);
     }
 
     public void AttackPrepared()

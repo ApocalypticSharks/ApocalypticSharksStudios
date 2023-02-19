@@ -72,8 +72,8 @@ public class MasterScript : MonoBehaviour
 
     IEnumerator Slash(float rotation)
     {
-        //animator.SetTrigger("Attack" + Random.Range(1, 3));
         transform.rotation = transform.rotation = Quaternion.Euler(0, rotation, 0);
+        animator.SetTrigger("Attack" + Random.Range(1, 3));
         transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         transform.GetChild(0).gameObject.SetActive(false);

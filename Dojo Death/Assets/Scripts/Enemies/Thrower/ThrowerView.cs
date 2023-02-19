@@ -30,10 +30,9 @@ public class ThrowerView : MonoBehaviour
     // Update is called once per frame
     public void Die()
     {
+        throwerPresenter.Disable();
         transform.parent = null;
         gameObject.SetActive(false);
-        Debug.Log("Died");
-        this.gameObject.GetComponent<Renderer>().material.color = new Color(255, 15, 15);
     }
 
     public void AttackPrepared()
