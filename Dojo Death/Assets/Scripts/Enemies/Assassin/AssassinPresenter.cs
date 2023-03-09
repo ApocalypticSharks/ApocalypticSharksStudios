@@ -17,33 +17,51 @@ public class AssassinPresenter : MonoBehaviour
 
     public void Enable()
     {
-        enemy.slashHandler += Slash;
+        enemy.slashTickHandler += SlashTimer;
+        enemy.attackPreparedHandler += SwitchAttackPrepared;
+        enemy.throwWeaponHandler += Throw;
     }
 
+    public void SlashTimerTick()
+    {
+        enemy.SlashTick();
+    }
+
+    public void AttackPrepared()
+    {
+        enemy.SwitchAttackPrepared();
+    }
     public void DoSlash()
     {
-        enemy.Slash();
+        enemy.ThrowWeapon();
     }
-
-    private void Slash(float damage, ref float attackSpeed, float deffaultAttackSpeed, ref float attackPreparedTimer, ref bool attackPrepared)
+    private void SlashTimer(ref float attackSpeed, ref bool attackPrepared)
     {
-        if (attackSpeed > 0)
-            attackSpeed -= Time.deltaTime;
-        else
+        if (!attackPrepared)
         {
-            if (!attackPrepared)
-                assassin.animator.SetTrigger("Attack");
-            attackPrepared = true;
-            if (attackPreparedTimer > 0)
-                attackPreparedTimer -= Time.deltaTime;
+            if (attackSpeed > 0)
+                attackSpeed -= Time.deltaTime;
             else
             {
-                assassin.Slash();
-                assassin.StartCoroutine(ThrowKunai());
-                attackSpeed = deffaultAttackSpeed;
-                attackPreparedTimer = 0.5f;
+                AttackPrepared();
+                assassin.animator.SetTrigger("Attack");
             }
         }
+    }
+
+    private void SwitchAttackPrepared(ref bool attackPrepared)
+    {
+        if (attackPrepared)
+            attackPrepared = false;
+        else
+            attackPrepared = true;
+    }
+
+    private void Throw(float deffaultAttackSpeed, ref float attackSpeed)
+    {
+        assassin.StartCoroutine(ThrowKunai());
+        attackSpeed = deffaultAttackSpeed;
+        AttackPrepared();
     }
 
     IEnumerator ThrowKunai()
@@ -59,6 +77,8 @@ public class AssassinPresenter : MonoBehaviour
 
     public void Disable()
     {
-        enemy.slashHandler -= Slash;
+        enemy.slashTickHandler -= SlashTimer;
+        enemy.attackPreparedHandler -= SwitchAttackPrepared;
+        enemy.throwWeaponHandler -= Throw;
     }
 }

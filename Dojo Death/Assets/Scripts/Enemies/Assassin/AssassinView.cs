@@ -13,7 +13,7 @@ public class AssassinView : MonoBehaviour
     }
     private void Update()
     {
-        assassinPresenter.DoSlash();
+        assassinPresenter.SlashTimerTick();
     }
 
     public void TakeDamage(float health)
@@ -30,11 +30,11 @@ public class AssassinView : MonoBehaviour
 
     public void AttackPrepared()
     {
-        this.gameObject.GetComponent<Renderer>().material.color = new Color(0, 255, 0);
+        assassinPresenter.AttackPrepared();
     }
 
-    public void Slash()
+    public void DoSlash()
     {
-        this.gameObject.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+        assassinPresenter.DoSlash();
     }
 }

@@ -15,7 +15,7 @@ public class MasterScript : MonoBehaviour
 
     private void Start()
     {
-        hp = 100;
+        hp = 10000;
     }
     private void Update()
     {
@@ -28,14 +28,18 @@ public class MasterScript : MonoBehaviour
                 if (Input.mousePosition.y > firstClick.y + 20)
                     Throw(rightBalcony.transform.position);
                 else
-                    Attack(0);
+                {
+                    animator.SetTrigger("Attack" + Random.Range(1, 3));
+                }                   
             }
             else if (Input.mousePosition.x < firstClick.x - 10)
             {
                 if (Input.mousePosition.y > firstClick.y + 20)
                     Throw(leftBalcony.transform.position);
                 else
-                    Attack(180);
+                {
+                    animator.SetTrigger("Attack" + Random.Range(1, 3) + "Left");
+                }
             }
             else
                 CatchProjectile();
@@ -73,7 +77,6 @@ public class MasterScript : MonoBehaviour
     IEnumerator Slash(float rotation)
     {
         transform.rotation = transform.rotation = Quaternion.Euler(0, rotation, 0);
-        animator.SetTrigger("Attack" + Random.Range(1, 3));
         transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         transform.GetChild(0).gameObject.SetActive(false);

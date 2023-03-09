@@ -14,7 +14,7 @@ public class ThrowerView : MonoBehaviour
     }
     private void Update()
     {
-        throwerPresenter.DoSlash();
+        throwerPresenter.SlashTimerTick();
     }
     public void TakeDamage(float health)
     {
@@ -37,11 +37,11 @@ public class ThrowerView : MonoBehaviour
 
     public void AttackPrepared()
     {
-        this.gameObject.GetComponent<Renderer>().material.color = new Color(0, 255, 0);
+        throwerPresenter.AttackPrepared();
     }
 
-    public void Slash()
+    public void DoSlash()
     {
-        this.gameObject.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+        throwerPresenter.DoSlash();
     }
 }

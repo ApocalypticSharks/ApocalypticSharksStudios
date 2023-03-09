@@ -10,8 +10,17 @@ public class Enemy: MonoBehaviour
     public event Action death;
     public event Action<float> takenDamage;
 
-    public delegate void slash(float damage, ref float attackSpeed, float deffaultAttackSpeed, ref float attackPreparedTimer, ref bool attackPrepared);
-    public slash slashHandler;
+    public delegate void slash(ref float attackSpeed, ref bool attackPrepared);
+    public slash slashTickHandler;
+
+    public delegate void attackPreparation(ref bool attackPrepared);
+    public attackPreparation attackPreparedHandler;
+
+    public delegate void dealDamage(float damage, float deffaultAttackSpeed, ref float attackSpeed);
+    public dealDamage dealDamageHandler;
+
+    public delegate void throwWeapon(float deffaultAttackSpeed, ref float attackSpeed);
+    public throwWeapon throwWeaponHandler;
 
     public delegate void stun(ref bool stunned, float stunTime, ref float stunRecover);
     public stun stunHandler;
@@ -31,10 +40,27 @@ public class Enemy: MonoBehaviour
         }
     }
 
-    public void Slash()
+    public void SlashTick()
     {
         if(!stunned)
-            slashHandler?.Invoke(damage, ref  attackSpeed,  deffaultAttackSpeed,  ref attackPreparedTimer,  ref attackPrepared);
+            slashTickHandler?.Invoke(ref  attackSpeed, ref attackPrepared);
+    }
+
+    public void SwitchAttackPrepared()
+    {
+            attackPreparedHandler?.Invoke(ref attackPrepared);
+    }
+
+    public void DealDamage()
+    {
+        if (!stunned)
+            dealDamageHandler?.Invoke(damage, deffaultAttackSpeed, ref attackSpeed);
+    }
+
+    public void ThrowWeapon()
+    {
+        if (!stunned)
+            throwWeaponHandler?.Invoke(deffaultAttackSpeed, ref attackSpeed);
     }
 
     public void StunCheck()

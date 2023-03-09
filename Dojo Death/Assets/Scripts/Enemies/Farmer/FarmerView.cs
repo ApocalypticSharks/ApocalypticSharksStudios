@@ -13,7 +13,7 @@ public class FarmerView : MonoBehaviour
     }
     private void Update()
     {
-        farmerPresenter.DoSlash();
+        farmerPresenter.SlashTimerTick();
         farmerPresenter.StunCheck();
     }
 
@@ -35,11 +35,11 @@ public class FarmerView : MonoBehaviour
 
     public void AttackPrepared()
     {
-        this.gameObject.GetComponent<Renderer>().material.color = new Color(0, 255, 0);
+        farmerPresenter.AttackPrepared();
     }
 
-    public void Slash()
+    public void DoSlash()
     {
-        this.gameObject.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+        farmerPresenter.DoSlash();
     }
 }
