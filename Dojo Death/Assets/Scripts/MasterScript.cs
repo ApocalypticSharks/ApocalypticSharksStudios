@@ -51,9 +51,12 @@ public class MasterScript : MonoBehaviour
 
     
 
-    private void Attack(float rotation)
+    private void Attack()
     {
-        StartCoroutine(Slash(rotation));
+        if (transform.GetChild(0).gameObject.activeSelf)
+            transform.GetChild(0).gameObject.SetActive(false);
+        else
+            transform.GetChild(0).gameObject.SetActive(true);
     }
 
     private void Throw(Vector3 direction)
@@ -72,14 +75,6 @@ public class MasterScript : MonoBehaviour
     private void CatchProjectile()
     {
         StartCoroutine(Catch());
-    }
-
-    IEnumerator Slash(float rotation)
-    {
-        transform.rotation = transform.rotation = Quaternion.Euler(0, rotation, 0);
-        transform.GetChild(0).gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        transform.GetChild(0).gameObject.SetActive(false);
     }
 
     IEnumerator Catch()
