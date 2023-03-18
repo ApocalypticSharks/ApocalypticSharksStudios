@@ -11,7 +11,7 @@ public class MasterScript : MonoBehaviour
     [SerializeField] private Object weapon;
     [SerializeField] private GameObject leftBalcony, rightBalcony;
     private Vector3 firstClick;
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator animator, cameraAnimator;
 
     private void Start()
     {
@@ -26,18 +26,26 @@ public class MasterScript : MonoBehaviour
             if (Input.mousePosition.x > firstClick.x + 10)
             {
                 if (Input.mousePosition.y > firstClick.y + 20)
+                {
+                    cameraAnimator.SetTrigger("upRight");
                     Throw(rightBalcony.transform.position);
+                }
                 else
                 {
+                    cameraAnimator.SetTrigger("right");
                     animator.SetTrigger("Attack" + Random.Range(1, 3));
                 }                   
             }
             else if (Input.mousePosition.x < firstClick.x - 10)
             {
                 if (Input.mousePosition.y > firstClick.y + 20)
+                {
+                    cameraAnimator.SetTrigger("upLeft");
                     Throw(leftBalcony.transform.position);
+                }
                 else
                 {
+                    cameraAnimator.SetTrigger("left");
                     animator.SetTrigger("Attack" + Random.Range(1, 3) + "Left");
                 }
             }
