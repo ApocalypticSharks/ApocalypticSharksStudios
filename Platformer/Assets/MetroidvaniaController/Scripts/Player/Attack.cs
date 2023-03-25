@@ -12,6 +12,7 @@ public class Attack : MonoBehaviour
 	public bool canAttack = true;
 	public bool isTimeToCheck = false;
 	public Transform collidingLight;
+	private float shootCooldown;
 
 	public GameObject cam;
 
@@ -29,6 +30,7 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		shootCooldown -= Time.deltaTime;
 		if (Input.GetKeyDown(KeyCode.X) && canAttack)
 		{
 			canAttack = false;
@@ -36,18 +38,19 @@ public class Attack : MonoBehaviour
 			StartCoroutine(AttackCooldown());
 		}
 
-		if (Input.GetKeyDown(KeyCode.V) && collidingLight != null)
+		if (Input.GetKeyDown(KeyCode.V) && collidingLight != null && shootCooldown <= 0)
 		{
 			GameObject throwableWeapon = Instantiate(throwableObject, transform.position, Quaternion.identity) as GameObject;
 			Vector2 direction = transform.position - collidingLight.position;
 			throwableWeapon.GetComponent<ThrowableWeapon>().direction = direction;
 			throwableWeapon.name = "ThrowableWeapon";
+			shootCooldown = 0.3f;
 		}
 	}
 
 	IEnumerator AttackCooldown()
 	{
-		yield return new WaitForSeconds(0.25f);
+		yield return new WaitForSeconds(0.5f);
 		canAttack = true;
 	}
 
