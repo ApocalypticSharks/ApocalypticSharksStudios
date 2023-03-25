@@ -3,9 +3,10 @@
 https://code.visualstudio.com/docs/other/unity
 
 Необходимые расширения для работы:
-1) Debugger for Unity
-2) Unity Code Snippets
-3) Unity Tools
+1) C# 
+2) Debugger for Unity
+3) Unity Code Snippets
+4) Unity Tools
 
 # Настройка для Visual Studio
 
