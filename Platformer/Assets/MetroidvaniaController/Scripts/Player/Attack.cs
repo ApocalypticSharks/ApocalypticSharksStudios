@@ -41,7 +41,7 @@ public class Attack : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.V) && collidingLight != null && shootCooldown <= 0)
 		{
 			GameObject throwableWeapon = Instantiate(throwableObject, transform.position, Quaternion.identity) as GameObject;
-			Vector2 direction = transform.position - collidingLight.position;
+			Vector2 direction = (transform.position - collidingLight.position).normalized;
 			throwableWeapon.GetComponent<ThrowableWeapon>().direction = direction;
 			throwableWeapon.name = "ThrowableWeapon";
 			shootCooldown = 0.3f;
