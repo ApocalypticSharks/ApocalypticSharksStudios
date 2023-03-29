@@ -10,6 +10,7 @@ public class Flight : MonoBehaviour
     float progress;
     bool flag = true;
     bool attack = false;
+    [SerializeField]Animator animator;
     private void Start()
     {
         player = GameObject.Find("DrawCharacter");
@@ -37,7 +38,7 @@ public class Flight : MonoBehaviour
         {
             if (flag)
             {
-                transform.position = Vector3.Lerp(startPosition, endPosition, progress += 0.02F);
+                transform.position = Vector3.Lerp(startPosition, endPosition, progress += 0.01F);
                 if (transform.position.y == endPosition.y)
                 {
                     progress = 0f;
@@ -46,7 +47,7 @@ public class Flight : MonoBehaviour
             }
             else
             {
-                transform.position = Vector3.Lerp(endPosition, startPosition, progress += 0.02F);
+                transform.position = Vector3.Lerp(endPosition, startPosition, progress += 0.01F);
                 if (transform.position.y == startPosition.y)
                 {
                     progress = 0f;
