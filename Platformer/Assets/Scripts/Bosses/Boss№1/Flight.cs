@@ -13,7 +13,7 @@ public class Flight : MonoBehaviour
     [SerializeField]Animator animator;
     private void Start()
     {
-        player = GameObject.Find("DrawCharacter");
+        player = GameObject.Find("Guf");
         transform.position = startPosition;
     }
     void FixedUpdate()

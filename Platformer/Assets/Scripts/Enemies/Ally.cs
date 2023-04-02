@@ -119,7 +119,7 @@ public class Ally : MonoBehaviour
 		}
 		else 
 		{
-			enemy = GameObject.Find("DrawCharacter");
+			enemy = GameObject.Find("Guf");
 		}
 
 		if (transform.localScale.x * m_Rigidbody2D.velocity.x > 0 && !m_FacingRight && life > 0)

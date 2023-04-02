@@ -200,7 +200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1377240496476148, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1393053470196254, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
       propertyPath: m_Layer
@@ -1683,6 +1683,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471052127}
   m_CullTransparentMesh: 1
+--- !u!95 &1488496393 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2743240042017599961, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+  m_PrefabInstance: {fileID: 7561479555388401677}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1496970625 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4660076192433278, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
@@ -2800,6 +2805,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gufik
       objectReference: {fileID: 0}
+    - target: {fileID: 1437069527130181184, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: m_Rigidbody2D
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2699193632512958300, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1488496393}
     - target: {fileID: 2893574529143473226, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -2842,6 +2855,46 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2893574529143473226, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3062193775815797555, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1488496393}
+    - target: {fileID: 3062193775815797555, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4388140102279963158, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: _playerAttacks
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785820824173301014, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785820824173301014, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785820824173301014, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785820824173301014, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692806267540710664, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692806267540710664, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692806267540710664, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
