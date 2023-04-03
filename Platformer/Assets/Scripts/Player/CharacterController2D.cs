@@ -12,7 +12,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_WallCheck;								//Posicion que controla si el personaje toca una pared
 
-	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+	const float k_GroundedRadius = .3f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	[SerializeField]private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
@@ -20,7 +20,7 @@ public class CharacterController2D : MonoBehaviour
 	private float limitFallSpeed = 25f; // Limit fall speed
 
 	public bool canDoubleJump = true; //If player can double jump
-	[SerializeField] private float m_DashForce = 25f;
+	[SerializeField] private float m_DashForce = 40f;
 	private bool canDash = true;
 	private bool isDashing = false; //If player is dashing
 	private bool m_IsWall = false; //If there is a wall in front of the player
@@ -72,7 +72,7 @@ public class CharacterController2D : MonoBehaviour
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
 		for (int i = 0; i < colliders.Length; i++)
 		{
-			if (colliders[i].gameObject != gameObject)
+			//if (colliders[i].gameObject.CompareTag("Ground"))
 				m_Grounded = true;
 				if (!wasGrounded )
 				{
@@ -141,7 +141,7 @@ public class CharacterController2D : MonoBehaviour
 			// If crouching, check to see if the character can stand up
 			if (isDashing)
 			{
-				m_Rigidbody2D.velocity = new Vector2(transform.localScale.x * m_DashForce, 0);
+				m_Rigidbody2D.velocity = new Vector2(transform.parent.localScale.x * m_DashForce, 0);
 			}
 			//only control the player if grounded or airControl is turned on
 			else if (m_Grounded || m_AirControl)
@@ -170,7 +170,6 @@ public class CharacterController2D : MonoBehaviour
 			if (m_Grounded && jump)
 			{
 				// Add a vertical force to the player.
-				animator.SetBool("IsJumping", true);
 				animator.SetBool("JumpUp", true);
 				m_Grounded = false;
 				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
@@ -214,7 +213,6 @@ public class CharacterController2D : MonoBehaviour
 
 				if (jump && isWallSliding)
 				{
-					animator.SetBool("IsJumping", true);
 					animator.SetBool("JumpUp", true); 
 					m_Rigidbody2D.velocity = new Vector2(0f, 0f);
 					m_Rigidbody2D.AddForce(new Vector2(transform.localScale.x * m_JumpForce *1.2f, m_JumpForce));
@@ -255,9 +253,9 @@ public class CharacterController2D : MonoBehaviour
 		m_FacingRight = !m_FacingRight;
 
 		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
+		Vector3 theScale = transform.parent.localScale;
 		theScale.x *= -1;
-		transform.localScale = theScale;
+		transform.parent.localScale = theScale;
 	}
 
 	public void ApplyDamage(float damage, Vector3 position) 

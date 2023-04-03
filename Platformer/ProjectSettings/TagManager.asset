@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Enemy
   - Light
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 

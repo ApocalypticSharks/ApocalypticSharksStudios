@@ -718,9 +718,9 @@ GameObject:
   - component: {fileID: 389541610}
   - component: {fileID: 389541609}
   - component: {fileID: 389541608}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlatformLeft
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -971,7 +971,7 @@ GameObject:
   - component: {fileID: 573815216}
   - component: {fileID: 573815215}
   - component: {fileID: 573815217}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2164,9 +2164,9 @@ GameObject:
   - component: {fileID: 1679580823}
   - component: {fileID: 1679580822}
   - component: {fileID: 1679580824}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlatformRight
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2359,9 +2359,9 @@ GameObject:
   - component: {fileID: 1867605371}
   - component: {fileID: 1867605370}
   - component: {fileID: 1867605372}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2694,7 +2694,7 @@ GameObject:
   - component: {fileID: 2125047307}
   - component: {fileID: 2125047306}
   - component: {fileID: 2125047305}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2869,6 +2869,10 @@ PrefabInstance:
       propertyPath: _playerAttacks
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5412729671609805328, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: m_WhatIsGround.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6785820824173301014, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
       propertyPath: m_Size.x
       value: 1
@@ -2885,6 +2889,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7900871236202081118, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8692806267540710664, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
       propertyPath: m_Size.x
       value: 1
@@ -2895,6 +2903,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692806267540710664, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
       propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9021765983633488431, guid: be536496f6514c64c865dd59ad190c1d, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
