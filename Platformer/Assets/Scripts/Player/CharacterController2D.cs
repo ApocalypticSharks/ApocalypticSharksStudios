@@ -31,7 +31,7 @@ public class CharacterController2D : MonoBehaviour
 
 	public float life = 10f; //Life of the player
 	public bool invincible = false; //If player can die
-	private bool canMove = true; //If player can move
+	[SerializeField]private bool canMove = true; //If player can move
 
 	private Animator animator;
 	public ParticleSystem particleJumpUp; //Trail particles
@@ -74,7 +74,9 @@ public class CharacterController2D : MonoBehaviour
 		{
 			//if (colliders[i].gameObject.CompareTag("Ground"))
 				m_Grounded = true;
-				if (!wasGrounded )
+				canMove = true;
+				animator.SetBool("IsWallSliding", false);
+			if (!wasGrounded )
 				{
 					OnLandEvent.Invoke();
 					if (!m_IsWall && !isDashing) 
@@ -182,7 +184,7 @@ public class CharacterController2D : MonoBehaviour
 				canDoubleJump = false;
 				m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
 				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce / 1.2f));
-				animator.SetBool("IsDoubleJumping", true);
+				animator.SetBool("JumpUp", true);
 			}
 
 			else if (m_IsWall && !m_Grounded)
@@ -223,7 +225,7 @@ public class CharacterController2D : MonoBehaviour
 					animator.SetBool("IsWallSliding", false);
 					oldWallSlidding = false;
 					m_WallCheck.localPosition = new Vector3(Mathf.Abs(m_WallCheck.localPosition.x), m_WallCheck.localPosition.y, 0);
-					canMove = false;
+					//canMove = false;
 				}
 				else if (dash && canDash)
 				{
