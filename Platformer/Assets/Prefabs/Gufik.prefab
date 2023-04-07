@@ -11001,6 +11001,7 @@ GameObject:
   - component: {fileID: 7847097264575172105}
   - component: {fileID: 8995311883722654615}
   - component: {fileID: 7573919965634726656}
+  - component: {fileID: 227687725547742710}
   m_Layer: 0
   m_Name: Guf
   m_TagString: Untagged
@@ -11269,7 +11270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmgValue: 4
-  throwableObject: {fileID: 5532974359214069763, guid: 340067e8e5a097546ad175f1d00a6ece, type: 3}
   attackCheck: {fileID: 4370582630649528, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
   animator: {fileID: 2743240042017599961}
   canAttack: 1
@@ -11301,6 +11301,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db5f8b4ef64dc7b4ca6b1daa00ac174e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &227687725547742710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561479554455344081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992590d1f83d0fc4e83774c792398c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7561479554514411280

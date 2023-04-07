@@ -11,9 +11,9 @@ public class KillZone : MonoBehaviour
         {
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         }
-        else
+        else if (col.gameObject.tag == "Projectile")
         {
-            Destroy(col.gameObject);
+            col.gameObject.SetActive(false);
         }
     }
 }

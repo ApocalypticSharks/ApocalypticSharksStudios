@@ -5,7 +5,7 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
 	public float dmgValue = 4;
-	public GameObject throwableObject;
+	private Weapons weapon;
 	public Transform attackCheck;
 	private Rigidbody2D m_Rigidbody2D;
 	public Animator animator;
@@ -19,6 +19,7 @@ public class Attack : MonoBehaviour
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+		weapon = gameObject.AddComponent<LightBlaster>();
 	}
 
 	// Start is called before the first frame update
@@ -40,11 +41,8 @@ public class Attack : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.V) && collidingLight != null && shootCooldown <= 0)
 		{
-			GameObject throwableWeapon = Instantiate(throwableObject, transform.position, Quaternion.identity) as GameObject;
-			Vector2 direction = (transform.position - collidingLight.position).normalized;
-			throwableWeapon.GetComponent<ThrowableWeapon>().direction = direction;
-			throwableWeapon.name = "ThrowableWeapon";
-			shootCooldown = 0.3f;
+			weapon.Shoot(collidingLight, transform.position);
+			shootCooldown = weapon.attackSpeed;
 		}
 	}
 
