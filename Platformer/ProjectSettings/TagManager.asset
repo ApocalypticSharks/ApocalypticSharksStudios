@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Projectile
   - Boss
+  - Slap
   layers:
   - Default
   - TransparentFX

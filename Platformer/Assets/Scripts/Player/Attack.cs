@@ -13,6 +13,7 @@ public class Attack : MonoBehaviour
 	public bool isTimeToCheck = false;
 	public Transform collidingLight;
 	private float shootCooldown;
+	[SerializeField] private GameObject slapBox;
 
 	public GameObject cam;
 
@@ -48,7 +49,10 @@ public class Attack : MonoBehaviour
 
 	IEnumerator AttackCooldown()
 	{
-		yield return new WaitForSeconds(0.5f);
+		slapBox.SetActive(true);
+		yield return new WaitForSeconds(0.1f);
+		slapBox.SetActive(false);
+		yield return new WaitForSeconds(0.3f);
 		canAttack = true;
 	}
 

@@ -7,11 +7,13 @@ public class PlayerMovement : MonoBehaviour {
 	public CharacterController2D controller;
 	public Animator animator;
 
+
 	public float runSpeed = 40f;
 
 	float horizontalMove = 0f;
 	bool jump = false;
 	bool dash = false;
+	
 
 	//bool dashAxis = false;
 	
@@ -25,6 +27,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Z))
 		{
 			jump = true;
+			
 		}
 
 		if (Input.GetKeyDown(KeyCode.C))
