@@ -21,10 +21,4 @@ public class RoomSpawner : MonoBehaviour
             freeRooms[Random.Range(0, freeRooms.Count)].ActivateDeactivte(roomSpawnPointsList[i]);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
