@@ -7895,6 +7895,7 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
+  roomSpawner: {fileID: 7786851521276002720}
 --- !u!1001 &599648368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29850,3 +29851,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
+--- !u!114 &7786851521276002720 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7786851520995978206, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
+  m_PrefabInstance: {fileID: 7786851521276002719}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401680959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2faa163557ee5d348a5fe7079e0c361d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
