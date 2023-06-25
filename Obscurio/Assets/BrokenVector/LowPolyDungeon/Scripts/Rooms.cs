@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
 public class Rooms : MonoBehaviour
 {
     public GameObject roomEntity;
+    public FixedString64Bytes name;
     public Rooms(Object roomObject)
     {
         roomEntity = Instantiate(roomObject) as GameObject;
         roomEntity.SetActive(false);
         roomEntity.transform.SetParent(GameObject.Find("RoomPool").transform);
+        name = roomEntity.name;
     }
     public void ActivateDeactivte(Transform spawnPoint)
     {

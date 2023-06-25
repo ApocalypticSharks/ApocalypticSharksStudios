@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class RoomSpawner : NetworkBehaviour
 {
     [SerializeField] private List<Object> roomsList = new List<Object>();
-    [SerializeField] private List<Transform> roomSpawnPointsList = new List<Transform>();
+    [SerializeField] private List<GameObject> roomSpawnPointsList = new List<GameObject>();
+    List<GameObject> freeRoomLocations;
+    List<Rooms> freeRooms;
     private List<Rooms> roomsPool = new List<Rooms>();
     // Start is called before the first frame update
     void Start()
@@ -36,11 +40,17 @@ public class RoomSpawner : NetworkBehaviour
 
     private void SpawnRoom()
     {
-        List<Transform> freeRoomLocations = roomSpawnPointsList.Where(roomLocation => roomLocation.childCount == 0).ToList();
+        freeRoomLocations = roomSpawnPointsList.Where(roomLocation => roomLocation.transform.childCount == 0).ToList();
         if (freeRoomLocations.Count > 0)
         {
-            List<Rooms> freeRooms = roomsPool.Where(room => !room.roomEntity.activeSelf).ToList();
-            freeRooms[Random.Range(0, freeRooms.Count)].ActivateDeactivte(roomSpawnPointsList[Random.Range(0, freeRoomLocations.Count)]);
+            freeRooms = roomsPool.Where(room => !room.roomEntity.activeSelf).ToList();
+            ActivateRoomClientRpc(freeRooms[Random.Range(0, freeRooms.Count)].name, roomSpawnPointsList[Random.Range(0, freeRoomLocations.Count)].name);
         }
+    }
+
+    [ClientRpc]
+    private void ActivateRoomClientRpc(FixedString64Bytes roomName, FixedString64Bytes roomLocatioName)
+    {
+        roomsPool.Find(room => room.name == roomName).ActivateDeactivte(roomSpawnPointsList.Find(location => location.name == roomLocatioName).transform);
     }
 }
