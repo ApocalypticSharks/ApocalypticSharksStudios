@@ -38,9 +38,11 @@ public class RoleSystem : NetworkBehaviour
         player = NetworkManager.LocalClient.PlayerObject;
         player.GetComponent<PlayerMethods>().statePlayerAction -= InnocentStateActions;
         player.GetComponent<PlayerMethods>().statePlayerAction += GrimoireStateActions;
+        player.GetComponent<PlayerMethods>().playerControls += GrimoireControls;
         player.tag = "grimoire";
     }
 
+    #region Change state Actions
     private void InnocentStateActions(string state)
     {
         switch (state)
@@ -82,4 +84,21 @@ public class RoleSystem : NetworkBehaviour
                 break;
         }
     }
+    #endregion
+
+    #region Player controls
+    private void GrimoireControls()
+    {
+        if (Input.GetButtonDown("Action"))
+        {
+            if (Physics.Raycast(NetworkManager.LocalClient.PlayerObject.transform.GetChild(0).position, NetworkManager.LocalClient.PlayerObject.transform.GetChild(0).forward, out RaycastHit raycastHit, 3f))
+            {
+                if (raycastHit.transform.TryGetComponent(out PaintsMethod paintMethod))
+                {
+                    paintMethod.MovePin(raycastHit.point);
+                }
+            }
+        }
+    }
+    #endregion
 }

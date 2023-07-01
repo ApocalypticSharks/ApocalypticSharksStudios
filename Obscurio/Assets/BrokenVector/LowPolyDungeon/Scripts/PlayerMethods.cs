@@ -8,6 +8,11 @@ using UnityEngine;
 public class PlayerMethods : NetworkBehaviour
 {
     public event Action<string> statePlayerAction;
+    public event Action playerControls;
+    private void FixedUpdate()
+    {
+        playerControls?.Invoke();
+    }
     public void ChangeStatePlayerAction(string state)
     {
         statePlayerAction?.Invoke(state);
