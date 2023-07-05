@@ -95,7 +95,7 @@ public class RoleSystem : NetworkBehaviour
             {
                 if (raycastHit.transform.TryGetComponent(out PaintsMethod paintMethod))
                 {
-                    paintMethod.MovePin(raycastHit.point);
+                    paintMethod.MovePinServerRpc(raycastHit.point);
                 }
             }
         }

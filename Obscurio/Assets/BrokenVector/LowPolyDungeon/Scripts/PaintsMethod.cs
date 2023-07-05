@@ -6,7 +6,9 @@ using UnityEngine;
 public class PaintsMethod : NetworkBehaviour
 {
     [SerializeField] private Transform pin;
-    public void MovePin(Vector3 newPosition)
+
+    [ServerRpc(RequireOwnership = false)]
+    public void MovePinServerRpc(Vector3 newPosition)
     {
         pin.position = newPosition;
     }
