@@ -65,6 +65,7 @@ public class RoleSystem : NetworkBehaviour
                 NetworkManager.LocalClient.PlayerObject.transform.position = new Vector3(0, 1, 0);
                 break;
             case "impostor":
+                NetworkManager.LocalClient.PlayerObject.transform.position = hubPosition.position;
                 break;
             case "innocent":
                 break;
@@ -79,6 +80,7 @@ public class RoleSystem : NetworkBehaviour
                 NetworkManager.LocalClient.PlayerObject.transform.position = hubPosition.position;
                 break;
             case "impostor":
+                NetworkManager.LocalClient.PlayerObject.transform.position = new Vector3(0, 1, 0);
                 break;
             case "innocent":
                 break;

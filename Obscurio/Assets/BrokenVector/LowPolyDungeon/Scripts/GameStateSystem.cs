@@ -8,17 +8,23 @@ public class GameStateSystem : NetworkBehaviour
 {
     public NetworkVariable<FixedString64Bytes> gameState = new NetworkVariable<FixedString64Bytes>("readyCheck", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField]private RoomSpawner roomSpawner;
+    public Timer timer;
 
     [ServerRpc]
-    public void ChangeGameStateServerRpc(string state)
+    public void ChangeGameStateServerRpc()
     {
-        gameState.Value = state;
-
         switch (gameState.Value.ToString())
         {
-            case "grimoire":
+            case "readyCheck":
+                gameState.Value = "grimoire";
                 CallOnChangeStatePlayerActionClientRpc(gameState.Value);
                 roomSpawner.SpawnFirstRoomServerRpc();
+                timer.ActivateTimerClientRpc(0, 1, 0);
+                break;
+            case "grimoire":
+                gameState.Value = "impostor";
+                CallOnChangeStatePlayerActionClientRpc(gameState.Value);
+                timer.ActivateTimerClientRpc(0, 1, 0);
                 break;
         }
     }

@@ -26,7 +26,7 @@ public class NetworkManagerUI : NetworkBehaviour
         {
             roleSystem.AllocateRolesServerRpc();
             UpdateRoleClientRpc();
-            gameStateSystem.ChangeGameStateServerRpc("grimoire");
+            gameStateSystem.ChangeGameStateServerRpc();
         }
     }
     private void Awake()

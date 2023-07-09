@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
+using Unity.Netcode;
 
-
-public class Timer : MonoBehaviour
+public class Timer : NetworkBehaviour
 {
     public UnityEvent onTimerEnd;
 
@@ -311,6 +311,15 @@ public class Timer : MonoBehaviour
                 dialSlider.fillAmount = 0f;
             }
         }
+    }
+
+    [ClientRpc]
+    public void ActivateTimerClientRpc(int hours, int minutes, int seconds)
+    {
+        this.hours = hours;
+        this.minutes = minutes;
+        this.seconds = seconds;
+        StartTimer();
     }
 
     public float ReturnTotalSeconds()
