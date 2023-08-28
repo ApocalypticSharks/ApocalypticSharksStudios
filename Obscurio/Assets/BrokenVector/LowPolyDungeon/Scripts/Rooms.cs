@@ -8,6 +8,7 @@ public class Rooms : MonoBehaviour
 {
     public GameObject roomEntity;
     public FixedString64Bytes name;
+    public bool isExit;
     public Rooms(Object roomObject)
     {
         roomEntity = Instantiate(roomObject) as GameObject;
@@ -24,6 +25,7 @@ public class Rooms : MonoBehaviour
         }
         else
         {
+            isExit = false;
             roomEntity.SetActive(true);
             roomEntity.GetComponent<Transform>().position = spawnPoint.position;
             roomEntity.transform.SetParent(spawnPoint);

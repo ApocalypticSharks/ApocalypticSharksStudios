@@ -1,27 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
 public class RoomMethods : NetworkBehaviour
 {
     public NetworkVariable<int> voteCount = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> selected = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    [SerializeField] private GameObject voteCounter;
+    [SerializeField] private NetworkManagerUI uiManager;
 
-   
-
-    private void OnTriggerEnter(Collider other)
+    [ServerRpc(RequireOwnership = false)]
+    public void SelectRoomServerRpc()
     {
-        if (other.gameObject.tag == "Player")
-            voteCount.Value++;
-
-        Debug.Log(OwnerClientId + ": " + voteCount.Value);
+        if (selected.Value)
+        {
+            selected.Value = false;
+            transform.Find("Selector").transform.position = GameObject.Find("Selectors").transform.position;
+            transform.Find("Selector").transform.SetParent(GameObject.Find("Selectors").transform);
+        }
+        else if(!selected.Value && GameObject.Find("Selectors").transform.childCount > 0 && transform.childCount <= 0)
+        {
+            selected.Value = true;
+            GameObject.Find("Selectors").transform.GetChild(0).transform.position = transform.position;
+            GameObject.Find("Selectors").transform.GetChild(0).transform.SetParent(transform);
+        }
     }
 
-    private void OnTriggerExit(Collider other)
+    [ServerRpc(RequireOwnership = false)]
+    public void VoteRoomServerRpc()
     {
-        if (other.gameObject.tag == "Player")
-            voteCount.Value--;
-
-        Debug.Log(OwnerClientId + ": " + voteCount.Value);
+        voteCount.Value++;
+        uiManager.UpdateVoteCountClientRpc(voteCounter.name, voteCount.Value);
     }
 }

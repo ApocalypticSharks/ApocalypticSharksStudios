@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine.Events;
 using Unity.Netcode;
 
-public class Timer : NetworkBehaviour
+public class Timer : MonoBehaviour
 {
     public UnityEvent onTimerEnd;
 
@@ -312,9 +312,7 @@ public class Timer : NetworkBehaviour
             }
         }
     }
-
-    [ClientRpc]
-    public void ActivateTimerClientRpc(int hours, int minutes, int seconds)
+    public void ActivateTimer(int hours, int minutes, int seconds)
     {
         this.hours = hours;
         this.minutes = minutes;

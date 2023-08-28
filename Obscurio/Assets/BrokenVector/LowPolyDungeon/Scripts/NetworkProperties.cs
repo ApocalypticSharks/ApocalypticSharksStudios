@@ -8,6 +8,8 @@ public class NetworkProperties : NetworkBehaviour
 {
     public NetworkVariable<int> readyCount = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<int> playerCount = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> timeUp = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> stageReady = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public override void OnNetworkSpawn()
     {
@@ -18,5 +20,17 @@ public class NetworkProperties : NetworkBehaviour
     private void PlayerCounterServerRpc()
     {
         playerCount.Value++;
+    }
+
+    [ServerRpc]
+    private void TimeUpServerRpc()
+    {
+        timeUp.Value = true;
+    }
+
+    public void TimerUp()
+    {
+        if (IsHost)
+            TimeUpServerRpc();
     }
 }

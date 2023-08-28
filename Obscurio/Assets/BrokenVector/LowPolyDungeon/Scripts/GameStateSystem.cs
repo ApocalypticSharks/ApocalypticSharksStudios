@@ -8,7 +8,7 @@ public class GameStateSystem : NetworkBehaviour
 {
     public NetworkVariable<FixedString64Bytes> gameState = new NetworkVariable<FixedString64Bytes>("readyCheck", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField]private RoomSpawner roomSpawner;
-    public Timer timer;
+    public NetworkManagerUI uiManager;
 
     [ServerRpc]
     public void ChangeGameStateServerRpc()
@@ -17,14 +17,25 @@ public class GameStateSystem : NetworkBehaviour
         {
             case "readyCheck":
                 gameState.Value = "grimoire";
+                uiManager.SetGameStateTextClientRpc(gameState.Value);
                 CallOnChangeStatePlayerActionClientRpc(gameState.Value);
                 roomSpawner.SpawnFirstRoomServerRpc();
-                timer.ActivateTimerClientRpc(0, 1, 0);
+                uiManager.ActivateTimerClientRpc(0, 0, 10);
                 break;
             case "grimoire":
                 gameState.Value = "impostor";
+                uiManager.SetGameStateTextClientRpc(gameState.Value);
                 CallOnChangeStatePlayerActionClientRpc(gameState.Value);
-                timer.ActivateTimerClientRpc(0, 1, 0);
+                roomSpawner.SpawnAllRoomsServerRpc();
+                uiManager.ActivateTimerClientRpc(0, 0, 10);
+                break;
+            case "impostor":
+                gameState.Value = "innocent";
+                uiManager.SetGameStateTextClientRpc(gameState.Value);
+                CallOnChangeStatePlayerActionClientRpc(gameState.Value);
+                roomSpawner.DespawnRegularRoomsServerRpc();
+                roomSpawner.SpawnAllRoomsServerRpc();
+                uiManager.ActivateTimerClientRpc(0, 0, 10);
                 break;
         }
     }

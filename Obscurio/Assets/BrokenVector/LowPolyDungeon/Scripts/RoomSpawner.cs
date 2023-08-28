@@ -25,17 +25,16 @@ public class RoomSpawner : NetworkBehaviour
     [ServerRpc]
     public void SpawnFirstRoomServerRpc()
     {
-        SpawnRoom();
+        SpawnFirstRoom();
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void SpawnAllRoomsServerRpc()
     {
         for (int i = 0; i < roomSpawnPointsList.Count - 1; i++)
         {
             SpawnRoom();
         }
-
     }
 
     private void SpawnRoom()
@@ -44,7 +43,22 @@ public class RoomSpawner : NetworkBehaviour
         if (freeRoomLocations.Count > 0)
         {
             freeRooms = roomsPool.Where(room => !room.roomEntity.activeSelf).ToList();
-            ActivateRoomClientRpc(freeRooms[Random.Range(0, freeRooms.Count)].name, roomSpawnPointsList[Random.Range(0, freeRoomLocations.Count)].name);
+            ActivateRoomClientRpc(freeRooms[Random.Range(0, freeRooms.Count)].name, freeRoomLocations[Random.Range(0, freeRoomLocations.Count)].name);
+        }
+    }
+
+    private void SpawnFirstRoom()
+    {
+        freeRoomLocations = roomSpawnPointsList.Where(roomLocation => roomLocation.transform.childCount == 0).ToList();
+        if (freeRoomLocations.Count > 0)
+        {
+            freeRooms = roomsPool.Where(room => !room.roomEntity.activeSelf).ToList();
+            Rooms firstRoom = freeRooms[Random.Range(0, freeRooms.Count)];
+            firstRoom.isExit = true;
+            GameObject spawnPoint = roomSpawnPointsList[Random.Range(0, freeRoomLocations.Count)];
+            GameObject.Find("ExitMarker").transform.position = spawnPoint.transform.position;
+            GameObject.Find("ExitMarker").transform.SetParent(spawnPoint.transform);
+            ActivateRoomClientRpc(firstRoom.name, spawnPoint.name);
         }
     }
 
@@ -52,5 +66,25 @@ public class RoomSpawner : NetworkBehaviour
     private void ActivateRoomClientRpc(FixedString64Bytes roomName, FixedString64Bytes roomLocatioName)
     {
         roomsPool.Find(room => room.name == roomName).ActivateDeactivte(roomSpawnPointsList.Find(location => location.name == roomLocatioName).transform);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeRoomServerRpc(FixedString64Bytes roomName, FixedString64Bytes roomLocatioName)
+    {
+        ActivateRoomClientRpc(roomName, roomLocatioName);
+        SpawnRoom();
+    }
+
+    [ServerRpc]
+    public void DespawnRegularRoomsServerRpc()
+    {
+        roomSpawnPointsList.ForEach(spawnPoint =>
+            {
+                if (!spawnPoint.transform.Find("Selector") && !spawnPoint.transform.Find("ExitMarker"))
+                {
+                    ActivateRoomClientRpc(spawnPoint.transform.GetChild(0).name, spawnPoint.name);
+                }
+            }
+        );
     }
 }
