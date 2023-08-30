@@ -13,6 +13,7 @@ public class RoomSpawner : NetworkBehaviour
     List<GameObject> freeRoomLocations;
     List<Rooms> freeRooms;
     private List<Rooms> roomsPool = new List<Rooms>();
+    [SerializeField] private NetworkProperties networkProperties;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,5 +87,28 @@ public class RoomSpawner : NetworkBehaviour
                 }
             }
         );
+    }
+
+    [ServerRpc]
+    public void UnselectAllRoomsOnRoundResultsServerRpc()
+    {
+        roomSpawnPointsList.ForEach(spawnPoint =>
+            {
+                spawnPoint.GetComponent<RoomMethods>().SelectRoomServerRpc();
+            }
+        );
+    }
+
+    [ServerRpc]
+    public void CalculateVotesServerRpc()
+    {
+        roomSpawnPointsList.ForEach(spawnPoint =>
+        {
+            if (!roomsPool.Find(room => room.name == spawnPoint.transform.GetChild(0).name).isExit)
+            {
+               networkProperties.health.Value -= spawnPoint.GetComponent<RoomMethods>().voteCount.Value;
+            }
+        }
+);
     }
 }

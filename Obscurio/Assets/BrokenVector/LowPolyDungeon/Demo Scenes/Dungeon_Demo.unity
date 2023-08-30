@@ -13854,6 +13854,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3914403a7207a4489355298b12ddb55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health:
+    m_InternalValue: 0
   readyCount:
     m_InternalValue: 0
   playerCount:
@@ -32140,6 +32142,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 489472553}
     - target: {fileID: 7786851520434926132, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
+      propertyPath: gameStateSystem
+      value: 
+      objectReference: {fileID: 585882167}
+    - target: {fileID: 7786851520434926132, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
       propertyPath: voteCounterText
       value: 
       objectReference: {fileID: 489472553}
@@ -32159,6 +32165,10 @@ PrefabInstance:
       propertyPath: voteCounter
       value: 
       objectReference: {fileID: 751771971}
+    - target: {fileID: 7786851520474337113, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
+      propertyPath: gameStateSystem
+      value: 
+      objectReference: {fileID: 585882167}
     - target: {fileID: 7786851520474337113, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
       propertyPath: voteCounterText
       value: 
@@ -32180,6 +32190,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1208205652}
     - target: {fileID: 7786851520923857234, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
+      propertyPath: gameStateSystem
+      value: 
+      objectReference: {fileID: 585882167}
+    - target: {fileID: 7786851520923857234, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
       propertyPath: voteCounterText
       value: 
       objectReference: {fileID: 1208205652}
@@ -32195,6 +32209,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1856338605
       objectReference: {fileID: 0}
+    - target: {fileID: 7786851520995978206, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
+      propertyPath: networkProperties
+      value: 
+      objectReference: {fileID: 952044130}
     - target: {fileID: 7786851520995978206, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
       propertyPath: roomSpawnPointsList.Array.data[0]
       value: 
@@ -32280,6 +32298,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1383062119}
     - target: {fileID: 7786851521788103549, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
+      propertyPath: gameStateSystem
+      value: 
+      objectReference: {fileID: 585882167}
+    - target: {fileID: 7786851521788103549, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
       propertyPath: voteCounterText
       value: 
       objectReference: {fileID: 1383062119}
@@ -32300,6 +32322,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1931669846}
     - target: {fileID: 7786851521807071359, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
+      propertyPath: gameStateSystem
+      value: 
+      objectReference: {fileID: 585882167}
+    - target: {fileID: 7786851521807071359, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
       propertyPath: voteCounterText
       value: 
       objectReference: {fileID: 1931669846}
@@ -32315,6 +32341,10 @@ PrefabInstance:
       propertyPath: voteCounter
       value: 
       objectReference: {fileID: 14645855}
+    - target: {fileID: 7786851522042780711, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
+      propertyPath: gameStateSystem
+      value: 
+      objectReference: {fileID: 585882167}
     - target: {fileID: 7786851522042780711, guid: 07e944873746b694fb3fe734e3b0bc89, type: 3}
       propertyPath: voteCounterText
       value: 

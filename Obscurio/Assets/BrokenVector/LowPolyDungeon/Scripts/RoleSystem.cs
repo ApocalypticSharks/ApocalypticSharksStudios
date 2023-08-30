@@ -62,6 +62,9 @@ public class RoleSystem : NetworkBehaviour
             case "innocent":
                 NetworkManager.LocalClient.PlayerObject.transform.position = new Vector3(0, 1, 0);
                 break;
+            case "roundResults":
+                NetworkManager.LocalClient.PlayerObject.transform.position = hubPosition.position;
+                break;
         }
     }
 
@@ -76,6 +79,9 @@ public class RoleSystem : NetworkBehaviour
                 NetworkManager.LocalClient.PlayerObject.transform.position = hubPosition.position;
                 break;
             case "innocent":
+                NetworkManager.LocalClient.PlayerObject.transform.position = hubPosition.position;
+                break;
+            case "roundResults":
                 NetworkManager.LocalClient.PlayerObject.transform.position = hubPosition.position;
                 break;
         }
@@ -94,6 +100,9 @@ public class RoleSystem : NetworkBehaviour
                 NetworkManager.LocalClient.PlayerObject.transform.position = new Vector3(0, 1, 0);
                 break;
             case "innocent":
+                NetworkManager.LocalClient.PlayerObject.transform.position = hubPosition.position;
+                break;
+            case "roundResults":
                 NetworkManager.LocalClient.PlayerObject.transform.position = hubPosition.position;
                 break;
         }

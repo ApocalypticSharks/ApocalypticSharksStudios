@@ -10,11 +10,12 @@ public class RoomMethods : NetworkBehaviour
     public NetworkVariable<bool> selected = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] private GameObject voteCounter;
     [SerializeField] private NetworkManagerUI uiManager;
+    [SerializeField] private GameStateSystem gameStateSystem;
 
     [ServerRpc(RequireOwnership = false)]
     public void SelectRoomServerRpc()
     {
-        if (selected.Value)
+        if (selected.Value && gameStateSystem.gameState.Value != "roundResults")
         {
             selected.Value = false;
             transform.Find("Selector").transform.position = GameObject.Find("Selectors").transform.position;

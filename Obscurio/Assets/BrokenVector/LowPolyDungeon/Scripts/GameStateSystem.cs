@@ -37,6 +37,14 @@ public class GameStateSystem : NetworkBehaviour
                 roomSpawner.SpawnAllRoomsServerRpc();
                 uiManager.ActivateTimerClientRpc(0, 0, 10);
                 break;
+            case "innocent":
+                gameState.Value = "roundResults";
+                uiManager.SetGameStateTextClientRpc(gameState.Value);
+                CallOnChangeStatePlayerActionClientRpc(gameState.Value);
+                roomSpawner.UnselectAllRoomsOnRoundResultsServerRpc();
+                roomSpawner.DespawnRegularRoomsServerRpc();
+                roomSpawner.CalculateVotesServerRpc();
+                break;
         }
     }
     [ClientRpc]
