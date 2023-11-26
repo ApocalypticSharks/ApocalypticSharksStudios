@@ -93,7 +93,7 @@ public class NetworkManagerUI : NetworkBehaviour
         TextMeshProUGUI counter = GameObject.Find(counterName.ToString()).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         counter.SetText(voteCount.ToString());
         totalVotes++;
-        if (totalVotes == networkProperties.playerCount.Value)
+        if (totalVotes == networkProperties.playerCount.Value && IsHost)
             networkProperties.stageReady.Value = true;
     }
 }

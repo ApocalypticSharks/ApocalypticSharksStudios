@@ -57,9 +57,9 @@ public class RoomSpawner : NetworkBehaviour
             Rooms firstRoom = freeRooms[Random.Range(0, freeRooms.Count)];
             firstRoom.isExit = true;
             GameObject spawnPoint = roomSpawnPointsList[Random.Range(0, freeRoomLocations.Count)];
+            ActivateRoomClientRpc(firstRoom.name, spawnPoint.name);
             GameObject.Find("ExitMarker").transform.position = spawnPoint.transform.position;
             GameObject.Find("ExitMarker").transform.SetParent(spawnPoint.transform);
-            ActivateRoomClientRpc(firstRoom.name, spawnPoint.name);
         }
     }
 

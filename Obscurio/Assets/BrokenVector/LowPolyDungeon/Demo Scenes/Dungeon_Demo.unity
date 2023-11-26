@@ -8377,6 +8377,7 @@ MonoBehaviour:
         byte0060: 0
         byte0061: 0
   roomSpawner: {fileID: 7786851521276002720}
+  networkProperties: {fileID: 952044130}
   uiManager: {fileID: 1601987522}
 --- !u!1 &597785586
 GameObject:
@@ -13855,7 +13856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    m_InternalValue: 0
+    m_InternalValue: 20
   readyCount:
     m_InternalValue: 0
   playerCount:

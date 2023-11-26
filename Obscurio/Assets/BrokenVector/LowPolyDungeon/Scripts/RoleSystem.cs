@@ -26,7 +26,7 @@ public class RoleSystem : NetworkBehaviour
         while (grimoireId == impostorId)
             grimoireId = (ulong)UnityEngine.Random.Range(0, networkProperties.playerCount.Value+1);
         SetImpostorClientRpc(new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { impostorId } } });
-        //SetGrimoireClientRpc(new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { grimoireId } } });
+        SetGrimoireClientRpc(new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { grimoireId } } });
     }
     [ClientRpc]
     private void SetImpostorClientRpc(ClientRpcParams clientId)
