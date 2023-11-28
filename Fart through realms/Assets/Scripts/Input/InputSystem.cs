@@ -11,7 +11,7 @@ public class InputSystem : MonoBehaviour
     [SerializeField] private float rotationSpeed, maxChargePower;
     [SerializeField]private float chargePower = 1, chargingSpeed;
     private bool isCharging;
-
+    [SerializeField] private Transform chargingMeter;
     private void Awake()
     {
         playerInputs = new PlayerInputs();
@@ -20,21 +20,21 @@ public class InputSystem : MonoBehaviour
         playerInputs.Player.Jump.started += JumpCharge;
         playerInputs.Player.Jump.canceled += JumpRelease;
     }
-
     private void FixedUpdate()
     {
         float rotationDirection = playerInputs.Player.Rotate.ReadValue<float>();
         transform.Rotate(new Vector3(0,0,-5) * rotationDirection);
         if (isCharging && chargePower < maxChargePower)
             chargePower += chargingSpeed * Time.deltaTime;
+        ChargeMeter(chargingMeter.GetChild(0), chargePower, maxChargePower);
     }
-
     public void JumpCharge(InputAction.CallbackContext context)
     {
+        chargingMeter.gameObject.SetActive(true);
         isCharging = true;
     }
-
     public void JumpRelease(InputAction.CallbackContext context) {
+        chargingMeter.gameObject.SetActive(false);
         isCharging = false;
         int layerMask = 1 << 3;
         chargePower = chargePower < maxChargePower ? chargePower : maxChargePower;
@@ -43,5 +43,11 @@ public class InputSystem : MonoBehaviour
             rigidBody.AddForce(transform.up.normalized * chargePower, ForceMode2D.Impulse);
         }         
         chargePower = 1;
+    }
+    private void ChargeMeter(Transform meter, float chargePower, float maxChargePower)
+    {
+        float chargePercent = 1/maxChargePower;
+        meter.localScale = new Vector3(chargePercent*chargePower,1, 1);
+
     }
 }

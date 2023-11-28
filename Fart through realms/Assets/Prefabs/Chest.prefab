@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7829565387919188095}
+  coinCounter: {fileID: 8372364979710257034, guid: a5e15ccabf8934041a228b60bb5bfde6, type: 3}
   coin: {fileID: 3586874541998816863, guid: 4afd40ed53065a04397ec257e5170753, type: 3}
 --- !u!61 &2690795070711670532
 BoxCollider2D:
