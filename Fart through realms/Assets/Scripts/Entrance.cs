@@ -8,11 +8,13 @@ public class Enterance : MonoBehaviour
     private Player player;
     private Level level;
     private PlayerUI ui;
+    private Camera camera;
     private void Awake()
     {
         level = new Level(realm);
         ui = new PlayerUI(realm);
         player = new Player(realm);
         player.playerController.getCoin += ui.playerUIController.CountCoins;
+        camera = new Camera(player.instance.transform);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player:MonoBehaviour
 {
-    private GameObject instance;
+    public  GameObject instance;
     public PlayerController playerController;
     public Player(int realm)
     {
