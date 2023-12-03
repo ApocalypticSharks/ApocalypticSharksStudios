@@ -16,7 +16,7 @@ public class CameraFollowScript : MonoBehaviour
         if (math.abs(transform.position.y - player.position.y) >= 2)
         {
             Vector3 newPositionY = transform.position;
-            newPositionY.y = Mathf.Lerp(transform.position.y, player.transform.position.y, 1 * Time.deltaTime);
+            newPositionY.y = Mathf.Lerp(transform.position.y, player.transform.position.y, 2f * Time.deltaTime);
             transform.position = newPositionY;
         }
     }

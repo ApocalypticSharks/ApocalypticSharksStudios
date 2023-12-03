@@ -10,7 +10,7 @@ public class Player:MonoBehaviour
     {
         playerController = new PlayerController();
         instance = Instantiate(Resources.Load($"{realm}/player")) as GameObject;
-        var playerView = instance.GetComponent<PlayerView>();
+        var playerView = instance.transform.Find("body").GetComponent<PlayerView>();
         playerView.controller = playerController;
         playerController.view = playerView;
     }

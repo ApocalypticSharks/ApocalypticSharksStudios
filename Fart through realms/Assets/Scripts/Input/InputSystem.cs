@@ -7,7 +7,6 @@ public class InputSystem : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
     private PlayerInputs playerInputs;
-    [SerializeField] private Transform head, bottom;
     [SerializeField] private float rotationSpeed, maxChargePower;
     [SerializeField]private float chargePower = 1, chargingSpeed;
     private bool isCharging;
@@ -48,6 +47,5 @@ public class InputSystem : MonoBehaviour
     {
         float chargePercent = 1/maxChargePower;
         meter.localScale = new Vector3(chargePercent*chargePower,1, 1);
-
     }
 }
