@@ -8,8 +8,8 @@ public class Player:MonoBehaviour
     public PlayerController playerController;
     public Player(int realm)
     {
-        playerController = new PlayerController();
         instance = Instantiate(Resources.Load($"{realm}/player")) as GameObject;
+        playerController = new PlayerController(instance.transform);
         var playerView = instance.transform.Find("body").GetComponent<PlayerView>();
         playerView.controller = playerController;
         playerController.view = playerView;
