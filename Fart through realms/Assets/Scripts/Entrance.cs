@@ -15,6 +15,7 @@ public class Enterance : MonoBehaviour
         ui = new PlayerUI(realm);
         player = new Player(realm);
         player.playerController.getCoin += ui.playerUIController.CountCoins;
+        player.playerController.updateUI += ui.playerUIController.SetCoinCounterImage;
         camera = new Camera(player.instance.transform.Find("body"));
     }
 }

@@ -7,5 +7,6 @@ public class DoorScript : MonoBehaviour
     [SerializeField] public GameObject levelToActivate;
     [SerializeField] public GameObject levelToDeactivate;
     [SerializeField] public Transform nextLevelDoor;
-    [SerializeField] public int coinAmountToOpen; 
+    [SerializeField] public int coinAmountToOpen;
+    [SerializeField] public Sprite uiCoinSprite;
 }

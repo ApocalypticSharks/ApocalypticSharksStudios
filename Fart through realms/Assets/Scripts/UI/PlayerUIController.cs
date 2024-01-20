@@ -15,4 +15,8 @@ public class PlayerUIController
         collectedCoins++;
         view.UpdateCoinCounter(collectedCoins);
     }
+    public void SetCoinCounterImage(Sprite sprite)
+    {
+        view.SetCoinCounterImage(sprite);
+    }
 }

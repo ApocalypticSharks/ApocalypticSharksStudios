@@ -270,5 +270,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e7ab928b74bb484388be634d260a7c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
   counter: {fileID: 9174972056157639078}
+  coinSprite: {fileID: 2858565516959653375}
