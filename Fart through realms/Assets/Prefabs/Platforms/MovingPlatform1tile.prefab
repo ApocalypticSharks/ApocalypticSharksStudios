@@ -44,9 +44,9 @@ GameObject:
   - component: {fileID: 6123293390578939298}
   - component: {fileID: 8883293483388727922}
   - component: {fileID: 6089740431975750888}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tileset_15
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

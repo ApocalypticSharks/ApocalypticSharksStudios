@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7501675365165994143}
   - component: {fileID: 3471090575457970849}
   - component: {fileID: 1036848412197209518}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tileset_3
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300006, guid: 85a7945d9afa66241856829353b87653, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -201,9 +201,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6284597816672625038}
   - component: {fileID: 2151105498713011790}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tileset_11
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -263,7 +263,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300022, guid: 85a7945d9afa66241856829353b87653, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -323,6 +323,5 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0, z: 0}
   endPosition: {x: 0, y: 0, z: 0}
   movingSpeed: 0
-  rotatingPoint: {fileID: 0}
   isRotating: 0
   isTraveling: 0

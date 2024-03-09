@@ -18,6 +18,7 @@ public class InputSystem : MonoBehaviour
         playerInputs.Player.Enable();
         playerInputs.Player.Jump.started += JumpCharge;
         playerInputs.Player.Jump.canceled += JumpRelease;
+        playerInputs.Player.Respawn.performed += Respawn;
     }
     private void FixedUpdate()
     {
@@ -42,6 +43,12 @@ public class InputSystem : MonoBehaviour
             rigidBody.AddForce(transform.up.normalized * chargePower, ForceMode2D.Impulse);
         }         
         chargePower = 1;
+    }
+
+    public void Respawn(InputAction.CallbackContext context)
+    {
+        var spawnPoint = GameObject.Find("SpawnPoint");
+        transform.position = spawnPoint.transform.position;
     }
     private void ChargeMeter(Transform meter, float chargePower, float maxChargePower)
     {
