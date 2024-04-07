@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 using static PlayerController;
 
 public class PlayerView : MonoBehaviour
 {
     public PlayerController controller;
+    public GameObject particles;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -22,8 +25,7 @@ public class PlayerView : MonoBehaviour
         }
         if (door != null)
         {
-            controller.toNextLevel?.Invoke(door.nextLevelDoor.position, door.coinAmountToOpen, door.levelToActivate, door.levelToDeactivate);
-            controller.updateUI?.Invoke(door.uiCoinSprite);
+            controller.toNextLevel?.Invoke(door.nextLevelDoor.position, door.coinAmountToOpen, door.levelToActivate, door.levelToDeactivate, door.head, door.hand, door.arm, door.leg, door.foot, door.body, door.uiCoinSprite);
         }
         if (spikes != null)
         { 
@@ -33,14 +35,27 @@ public class PlayerView : MonoBehaviour
         {
             controller.getWinded?.Invoke(collision.transform, wind.windForce);
         }
-        if(beanCan != null)
+        if(beanCan != null && !controller.isFlying)
         {
+            particles.SetActive(true);
             controller.getBeaned?.Invoke(beanCan.beanForce);
+            transform.Find("head").GetComponent<SpriteRenderer>().sprite = beanCan.head;
+        }
+        if (controller.isFlying && beanCan == null)
+        {
+            particles.SetActive(false);
+            controller.getUnbeaned?.Invoke();
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (controller.isFlying)
+        {
+            particles.SetActive(false);
+            controller.getUnbeaned?.Invoke();
+        }
+
         if (collision.gameObject.tag == "MovingPlatform")
         {
             transform.parent.SetParent(collision.transform, true);

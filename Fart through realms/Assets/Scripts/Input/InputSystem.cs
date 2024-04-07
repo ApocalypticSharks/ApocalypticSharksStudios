@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +11,8 @@ public class InputSystem : MonoBehaviour
     [SerializeField] private float rotationSpeed, maxChargePower;
     [SerializeField]private float chargePower = 1, chargingSpeed;
     private bool isCharging;
-    [SerializeField] private Transform chargingMeter;
+    [SerializeField] private Transform chargingMeter, particles;
+    [SerializeField] private Animator animator;
     private void Awake()
     {
         playerInputs = new PlayerInputs();
@@ -18,7 +20,9 @@ public class InputSystem : MonoBehaviour
         playerInputs.Player.Enable();
         playerInputs.Player.Jump.started += JumpCharge;
         playerInputs.Player.Jump.canceled += JumpRelease;
+#if UNITY_EDITOR
         playerInputs.Player.Respawn.performed += Respawn;
+#endif
     }
     private void FixedUpdate()
     {
@@ -32,17 +36,21 @@ public class InputSystem : MonoBehaviour
     {
         chargingMeter.gameObject.SetActive(true);
         isCharging = true;
+        animator.SetTrigger("isCharging");
     }
     public void JumpRelease(InputAction.CallbackContext context) {
         chargingMeter.gameObject.SetActive(false);
         isCharging = false;
         int layerMask = 1 << 3;
         chargePower = chargePower < maxChargePower ? chargePower : maxChargePower;
-        if (Physics2D.Raycast(transform.position, -transform.up, 2f, layerMask))
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 2f, layerMask);
+        if (hit)
         {
+            Instantiate(particles, hit.point, Quaternion.identity);
             rigidBody.AddForce(transform.up.normalized * chargePower, ForceMode2D.Impulse);
         }         
         chargePower = 1;
+        animator.SetTrigger("isFlying");
     }
 
     public void Respawn(InputAction.CallbackContext context)

@@ -9,4 +9,5 @@ public class DoorScript : MonoBehaviour
     [SerializeField] public Transform nextLevelDoor;
     [SerializeField] public int coinAmountToOpen;
     [SerializeField] public Sprite uiCoinSprite;
+    [SerializeField] public Sprite head, hand, arm, leg, foot, body;
 }

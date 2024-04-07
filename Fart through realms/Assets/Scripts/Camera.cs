@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-    GameObject instance;
+    public GameObject instance;
     public Camera(Transform player)
     {
         instance = Instantiate(Resources.Load("Main Camera")) as GameObject;
