@@ -8,6 +8,7 @@ public class ChestScript : MonoBehaviour
     [SerializeField] private Animator animator;
     public bool isOpened;
     [SerializeField] private Object coin;
+    [SerializeField] private AudioClip coinSound;
     public void CoinDrop()
     {
         if (!isOpened)
@@ -15,6 +16,7 @@ public class ChestScript : MonoBehaviour
             isOpened = true;
             animator.SetBool("isOpened", isOpened);
             Instantiate(coin, transform.position, transform.rotation);
+            SoundSystemScript.instance.PlaySoundFXClip(coinSound, transform, 80f);
         }
     }
 }

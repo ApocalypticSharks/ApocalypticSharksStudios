@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController
@@ -7,7 +8,7 @@ public class PlayerController
     public bool isFlying;
     public PlayerView view;
     public Action getCoin;
-    public delegate void moveToNextLevel(Vector3 doorPosition, int requiredCoinAmount, GameObject levelToActivate, GameObject levelToDeactivate, Sprite head, Sprite hand, Sprite arm, Sprite leg, Sprite foot, Sprite body, Sprite uiCoinSprite);
+    public delegate void moveToNextLevel(List<AudioClip> levelMusic,Vector3 doorPosition, int requiredCoinAmount, GameObject levelToActivate, GameObject levelToDeactivate, Sprite head, Sprite hand, Sprite arm, Sprite leg, Sprite foot, Sprite body, Sprite uiCoinSprite);
     public moveToNextLevel toNextLevel;
     public delegate void updateLevelUI(Sprite coinSprite);
     public updateLevelUI updateUI;
@@ -35,7 +36,7 @@ public class PlayerController
     {
         collectedCoins++;
     }
-    private void MoveToNextLevel(Vector3 doorPosition, int requiredCoinAmount, GameObject leveltoActivate, GameObject levelToDeactivate, Sprite head, Sprite hand, Sprite arm, Sprite leg, Sprite foot, Sprite body, Sprite uiCoinSprite)
+    private void MoveToNextLevel(List<AudioClip> levelMusic, Vector3 doorPosition, int requiredCoinAmount, GameObject leveltoActivate, GameObject levelToDeactivate, Sprite head, Sprite hand, Sprite arm, Sprite leg, Sprite foot, Sprite body, Sprite uiCoinSprite)
     {
         if (collectedCoins >= requiredCoinAmount)
         {
@@ -53,6 +54,10 @@ public class PlayerController
             playerInstance.Find("body").transform.Find("legLeft").GetChild(0).GetComponent<SpriteRenderer>().sprite = foot;
             playerInstance.Find("body").transform.Find("legRight").GetComponent<SpriteRenderer>().sprite = leg;
             playerInstance.Find("body").transform.Find("legRight").GetChild(0).GetComponent<SpriteRenderer>().sprite = foot;
+            MusicSystemScript.instance.StopAllCoroutines();
+            MusicSystemScript.instance.levelMusic = levelMusic;
+            MusicSystemScript.instance.StopAudioClip();
+            MusicSystemScript.instance.PlayNextClip();
         }
     }
 

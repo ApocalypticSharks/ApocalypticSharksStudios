@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -30,6 +31,12 @@ public class CameraFollowScript : MonoBehaviour
     public void ChangeCameraSizeIn()
     {
         animator.SetTrigger("notFlying");
+    }
+
+    public void SetCameraToPlayPosition(InputAction.CallbackContext context)
+    {
+        transform.position = new Vector3(0, 0, -1);
+        UnityEngine.Camera.main.orthographicSize = 6.5f;
     }
 
     private void NormalModeFollow()

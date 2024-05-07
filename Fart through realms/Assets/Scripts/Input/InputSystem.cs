@@ -7,12 +7,13 @@ using UnityEngine.InputSystem;
 public class InputSystem : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
-    private PlayerInputs playerInputs;
+    public PlayerInputs playerInputs;
     [SerializeField] private float rotationSpeed, maxChargePower;
     [SerializeField]private float chargePower = 1, chargingSpeed;
     private bool isCharging;
     [SerializeField] private Transform chargingMeter, particles;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioClip fartSound;
     private void Awake()
     {
         playerInputs = new PlayerInputs();
@@ -20,6 +21,7 @@ public class InputSystem : MonoBehaviour
         playerInputs.Player.Enable();
         playerInputs.Player.Jump.started += JumpCharge;
         playerInputs.Player.Jump.canceled += JumpRelease;
+        playerInputs.Player.Jump.started += StartGame;
 #if UNITY_EDITOR
         playerInputs.Player.Respawn.performed += Respawn;
 #endif
@@ -37,6 +39,7 @@ public class InputSystem : MonoBehaviour
         chargingMeter.gameObject.SetActive(true);
         isCharging = true;
         animator.SetTrigger("isCharging");
+        transform.Find("FantasyCloud").gameObject.SetActive(false);
     }
     public void JumpRelease(InputAction.CallbackContext context) {
         chargingMeter.gameObject.SetActive(false);
@@ -50,6 +53,7 @@ public class InputSystem : MonoBehaviour
             rigidBody.AddForce(transform.up.normalized * chargePower, ForceMode2D.Impulse);
         }         
         chargePower = 1;
+        SoundSystemScript.instance.PlaySoundFXClip(fartSound, transform, 1f);
         animator.SetTrigger("isFlying");
     }
 
@@ -62,5 +66,13 @@ public class InputSystem : MonoBehaviour
     {
         float chargePercent = 1/maxChargePower;
         meter.localScale = new Vector3(chargePercent*chargePower,1, 1);
+    }
+
+    public void StartGame(InputAction.CallbackContext context)
+    {
+        transform.Find("FantasyCloud").gameObject.SetActive(false);
+        UnityEngine.Camera.main.GetComponent<Animator>().SetTrigger("gameStarted");
+        playerInputs.Player.Jump.started -= StartGame;
+        MusicSystemScript.instance.PlayLevelMusic();
     }
 }

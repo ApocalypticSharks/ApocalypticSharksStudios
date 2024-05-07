@@ -8,6 +8,7 @@ public class CloudsScript : MonoBehaviour
     [SerializeField] private Sprite coinSprite, head, hand, arm, leg, foot, body;
     public delegate void finishGame(Collider2D collision);
     public finishGame finish;
+    [SerializeField] public List<AudioClip> LevelMusic;
 
     private void Awake()
     {
@@ -31,6 +32,10 @@ public class CloudsScript : MonoBehaviour
                 collision.transform.Find("legLeft").GetChild(0).GetComponent<SpriteRenderer>().sprite = foot;
                 collision.transform.Find("legRight").GetComponent<SpriteRenderer>().sprite = leg;
                 collision.transform.Find("legRight").GetChild(0).GetComponent<SpriteRenderer>().sprite = foot;
+                MusicSystemScript.instance.StopAllCoroutines();
+                MusicSystemScript.instance.levelMusic = this.LevelMusic;
+                MusicSystemScript.instance.StopAudioClip();
+                MusicSystemScript.instance.PlayNextClip();
             }  
             else
                 finish?.Invoke(collision);

@@ -103,6 +103,7 @@ MonoBehaviour:
   animator: {fileID: 7829565387919188095}
   isOpened: 0
   coin: {fileID: 2923305701163027931, guid: c790905d422297d4fb51a6e2e850448b, type: 3}
+  coinSound: {fileID: 8300000, guid: 7c52e5092e763a74b83cffa4cb3950e5, type: 3}
 --- !u!61 &2690795070711670532
 BoxCollider2D:
   m_ObjectHideFlags: 0

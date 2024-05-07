@@ -10,4 +10,5 @@ public class DoorScript : MonoBehaviour
     [SerializeField] public int coinAmountToOpen;
     [SerializeField] public Sprite uiCoinSprite;
     [SerializeField] public Sprite head, hand, arm, leg, foot, body;
+    [SerializeField] public List<AudioClip> LevelMusic;
 }

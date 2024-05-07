@@ -25,7 +25,7 @@ public class PlayerView : MonoBehaviour
         }
         if (door != null)
         {
-            controller.toNextLevel?.Invoke(door.nextLevelDoor.position, door.coinAmountToOpen, door.levelToActivate, door.levelToDeactivate, door.head, door.hand, door.arm, door.leg, door.foot, door.body, door.uiCoinSprite);
+            controller.toNextLevel?.Invoke(door.LevelMusic, door.nextLevelDoor.position, door.coinAmountToOpen, door.levelToActivate, door.levelToDeactivate, door.head, door.hand, door.arm, door.leg, door.foot, door.body, door.uiCoinSprite);
         }
         if (spikes != null)
         { 
