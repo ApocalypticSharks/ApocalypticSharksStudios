@@ -22,6 +22,7 @@ public class InputSystem : MonoBehaviour
         playerInputs.Player.Jump.started += JumpCharge;
         playerInputs.Player.Jump.canceled += JumpRelease;
         playerInputs.Player.Jump.started += StartGame;
+        playerInputs.Player.Pause.performed += Pause;
 #if UNITY_EDITOR
         playerInputs.Player.Respawn.performed += Respawn;
 #endif
@@ -61,6 +62,12 @@ public class InputSystem : MonoBehaviour
     {
         var spawnPoint = GameObject.Find("SpawnPoint");
         transform.position = spawnPoint.transform.position;
+    }
+    public void Pause(InputAction.CallbackContext context)
+    {
+        var levelLayout = GameObject.Find("levelLayout(Clone)");
+        var pauseMenu = levelLayout.transform.Find("PauseMenu").gameObject;
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
     }
     private void ChargeMeter(Transform meter, float chargePower, float maxChargePower)
     {

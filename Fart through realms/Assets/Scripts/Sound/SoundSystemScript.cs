@@ -22,4 +22,12 @@ public class SoundSystemScript : MonoBehaviour
         float clipLength = audioSource.clip.length;
         Destroy(audioSource.gameObject, clipLength);
     }
+
+    public void PlayConstantSoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    {
+        AudioSource constantAudioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
+        constantAudioSource.clip = audioClip;
+        constantAudioSource.volume = volume;
+        constantAudioSource.Play();
+    }
 }

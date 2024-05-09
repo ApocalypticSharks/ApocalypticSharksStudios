@@ -58,7 +58,7 @@ public class MusicSystemScript : MonoBehaviour
 
     IEnumerator ScheduleNextSound(float clipLength)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(clipLength);
         StopAudioClip();
         PlayNextClip();
     }
