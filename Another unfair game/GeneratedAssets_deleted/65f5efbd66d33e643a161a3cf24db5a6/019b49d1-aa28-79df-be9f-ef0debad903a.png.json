@@ -1,0 +1,20 @@
+{
+    "asset": "65f5efbd66d33e643a161a3cf24db5a6",
+    "fileName": "019b49d1-aa28-79df-be9f-ef0debad903a.png",
+    "prompt": "Icon for shop event in deck building card game, casino style, black white red gold color scheme, circle shape",
+    "negativePrompt": "",
+    "model": "982ae1a2-d3b9-4023-a76b-2b32510f21ed",
+    "modelName": "Sticker Icons",
+    "customSeed": -1,
+    "w3CTraceId": "b3dd68b653a891115c1ff547917bb64c",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

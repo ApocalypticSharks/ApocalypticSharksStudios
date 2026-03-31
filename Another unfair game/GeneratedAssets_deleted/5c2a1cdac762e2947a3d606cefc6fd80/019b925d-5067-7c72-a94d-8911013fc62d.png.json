@@ -1,0 +1,20 @@
+{
+    "asset": "5c2a1cdac762e2947a3d606cefc6fd80",
+    "fileName": "019b925d-5067-7c72-a94d-8911013fc62d.png",
+    "prompt": "Минималистичный скелет в стиле cell Shading, В полный рост",
+    "negativePrompt": "",
+    "model": "9f64bc29-fded-42b6-8f1c-a899c3f56125",
+    "modelName": "Creepy Style Character Icons",
+    "customSeed": -1,
+    "w3CTraceId": "e107d1f28acbbb8b38523520ab33a5a8",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

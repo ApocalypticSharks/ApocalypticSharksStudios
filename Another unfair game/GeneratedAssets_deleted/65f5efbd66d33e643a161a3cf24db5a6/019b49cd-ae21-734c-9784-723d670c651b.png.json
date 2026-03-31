@@ -1,0 +1,20 @@
+{
+    "asset": "65f5efbd66d33e643a161a3cf24db5a6",
+    "fileName": "019b49cd-ae21-734c-9784-723d670c651b.png",
+    "prompt": "Icon for shop event in deck building card game, casino style",
+    "negativePrompt": "",
+    "model": "982ae1a2-d3b9-4023-a76b-2b32510f21ed",
+    "modelName": "Sticker Icons",
+    "customSeed": -1,
+    "w3CTraceId": "699f5a84dd5c050093df8488b00f0994",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

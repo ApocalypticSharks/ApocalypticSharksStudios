@@ -1,0 +1,20 @@
+{
+    "asset": "5c2a1cdac762e2947a3d606cefc6fd80",
+    "fileName": "019b925e-f3f4-7b6c-81c6-5cbda97b9b2e.png",
+    "prompt": "Skeleton, no background",
+    "negativePrompt": "",
+    "model": "9f64bc29-fded-42b6-8f1c-a899c3f56125",
+    "modelName": "Creepy Style Character Icons",
+    "customSeed": -1,
+    "w3CTraceId": "76a22bc83e4aafd8953764e18b4e67ad",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

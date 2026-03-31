@@ -1,0 +1,129 @@
+using NUnit.Framework;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PlayerManager : MonoBehaviour
+{
+    public static PlayerManager Instance;
+    public Transform playerHandContainer;
+    public int playerHealth;
+    public int gold;
+
+    [Header("UI")]
+    public TMP_Text handValue;
+
+    [Header("Buttons")]
+    public Button hitButton;
+    public Button standButton;
+    public Button startNewBattle;
+
+    public List<GameObject> playerHand;
+    public int currentHandValue;
+
+    private void Awake()
+    {
+        // Singleton pattern
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        hitButton.onClick.AddListener(() => PlayerHit());
+        standButton.onClick.AddListener(() => PlayerStand());
+        startNewBattle.onClick.AddListener(() => BattleManager.Instance.StartNewBattle());
+    }
+
+    public void TakeDamage(int damage)
+    { 
+        playerHealth -= damage;
+    }
+
+    public void HealDamage(int amount)
+    {
+        playerHealth += amount;
+    }
+
+    public void GetGold(int amount)
+    {
+        gold += amount;
+        UIManager.Instance.ChangeGoldValue();
+    }
+
+    public void SpendGold(int amount)
+    {
+        gold -= amount;
+        UIManager.Instance.ChangeGoldValue();
+    }
+    public void PlayerHit()
+    {
+        DeckManager.Instance.DrawFromGameDeck(playerHand, playerHandContainer);
+        currentHandValue = CalculateHandValue();
+        handValue.text = currentHandValue.ToString();
+        if (currentHandValue == 21)
+        {
+            if (playerHand.Count == 2)
+            {
+                GameStateManager.Instance.MoveToNextGameState(GameState.BattleResults);
+            }
+            else
+            {
+                PlayerStand();
+            }
+        }
+        isBust(currentHandValue);
+    }
+
+    public void PlayerStand()
+    {
+        GameStateManager.Instance.MoveToNextGameState(GameState.BattleEnemyTurn);
+    }
+
+    public int CalculateHandValue()
+    {
+        int totalValue = 0;
+        int aceCount = 0;
+
+        foreach (GameObject card in playerHand)
+        {
+            if (card.GetComponent<CardData>().data.rank == CardRank.Ace)
+            {
+                aceCount++;
+                totalValue += 1; // —начала считаем тузы как 1
+            }
+            else
+            {
+                totalValue += card.GetComponent<CardData>().data.baseValue;
+            }
+        }
+
+        // ѕытаемс€ использовать тузы как 11, если это выгодно
+        while (aceCount > 0 && totalValue + 10 <= 21)
+        {
+            totalValue += 10;
+            aceCount--;
+        }
+
+        return totalValue;
+    }
+
+    public void isBust(int handValue)
+    {
+        if (handValue > 21)
+        {
+            foreach (var upgrade in GameStateManager.Instance.upgrades)
+            {
+                foreach (var effect in upgrade.data.onBustEffects)
+                {
+                    effect.ApplyEffect(GameStateManager.Instance.currentGameState);
+                }
+            }
+            GameStateManager.Instance.MoveToNextGameState (GameState.BattleResults);
+        }
+    }
+}

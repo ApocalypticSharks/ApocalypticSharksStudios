@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b459aac49cffaaf42a15b1a7963874ea, type: 3}
+  m_Name: Jack
+  m_EditorClassIdentifier: Assembly-CSharp::ActSO
+  Name: Jacks
+  floors:
+  - {fileID: 11400000, guid: a20f916078ce6ec46ae3e4d1f8101be6, type: 2}
+  - {fileID: 11400000, guid: 912dfae8c7c97334a9b7905562cec6e7, type: 2}
+  - {fileID: 11400000, guid: 16a7ed0d32b544a43b0a3761c7979885, type: 2}
+  - {fileID: 11400000, guid: 450b3497375fe17449eb7240f72eae11, type: 2}

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d36904444f58e43a420fce3fb1cbb9, type: 3}
+  m_Name: Skeleton
+  m_EditorClassIdentifier: Assembly-CSharp::DealerSO
+  dealerName: Skeleton
+  description: They are never dead completly
+  sprite: {fileID: 4354231566380549168, guid: 5c2a1cdac762e2947a3d606cefc6fd80, type: 3}
+  dealerHealth: 15
+  damageModifier: 1
+  might: 1
+  dealerDeck:
+  - {fileID: 11400000, guid: 13418999f5abab644bf8fc0b22d0c412, type: 2}
+  - {fileID: 11400000, guid: 32bcdb4ed8d4dae4397a3f3ff11826c4, type: 2}
+  - {fileID: 11400000, guid: 42176f7b451608c42a214c79411d697e, type: 2}
+  - {fileID: 11400000, guid: db578c2f602880749b2e6e518762e33b, type: 2}
+  - {fileID: 11400000, guid: 8b342a8935615b641b21a7583987f06b, type: 2}
+  - {fileID: 11400000, guid: aeed8030230eb2a42aa422dca0e236a4, type: 2}

@@ -1,0 +1,20 @@
+{
+    "asset": "9cdea3aae565f8c4abf6a4f3b7a9d6de",
+    "fileName": "019ad40f-a2df-75cd-8601-71dbeadabe3b.png",
+    "prompt": "Small round character with a lense instead of boudy. With Mustache and cylinder",
+    "negativePrompt": "",
+    "model": "d724c21b-ca75-4957-b630-2d6ff3f201c3",
+    "modelName": "Biomechanical",
+    "customSeed": -1,
+    "w3CTraceId": "689d9390e4f5c53fe2dc5b1177a91936",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

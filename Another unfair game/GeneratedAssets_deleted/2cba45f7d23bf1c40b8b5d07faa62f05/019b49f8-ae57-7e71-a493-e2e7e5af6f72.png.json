@@ -1,0 +1,20 @@
+{
+    "asset": "2cba45f7d23bf1c40b8b5d07faa62f05",
+    "fileName": "019b49f8-ae57-7e71-a493-e2e7e5af6f72.png",
+    "prompt": "[Icon] for [rest event] in deck building card game, casino style, black white red gold color scheme, [circle shape], add campfire",
+    "negativePrompt": "",
+    "model": "982ae1a2-d3b9-4023-a76b-2b32510f21ed",
+    "modelName": "Sticker Icons",
+    "customSeed": -1,
+    "w3CTraceId": "6c113469361473afd0cb3c3406a2f5c7",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

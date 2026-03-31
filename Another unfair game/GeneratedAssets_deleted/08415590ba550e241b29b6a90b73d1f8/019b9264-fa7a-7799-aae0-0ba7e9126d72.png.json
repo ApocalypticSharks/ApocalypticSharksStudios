@@ -1,0 +1,20 @@
+{
+    "asset": "08415590ba550e241b29b6a90b73d1f8",
+    "fileName": "019b9264-fa7a-7799-aae0-0ba7e9126d72.png",
+    "prompt": "zombie warrior, no gackground",
+    "negativePrompt": "",
+    "model": "9f64bc29-fded-42b6-8f1c-a899c3f56125",
+    "modelName": "Creepy Style Character Icons",
+    "customSeed": -1,
+    "w3CTraceId": "a8d1528757c9f1c501978f8b3d27f578",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

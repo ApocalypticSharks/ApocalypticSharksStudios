@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4953140397332600560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8025722740241657715}
+  - component: {fileID: 5316059262129627749}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8025722740241657715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4953140397332600560}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.85561, y: -0.15714, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5316059262129627749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4953140397332600560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b95adc667ef9548b31bf2736868769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  creditsText: {fileID: 0}
+  matchsticksText: {fileID: 0}
+  betText: {fileID: 0}
+  handValueText: {fileID: 0}
+  dealerHealthText: {fileID: 0}
+  dealerScoreText: {fileID: 0}
+  hitButton: {fileID: 0}
+  standButton: {fileID: 0}
+  increaseBetButton: {fileID: 0}
+  decreaseBetButton: {fileID: 0}
+  exitShopButton: {fileID: 0}
+  battlePanel: {fileID: 0}
+  shopPanel: {fileID: 0}
+  resultPanel: {fileID: 0}
+  resultText: {fileID: 0}
+  playerHandContainer: {fileID: 0}
+  dealerHandContainer: {fileID: 0}
+  cardSpacing: 120
+  handArcHeight: 40
+  cardPrefab: {fileID: 5764012294722493916, guid: 9498fe96d8df99d4f9a25b1d247bf7f9, type: 3}

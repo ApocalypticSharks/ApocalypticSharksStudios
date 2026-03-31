@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737aa1f13f6900e4ca9e719d84d56396, type: 3}
+  m_Name: 2ClubsRessurection
+  m_EditorClassIdentifier: Assembly-CSharp::CardSO
+  cardName: 2 of Clubs Ressurection
+  description: 
+  cardSprite: {fileID: 21300000, guid: 3f84a84c07b1aa641816679132663e7d, type: 3}
+  cardBackSprite: {fileID: 21300000, guid: 3f84a84c07b1aa641816679132663e7d, type: 3}
+  price: 0
+  suit: 2
+  rank: 2
+  baseValue: 2
+  isAce: 0
+  cardType: 0
+  rarity: 0
+  isCursed: 0
+  isBlessed: 0
+  isConsumable: 0
+  onPlayEffects: []
+  onWinEffects: []
+  onLoseEffects: []
+  onDiscardEffects: []
+  matchstickCost: 0
+  shopCost: 10
