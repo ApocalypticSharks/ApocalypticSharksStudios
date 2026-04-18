@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +16,6 @@ public class GameStateManager : MonoBehaviour
 
     [Header("Game Modifiers")]
     public List<UpgradeData> upgrades;
-    public List<EquipmentData> equipment;
 
     private void Awake()
     {

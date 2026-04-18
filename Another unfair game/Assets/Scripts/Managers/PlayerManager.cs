@@ -22,6 +22,9 @@ public class PlayerManager : MonoBehaviour
     public List<GameObject> playerHand;
     public int currentHandValue;
 
+    public int shield;
+    public int poisonStacks;
+
     private void Awake()
     {
         // Singleton pattern
@@ -39,9 +42,34 @@ public class PlayerManager : MonoBehaviour
         startNewBattle.onClick.AddListener(() => BattleManager.Instance.StartNewBattle());
     }
 
-    public void TakeDamage(int damage)
-    { 
+    public void TakeDamage(int damage, bool ignoreShield = false)
+    {
+        if (!ignoreShield && shield > 0)
+        {
+            int absorbed = Mathf.Min(shield, damage);
+            shield -= absorbed;
+            damage -= absorbed;
+        }
         playerHealth -= damage;
+    }
+
+    public void AddShield(int amount)
+    {
+        shield += Mathf.Max(0, amount);
+    }
+
+    public void AddPoison(int amount)
+    {
+        poisonStacks += Mathf.Max(0, amount);
+    }
+
+    public void TickPoisonAtRoundStart()
+    {
+        if (poisonStacks <= 0)
+            return;
+        int dmg = poisonStacks;
+        poisonStacks = Mathf.Max(0, poisonStacks - 1);
+        TakeDamage(dmg, ignoreShield: false);
     }
 
     public void HealDamage(int amount)
@@ -94,7 +122,7 @@ public class PlayerManager : MonoBehaviour
             if (card.GetComponent<CardData>().data.rank == CardRank.Ace)
             {
                 aceCount++;
-                totalValue += 1; // —начала считаем тузы как 1
+                totalValue += 1; // ??????? ??????? ???? ??? 1
             }
             else
             {
@@ -102,7 +130,7 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        // ѕытаемс€ использовать тузы как 11, если это выгодно
+        // ???????? ???????????? ???? ??? 11, ???? ??? ???????
         while (aceCount > 0 && totalValue + 10 <= 21)
         {
             totalValue += 10;

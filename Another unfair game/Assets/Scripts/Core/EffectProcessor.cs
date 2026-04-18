@@ -1,5 +1,4 @@
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public static class EffectProcessor
@@ -17,11 +16,10 @@ public static class EffectProcessor
                 }
                 else if (phase == GameState.BattleEnemyTurn)
                 {
-                    PlayerManager.Instance.playerHealth -= BattleManager.Instance.activeDealer.GetDealerHand().Count * effect.value;
+                    PlayerManager.Instance.TakeDamage(BattleManager.Instance.activeDealer.GetDealerHand().Count * effect.value);
                 }
                 break;
-            //If bust, deal excess hand value as damage randomly allocated between enemies
-            case EffectType.Overcharge:               
+            case EffectType.Overcharge:
                 var handValue = PlayerManager.Instance.CalculateHandValue();
 
                 for (int i = 0; i < 21 - handValue; i++)
@@ -29,64 +27,73 @@ public static class EffectProcessor
                     var randomEnemy = Random.Range(0, BattleManager.Instance.dealers.Count);
                     BattleManager.Instance.dealers[randomEnemy].TakeDamage(1);
                 }
-                break;               
-            //When draw "Hearts" card, Heals to the value of the card
+                break;
             case EffectType.HealingHeart:
                 if (topCard.gameObject.GetComponent<CardData>().data.suit == CardSuit.Hearts)
                 {
                     PlayerManager.Instance.HealDamage(topCard.gameObject.GetComponent<CardData>().data.baseValue);
                 }
                 break;
-            //When card drawn, grants amount of gold equal the card value
             case EffectType.MoneyBag:
                 if (topCard.gameObject.GetComponent<CardData>().data.suit == CardSuit.Diamonds)
                 {
                     PlayerManager.Instance.GetGold(topCard.gameObject.GetComponent<CardData>().data.baseValue);
                 }
                 break;
+        }
+    }
 
-            //case EffectType.LoseCredits:
-            //    GameManager.Instance.SpendCredits(effect.value);
-            //    break;
+    public static void ProcessWinEffect(EffectStruct effect, in EffectWinContext ctx)
+    {
+        int amount = ctx.Card != null ? Mathf.Max(1, ctx.Card.baseValue) : Mathf.Max(1, effect.value);
 
-            //case EffectType.HealPlayer:
-            //    // Пока нет здоровья у игрока, можно добавить
-            //    break;
-
-            //case EffectType.DrawCard:
-            //    GameManager.Instance.deckManager.PlayerDrawCard();
-            //    break;
-
-            //case EffectType.DiscardCard:
-            //    // Сброс случайной карты
-            //    var hand = GameManager.Instance.deckManager.GetPlayerHand();
-            //    if (hand.Count > 0)
-            //    {
-            //        GameManager.Instance.deckManager.DiscardCard(
-            //            hand[Random.Range(0, hand.Count)],
-            //            hand
-            //        );
-            //    }
-            //    break;
-
-            //case EffectType.GainMatchstick:
-            //    GameManager.Instance.AddMatchsticks(effect.value);
-            //    break;
-
-            //case EffectType.LoseMatchstick:
-            //        GameManager.Instance.SpendMatchstick(effect.value);
-            //    break;
-
-            //case EffectType.ModifyBet:
-            //    GameManager.Instance.currentBet = Mathf.Max(1,
-            //        GameManager.Instance.currentBet + effect.value);
-            //    break;
+        switch (effect.type)
+        {
+            case EffectType.CardWinStrike:
+                if (ctx.PlayerWon && ctx.OpponentDealer != null)
+                    ctx.OpponentDealer.TakeDamage(amount, ignoreShield: false);
+                else if (!ctx.PlayerWon)
+                    PlayerManager.Instance.TakeDamage(amount, ignoreShield: false);
+                break;
+            case EffectType.CardWinShield:
+                if (ctx.PlayerWon)
+                    PlayerManager.Instance.AddShield(amount);
+                else if (ctx.OpponentDealer != null)
+                    ctx.OpponentDealer.AddShield(amount);
+                break;
+            case EffectType.CardWinHeal:
+                if (ctx.PlayerWon)
+                    PlayerManager.Instance.HealDamage(amount);
+                else if (ctx.OpponentDealer != null)
+                    ctx.OpponentDealer.HealDamage(amount);
+                break;
+            case EffectType.CardWinMagicStrike:
+                if (ctx.PlayerWon && ctx.OpponentDealer != null)
+                    ctx.OpponentDealer.TakeDamage(amount, ignoreShield: true);
+                else if (!ctx.PlayerWon)
+                    PlayerManager.Instance.TakeDamage(amount, ignoreShield: true);
+                break;
+            case EffectType.CardWinPoison:
+                if (ctx.PlayerWon && ctx.OpponentDealer != null)
+                    ctx.OpponentDealer.AddPoison(amount);
+                else if (!ctx.PlayerWon)
+                    PlayerManager.Instance.AddPoison(amount);
+                break;
         }
     }
 }
+
 public enum EffectType
 {
-    Overcharge, DealDamageBasedOnHandCount, HealingHeart, MoneyBag
+    Overcharge,
+    DealDamageBasedOnHandCount,
+    HealingHeart,
+    MoneyBag,
+    CardWinStrike,
+    CardWinShield,
+    CardWinHeal,
+    CardWinMagicStrike,
+    CardWinPoison
 }
 
 [System.Serializable]
@@ -96,9 +103,13 @@ public struct EffectStruct
     public int value;
     public string description;
 
-    // Метод применения эффекта
     public void ApplyEffect(GameState phase)
     {
         EffectProcessor.ProcessEffect(this, phase);
+    }
+
+    public void ApplyWinEffect(in EffectWinContext ctx)
+    {
+        EffectProcessor.ProcessWinEffect(this, in ctx);
     }
 }

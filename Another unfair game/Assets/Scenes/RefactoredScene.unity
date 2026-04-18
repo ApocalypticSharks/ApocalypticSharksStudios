@@ -2165,10 +2165,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d6534d6b44d61924c82d86fe03db77ba, type: 2}
   - {fileID: 11400000, guid: 70a857379f80d9c44b269452fd1d4137, type: 2}
   - {fileID: 11400000, guid: 4bed904df61c4574d90ae1a630295d4f, type: 2}
-  equipments: []
+  shopCardPool:
+  - {fileID: 11400000, guid: 8311e8b823c91d14ba3ea738b2ba1d5e, type: 2}
+  - {fileID: 11400000, guid: 223e846b63438d54d906149a12a011e8, type: 2}
+  - {fileID: 11400000, guid: 24ed006e38d679143b3444e9a24738de, type: 2}
+  - {fileID: 11400000, guid: 96198f99de414084cbb07bc92ef3b428, type: 2}
+  - {fileID: 11400000, guid: 227bb5712444ac443847a811defc3de7, type: 2}
+  - {fileID: 11400000, guid: b0eb43d453d785746a05ac8ee4b33f63, type: 2}
+  - {fileID: 11400000, guid: d9c286a6bf258034fb77dacb6108fd86, type: 2}
+  shopCardOfferPrefab: {fileID: 4829437554270448337, guid: f1e2d3c4b5a69788fedcba0123456789, type: 3}
+  boosterPrefab: {fileID: 5829437554270448338, guid: a1b2c3d4e5f60718293a4b5c6d7e8f90, type: 3}
+  boosterGoldCost: 40
   shopContainer: {fileID: 1392334379}
+  upgradeShopContainer: {fileID: 0}
+  cardShopContainer: {fileID: 0}
   upgradePrefab: {fileID: 2829437554270448337, guid: c7562f3158f5fdd4cbc9b29bfdd15a6d, type: 3}
-  equipmentPrefab: {fileID: 0}
   itemsForSale: []
 --- !u!4 &1412931348
 Transform:

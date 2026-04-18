@@ -31,6 +31,9 @@ public class BattleManager : MonoBehaviour
 
     public void StartNewBattle()
     {
+        PlayerManager.Instance.shield = 0;
+        PlayerManager.Instance.poisonStacks = 0;
+
         currentBattleNumber += 1;
         if (currentBattleNumber > maxBattlesCount)
         {
@@ -45,6 +48,9 @@ public class BattleManager : MonoBehaviour
     }
     public void StartBossBattle()
     {
+        PlayerManager.Instance.shield = 0;
+        PlayerManager.Instance.poisonStacks = 0;
+
         InitializeBoss();
         InitializeStartingHands();
         GameStateManager.Instance.MoveToNextGameState(GameState.BattlePlayerTurn);
@@ -63,29 +69,35 @@ public class BattleManager : MonoBehaviour
     }
     public void BattleResults()
     {
+        int p = PlayerManager.Instance.currentHandValue;
         foreach (var dealer in dealers)
         {
             if (dealer.dealerHealth > 0)
-            {                
-                if (PlayerManager.Instance.currentHandValue <= 21 && dealer.currentHandValue > 21)
+            {
+                int d = dealer.currentHandValue;
+                if (p <= 21 && d > 21)
                 {
-                    Debug.Log($"Damage dealt to enemy: {PlayerManager.Instance.currentHandValue}");
-                    dealer.TakeDamage(PlayerManager.Instance.currentHandValue);
+                    Debug.Log($"Damage dealt to enemy: {p}");
+                    dealer.TakeDamage(p);
+                    ApplyWinningHandCardEffects(true, dealer, PlayerManager.Instance.playerHand);
                 }
-                else if (PlayerManager.Instance.currentHandValue > 21 && dealer.currentHandValue <= 21)
+                else if (p > 21 && d <= 21)
                 {
-                    Debug.Log($"Damage dealt to player: {dealer.currentHandValue}");
-                    PlayerManager.Instance.TakeDamage(dealer.currentHandValue);
+                    Debug.Log($"Damage dealt to player: {d}");
+                    PlayerManager.Instance.TakeDamage(d);
+                    ApplyWinningHandCardEffects(false, dealer, dealer.dealerHand);
                 }
-                else if (PlayerManager.Instance.currentHandValue > dealer.currentHandValue)
+                else if (p > d)
                 {
-                    Debug.Log($"Damage dealt to enemy: {PlayerManager.Instance.currentHandValue}");
-                    dealer.TakeDamage(PlayerManager.Instance.currentHandValue);
+                    Debug.Log($"Damage dealt to enemy: {p}");
+                    dealer.TakeDamage(p);
+                    ApplyWinningHandCardEffects(true, dealer, PlayerManager.Instance.playerHand);
                 }
-                else if (PlayerManager.Instance.currentHandValue < dealer.currentHandValue)
+                else if (p < d)
                 {
-                    Debug.Log($"Damage dealt to player: {dealer.currentHandValue}");
-                    PlayerManager.Instance.TakeDamage(dealer.currentHandValue);
+                    Debug.Log($"Damage dealt to player: {d}");
+                    PlayerManager.Instance.TakeDamage(d);
+                    ApplyWinningHandCardEffects(false, dealer, dealer.dealerHand);
                 }
             }
         }
@@ -102,6 +114,13 @@ public class BattleManager : MonoBehaviour
 
     public void StartNextRound()
     {
+        PlayerManager.Instance.TickPoisonAtRoundStart();
+        foreach (var dealer in dealers)
+        {
+            if (dealer.dealerHealth > 0)
+                dealer.TickPoisonAtRoundStart();
+        }
+
         DeckManager.Instance.DiscradAllCards(PlayerManager.Instance.playerHand);
         InitializeStartingHands();
         foreach (var dealer in dealers)
@@ -113,6 +132,9 @@ public class BattleManager : MonoBehaviour
     }
     public void BattleEnd()
     {
+        PlayerManager.Instance.shield = 0;
+        PlayerManager.Instance.poisonStacks = 0;
+
         DeckManager.Instance.DiscradAllCards(PlayerManager.Instance.playerHand);
         foreach (var dealer in dealers)
         {
@@ -147,6 +169,24 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             PlayerManager.Instance.PlayerHit();
+        }
+    }
+
+    private static void ApplyWinningHandCardEffects(bool playerWon, Dealer dealer, List<GameObject> winningHand)
+    {
+        if (winningHand == null)
+            return;
+        foreach (GameObject cardGo in winningHand)
+        {
+            CardData cardData = cardGo.GetComponent<CardData>();
+            if (cardData == null || cardData.data == null)
+                continue;
+            List<EffectStruct> effects = cardData.data.onWinEffects;
+            if (effects == null || effects.Count == 0)
+                continue;
+            var ctx = new EffectWinContext(cardData.data, playerWon, dealer);
+            foreach (EffectStruct effect in effects)
+                effect.ApplyWinEffect(in ctx);
         }
     }
 }

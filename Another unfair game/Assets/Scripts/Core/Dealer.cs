@@ -12,6 +12,8 @@ public class Dealer : MonoBehaviour
     public Transform delaerHandContainer;
     public List<CardSO> dealerDeck;
     public int dealerHealth;
+    public int shield;
+    public int poisonStacks;
     public bool isActive;
     [Header("UI")]
     public TMP_Text handValueText;
@@ -19,7 +21,7 @@ public class Dealer : MonoBehaviour
     [Header("Behavior")]
     [SerializeField] private int standValue = 17;
 
-    // События
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public System.Action OnDealerTurnStart;
     public System.Action OnDealerTurnEnd;
     public System.Action<bool> OnDealerHandChanged;
@@ -27,6 +29,8 @@ public class Dealer : MonoBehaviour
     {
         this.dealerData = dealerData;
         dealerHealth = dealerData.dealerHealth;
+        shield = 0;
+        poisonStacks = 0;
         gameObject.GetComponent<Image>().sprite = dealerData.sprite;
         dealerDeck = dealerData.dealerDeck;
         DrawFromDealerDeck();
@@ -57,10 +61,10 @@ public class Dealer : MonoBehaviour
     {
         int handValue = CalculateHandValue();
 
-        // Базовое правило: добирать до 17
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 17
         if (handValue < standValue) return true;
 
-        // Мягкие 17 (туз + 6 = 17, но можно считать как 7)
+        // пїЅпїЅпїЅпїЅпїЅпїЅ 17 (пїЅпїЅпїЅ + 6 = 17, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ 7)
         //if (handValue == standValue && HasSoftSeventeen())
         //{
         //    return beforeDrawCardRules.Any(rule => rule.ruleType == RuleType.MustHitOnSoft17);
@@ -79,7 +83,7 @@ public class Dealer : MonoBehaviour
             if (card.GetComponent<CardData>().data.rank == CardRank.Ace)
             {
                 aceCount++;
-                totalValue += 1; // Сначала считаем тузы как 1
+                totalValue += 1; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ 1
             }
             else
             {
@@ -87,7 +91,7 @@ public class Dealer : MonoBehaviour
             }
         }
 
-        // Пытаемся использовать тузы как 11, если это выгодно
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ 11, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         while (aceCount > 0 && totalValue + 10 <= 21)
         {
             totalValue += 10;
@@ -99,20 +103,26 @@ public class Dealer : MonoBehaviour
 
     public List<GameObject> GetDealerHand() => dealerHand;
 
-    // Получение урона (когда игрок побеждает)
-    public void TakeDamage(int damage)
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
+    public void TakeDamage(int damage, bool ignoreShield = false)
     {
+        if (!ignoreShield && shield > 0)
+        {
+            int absorbed = Mathf.Min(shield, damage);
+            shield -= absorbed;
+            damage -= absorbed;
+        }
         dealerHealth -= damage;
         dealerHealth = Mathf.Max(dealerHealth, 0);
 
         if (dealerHealth <= 0)
         {
             Debug.Log($"Dealer {dealerData.dealerName} defeated!");
-            // Дилер побежден, переход к следующему
+            // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
     }
 
-    // Применение специальных правил
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     private int ApplySpecialRules(int currentScore, List<DealerRule> rules)
     {
         foreach (var rule in rules)
@@ -120,6 +130,30 @@ public class Dealer : MonoBehaviour
             currentScore = rule.ApplyRule(currentScore, dealerHand);
         }
         return currentScore;
+    }
+
+    public void AddShield(int amount)
+    {
+        shield += Mathf.Max(0, amount);
+    }
+
+    public void HealDamage(int amount)
+    {
+        dealerHealth += Mathf.Max(0, amount);
+    }
+
+    public void AddPoison(int amount)
+    {
+        poisonStacks += Mathf.Max(0, amount);
+    }
+
+    public void TickPoisonAtRoundStart()
+    {
+        if (poisonStacks <= 0)
+            return;
+        int dmg = poisonStacks;
+        poisonStacks = Mathf.Max(0, poisonStacks - 1);
+        TakeDamage(dmg, ignoreShield: false);
     }
 
     private bool HasSoftSeventeen()
@@ -130,14 +164,14 @@ public class Dealer : MonoBehaviour
         foreach (var card in dealerHand)
         {
             if (card.GetComponent<CardData>().data.isAce) hasAce = true;
-            handValue += card.GetComponent<CardData>().data.GetValue(false); // Считаем тузы как 1
+            handValue += card.GetComponent<CardData>().data.GetValue(false); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ 1
         }
 
         return hasAce && handValue == 7;
     }
 }
 
-// Правила дилера
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 [System.Serializable]
 public class DealerRule
 {
@@ -150,10 +184,10 @@ public class DealerRule
         switch (ruleType)
         {
             case RuleType.StandAtValue:
-                return currentScore; // Изменяем standValue через переменную
+                return currentScore; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ standValue пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
             case RuleType.IgnoreAceHigh:
-                // Считаем тузы только как 1
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ 1
                 int newScore = 0;
                 foreach (var card in hand)
                 {
@@ -164,7 +198,7 @@ public class DealerRule
                 }
                 return newScore;
 
-                // ... другие правила
+                // ... пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
         return currentScore;
     }
@@ -172,9 +206,9 @@ public class DealerRule
 
 public enum RuleType
 {
-    StandAtValue,    // Останавливаться на определенном значении
-    IgnoreAceHigh,   // Не считать тузы как 11
-    MustHitOnSoft17, // Добирать на "мягких" 17
-    DoubleOnAny,     // Удваивать на любой карте
-    NoSplit,         // Не разрешать сплит
+    StandAtValue,    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    IgnoreAceHigh,   // пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ 11
+    MustHitOnSoft17, // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ" 17
+    DoubleOnAny,     // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    NoSplit,         // пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 }

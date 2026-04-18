@@ -12,18 +12,27 @@ public class CardData : MonoBehaviour
 
     public void Initialize()
     {
-        rankImage.sprite = data.RankSprite;
-        rankImageReversed.sprite = data.RankSprite;
-        suitImage.sprite = data.suitSprite;
+        if (data == null)
+            return;
+        if (rankImage != null)
+            rankImage.sprite = data.RankSprite;
+        if (rankImageReversed != null)
+            rankImageReversed.sprite = data.RankSprite;
+        if (suitImage != null)
+            suitImage.sprite = data.suitSprite;
         if (data.rank == CardRank.Ten)
         {
-            rankSecondImage.sprite = data.RankSecondarySprite;
-            rankSecondImageReversed.sprite = data.RankSecondarySprite;
+            if (rankSecondImage != null)
+                rankSecondImage.sprite = data.RankSecondarySprite;
+            if (rankSecondImageReversed != null)
+                rankSecondImageReversed.sprite = data.RankSecondarySprite;
         }
-        else 
+        else
         {
-            rankSecondImage.sprite = null;
-            rankSecondImageReversed.sprite = null;
+            if (rankSecondImage != null)
+                rankSecondImage.sprite = null;
+            if (rankSecondImageReversed != null)
+                rankSecondImageReversed.sprite = null;
         }
     }
 }

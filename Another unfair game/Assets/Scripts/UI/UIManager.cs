@@ -14,14 +14,6 @@ public class UIManager : MonoBehaviour
     public GameObject ShopPanel;
     public GameObject StateSwitchPanel;
     public Transform ActiveUpgradeContainer;
-    public Transform HeadContainer;
-    public Transform ArmorContainer;
-    public Transform LegsContainer;
-    public Transform LeftHandContainer;
-    public Transform RightHandContainer;
-    public Transform LeftRingContainer;
-    public Transform RightRingContainer;
-    public Transform NeckLaceContainer;
     public TMP_Text GoldAmount;
     private void Awake()
     {

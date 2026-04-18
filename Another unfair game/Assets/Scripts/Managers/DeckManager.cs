@@ -47,10 +47,8 @@ public class DeckManager : MonoBehaviour
     public void InitializeGameDeck(List<CardSO> baseDeck)
     {
         gameDeck.Clear();
-        foreach (EquipmentData item in GameStateManager.Instance.equipment)
-        {
-            gameDeck.AddRange(item.data.Cards);
-        }
+        if (baseDeck != null)
+            gameDeck.AddRange(baseDeck);
         ShuffleDeck(gameDeck);
     }
 
