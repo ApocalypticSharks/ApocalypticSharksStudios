@@ -79,7 +79,18 @@ public class PlayerManager : MonoBehaviour
 
     public void GetGold(int amount)
     {
-        gold += amount;
+        if (amount <= 0)
+        {
+            gold += amount;
+            UIManager.Instance.ChangeGoldValue();
+            return;
+        }
+
+        int bonusPct = PassiveUpgradeBonuses.GetTotalGoldIncomeBonusPercent();
+        int gained = bonusPct > 0
+            ? Mathf.CeilToInt(amount * (100f + bonusPct) / 100f)
+            : amount;
+        gold += gained;
         UIManager.Instance.ChangeGoldValue();
     }
 

@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d91b07116a9cf464da7a20facf98ac85, type: 3}
-  m_Name: Overcharge
+  m_Name: PoisonedDagger
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
-  Name: Overcharge
-  Description: On bust, deal excess hand value as damage split randomly among enemies.
-  EffectType: 0
-  Cost: 100
-  Rarity: 50
-  Sprite: {fileID: 4240796555968452825, guid: 1d16134a2ca95254e9b8fd85c5b4e337, type: 3}
+  Name: Poisoned Dagger
+  Description: +5% critical hit chance for CardWinPoison (crits apply double poison
+    stacks).
+  EffectType: 16
+  Cost: 115
+  Rarity: 32
+  Sprite: {fileID: -8959297193482060910, guid: d4d18ac0ee33c3248b25430488331885, type: 3}
   onPlayEffects: []
-  onWinEffects: []
-  onBustEffects:
-  - type: 0
-    value: 0
+  onWinEffects:
+  - type: 16
+    value: 5
     description: 
+  onBustEffects: []
   onLoseEffects: []
   onDiscardEffects: []

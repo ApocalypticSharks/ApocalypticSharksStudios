@@ -1,0 +1,68 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// Passive modifiers stored in <see cref="UpgradeSO.onWinEffects"/> on owned upgrades.
+/// </summary>
+public static class PassiveUpgradeBonuses
+{
+    public static bool IsRoyalOrAce(CardSO card)
+    {
+        if (card == null)
+            return false;
+        return card.rank == CardRank.Jack
+            || card.rank == CardRank.Queen
+            || card.rank == CardRank.King
+            || card.rank == CardRank.Ace;
+    }
+
+    public static int SumPassiveValue(EffectType passiveType)
+    {
+        int sum = 0;
+        foreach (EffectStruct e in EnumeratePassiveEffects())
+        {
+            if (e.type == passiveType)
+                sum += e.value;
+        }
+        return sum;
+    }
+
+    public static int GetTotalGoldIncomeBonusPercent()
+    {
+        return SumPassiveValue(EffectType.UpgradePassiveGoldIncomeMultiplier);
+    }
+
+    /// <summary>
+    /// When the player deals damage to a dealer (hand value or card effects). Rolls Thief Hood.
+    /// </summary>
+    public static void OnPlayerDealtDamageToDealer(Dealer dealer, int damage)
+    {
+        if (damage <= 0 || dealer == null || GameStateManager.Instance == null)
+            return;
+
+        int chancePercent = SumPassiveValue(EffectType.UpgradePassiveGoldOnDamageChance);
+        if (chancePercent <= 0)
+            return;
+
+        chancePercent = Mathf.Min(100, chancePercent);
+        if (Random.Range(0, 100) < chancePercent)
+            PlayerManager.Instance.GetGold(5);
+    }
+
+    private static IEnumerable<EffectStruct> EnumeratePassiveEffects()
+    {
+        List<UpgradeData> upgrades = GameStateManager.Instance != null
+            ? GameStateManager.Instance.upgrades
+            : null;
+        if (upgrades == null)
+            yield break;
+
+        foreach (UpgradeData upgrade in upgrades)
+        {
+            if (upgrade == null || upgrade.data == null || upgrade.data.onWinEffects == null)
+                continue;
+            foreach (EffectStruct e in upgrade.data.onWinEffects)
+                yield return e;
+        }
+    }
+}

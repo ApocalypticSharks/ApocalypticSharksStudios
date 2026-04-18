@@ -14,25 +14,41 @@ public class CardData : MonoBehaviour
     {
         if (data == null)
             return;
+
+        Image cardFace = ResolveCardFaceImage();
+        if (cardFace != null && data.cardSprite != null)
+            cardFace.sprite = data.cardSprite;
+
         if (rankImage != null)
             rankImage.sprite = data.RankSprite;
         if (rankImageReversed != null)
             rankImageReversed.sprite = data.RankSprite;
         if (suitImage != null)
             suitImage.sprite = data.suitSprite;
-        if (data.rank == CardRank.Ten)
+        bool showSecondDigit = data.rank == CardRank.Ten && data.RankSecondarySprite != null;
+        if (rankSecondImage != null)
         {
-            if (rankSecondImage != null)
-                rankSecondImage.sprite = data.RankSecondarySprite;
-            if (rankSecondImageReversed != null)
-                rankSecondImageReversed.sprite = data.RankSecondarySprite;
+            rankSecondImage.sprite = showSecondDigit ? data.RankSecondarySprite : null;
+            rankSecondImage.enabled = showSecondDigit;
         }
-        else
+        if (rankSecondImageReversed != null)
         {
-            if (rankSecondImage != null)
-                rankSecondImage.sprite = null;
-            if (rankSecondImageReversed != null)
-                rankSecondImageReversed.sprite = null;
+            rankSecondImageReversed.sprite = showSecondDigit ? data.RankSecondarySprite : null;
+            rankSecondImageReversed.enabled = showSecondDigit;
         }
+    }
+
+    /// <summary>Battle cards use a child "FrontImage"; shop offer uses a root <see cref="Image"/>.</summary>
+    private Image ResolveCardFaceImage()
+    {
+        Transform front = transform.Find("FrontImage");
+        if (front != null)
+        {
+            Image img = front.GetComponent<Image>();
+            if (img != null)
+                return img;
+        }
+
+        return GetComponent<Image>();
     }
 }

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d91b07116a9cf464da7a20facf98ac85, type: 3}
   m_Name: HealingHeart
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
-  Name: Healing heart
-  Description: When draw "Hearts" card, Heals to the value of the card
+  Name: Healing Heart
+  Description: When you draw a Hearts card, heal for that card's value.
   EffectType: 2
   Cost: 100
   Rarity: 50
-  Sprite: {fileID: 0}
+  Sprite: {fileID: -1224917531191432863, guid: 1d16134a2ca95254e9b8fd85c5b4e337, type: 3}
   onPlayEffects:
   - type: 2
     value: 0

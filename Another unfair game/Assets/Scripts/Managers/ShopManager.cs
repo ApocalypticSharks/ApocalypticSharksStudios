@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ShopVisitMode
 {
@@ -16,16 +17,19 @@ public class ShopManager : MonoBehaviour
     [Header("Upgrades")]
     public List<UpgradeSO> updgrades;
     public GameObject upgradePrefab;
+    [Tooltip("Used when an UpgradeSO has no Sprite set in the asset (otherwise the shop Image stays empty).")]
+    [SerializeField] private Sprite defaultUpgradeIcon;
 
     [Header("Cards & booster")]
     public List<CardSO> shopCardPool;
-    public GameObject shopCardOfferPrefab;
     public GameObject boosterPrefab;
     public int boosterGoldCost = 40;
 
     [Header("Layout")]
+    [Tooltip("Default container for upgrades (and booster if Card Shop Container is set).")]
     public Transform shopContainer;
     public Transform upgradeShopContainer;
+    [Tooltip("Grid/panel for shop card offers only. If unset, card offers use Shop Container.")]
     public Transform cardShopContainer;
 
     public List<GameObject> itemsForSale = new List<GameObject>();
@@ -43,7 +47,8 @@ public class ShopManager : MonoBehaviour
     }
 
     private Transform UpgradeParent => upgradeShopContainer != null ? upgradeShopContainer : shopContainer;
-    private Transform CardParent => cardShopContainer != null ? cardShopContainer : shopContainer;
+    /// <summary>Card offers and booster; uses <see cref="cardShopContainer"/> when set.</summary>
+    private Transform CardShopContentParent => cardShopContainer != null ? cardShopContainer : shopContainer;
 
     public void DeinitializeShop()
     {
@@ -86,15 +91,24 @@ public class ShopManager : MonoBehaviour
 
             GameObject item = Instantiate(upgradePrefab, UpgradeParent);
             item.GetComponent<UpgradeData>().data = picked;
+            var upgradeImage = item.GetComponent<Image>();
+            upgradeImage.sprite = picked.Sprite != null ? picked.Sprite : defaultUpgradeIcon;
             itemsForSale.Add(item);
         }
     }
 
     private void PrepareCardOffers(int count)
     {
-        if (shopCardOfferPrefab == null || CardParent == null || shopCardPool == null || shopCardPool.Count == 0)
+        if (DeckManager.Instance == null || DeckManager.Instance.cardPrefab == null)
+        {
+            Debug.LogWarning("ShopManager: DeckManager or cardPrefab is missing; card offers are skipped.");
+            return;
+        }
+
+        if (CardShopContentParent == null || shopCardPool == null || shopCardPool.Count == 0)
             return;
 
+        GameObject cardPrefab = DeckManager.Instance.cardPrefab;
         var remaining = shopCardPool.Where(c => c != null).Distinct().ToList();
         for (int i = 0; i < count && remaining.Count > 0; i++)
         {
@@ -102,10 +116,10 @@ public class ShopManager : MonoBehaviour
             if (picked == null)
                 break;
 
-            GameObject item = Instantiate(shopCardOfferPrefab, CardParent);
-            var offer = item.GetComponent<ShopCardOfferData>();
-            if (offer != null)
-                offer.card = picked;
+            GameObject item = Instantiate(cardPrefab, CardShopContentParent);
+            var offer = item.GetComponent<ShopCardOfferData>() ?? item.AddComponent<ShopCardOfferData>();
+            offer.card = picked;
+            EnsureShopCardRaycastOverlay(item);
 
             var cardVisual = item.GetComponent<CardData>();
             if (cardVisual != null)
@@ -127,12 +141,38 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    private void PrepareBooster()
+    /// <summary>
+    /// Battle card prefab has no root Graphic; clicks hit child Images, so a root click handler
+    /// never fires. A full-rect transparent overlay on top receives clicks.
+    /// </summary>
+    private static void EnsureShopCardRaycastOverlay(GameObject cardRoot)
     {
-        if (boosterPrefab == null || CardParent == null || shopCardPool == null || shopCardPool.Count == 0)
+        if (cardRoot == null || cardRoot.transform.Find("ShopRaycastOverlay") != null)
             return;
 
-        GameObject item = Instantiate(boosterPrefab, CardParent);
+        var go = new GameObject("ShopRaycastOverlay", typeof(RectTransform));
+        go.transform.SetParent(cardRoot.transform, false);
+        var rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.sizeDelta = Vector2.zero;
+        rt.anchoredPosition = Vector2.zero;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
+
+        var img = go.AddComponent<Image>();
+        img.color = new Color(1f, 1f, 1f, 0.01f);
+        img.raycastTarget = true;
+        go.AddComponent<ShopCardOfferDisplay>();
+        go.transform.SetAsLastSibling();
+    }
+
+    private void PrepareBooster()
+    {
+        if (boosterPrefab == null || CardShopContentParent == null || shopCardPool == null || shopCardPool.Count == 0)
+            return;
+
+        GameObject item = Instantiate(boosterPrefab, CardShopContentParent);
         itemsForSale.Add(item);
     }
 

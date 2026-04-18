@@ -79,6 +79,7 @@ public class BattleManager : MonoBehaviour
                 {
                     Debug.Log($"Damage dealt to enemy: {p}");
                     dealer.TakeDamage(p);
+                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(dealer, p);
                     ApplyWinningHandCardEffects(true, dealer, PlayerManager.Instance.playerHand);
                 }
                 else if (p > 21 && d <= 21)
@@ -91,6 +92,7 @@ public class BattleManager : MonoBehaviour
                 {
                     Debug.Log($"Damage dealt to enemy: {p}");
                     dealer.TakeDamage(p);
+                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(dealer, p);
                     ApplyWinningHandCardEffects(true, dealer, PlayerManager.Instance.playerHand);
                 }
                 else if (p < d)

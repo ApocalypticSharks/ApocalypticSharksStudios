@@ -6,9 +6,17 @@ public class ShopCardOfferDisplay : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private ShopCardOfferData offer;
 
+    private void Awake()
+    {
+        if (offer == null)
+            offer = GetComponent<ShopCardOfferData>() ?? GetComponentInParent<ShopCardOfferData>();
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (GameStateManager.Instance.currentGameState != GameState.Shop || offer.card == null)
+        if (offer == null)
+            offer = GetComponent<ShopCardOfferData>();
+        if (GameStateManager.Instance.currentGameState != GameState.Shop || offer == null || offer.card == null)
             return;
 
         int cost = offer.card.shopCost;

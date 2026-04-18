@@ -12,7 +12,10 @@ public static class EffectProcessor
             case EffectType.DealDamageBasedOnHandCount:
                 if (phase == GameState.BattlePlayerTurn)
                 {
-                    BattleManager.Instance.dealers.First(dealer => dealer.dealerHealth > 0).TakeDamage(PlayerManager.Instance.playerHand.Count * effect.value);
+                    var targetDealer = BattleManager.Instance.dealers.First(dealer => dealer.dealerHealth > 0);
+                    int dmg = PlayerManager.Instance.playerHand.Count * effect.value;
+                    targetDealer.TakeDamage(dmg);
+                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(targetDealer, dmg);
                 }
                 else if (phase == GameState.BattleEnemyTurn)
                 {
@@ -25,7 +28,9 @@ public static class EffectProcessor
                 for (int i = 0; i < 21 - handValue; i++)
                 {
                     var randomEnemy = Random.Range(0, BattleManager.Instance.dealers.Count);
-                    BattleManager.Instance.dealers[randomEnemy].TakeDamage(1);
+                    Dealer ov = BattleManager.Instance.dealers[randomEnemy];
+                    ov.TakeDamage(1);
+                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(ov, 1);
                 }
                 break;
             case EffectType.HealingHeart:
@@ -50,12 +55,18 @@ public static class EffectProcessor
         switch (effect.type)
         {
             case EffectType.CardWinStrike:
+                amount = ApplyPassiveStrikeAndMagicBonuses(EffectType.CardWinStrike, amount, in ctx);
+                amount = ApplyStrikeCrit(amount, in ctx);
                 if (ctx.PlayerWon && ctx.OpponentDealer != null)
+                {
                     ctx.OpponentDealer.TakeDamage(amount, ignoreShield: false);
+                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(ctx.OpponentDealer, amount);
+                }
                 else if (!ctx.PlayerWon)
                     PlayerManager.Instance.TakeDamage(amount, ignoreShield: false);
                 break;
             case EffectType.CardWinShield:
+                amount = ApplyPassiveShieldBonus(amount, in ctx);
                 if (ctx.PlayerWon)
                     PlayerManager.Instance.AddShield(amount);
                 else if (ctx.OpponentDealer != null)
@@ -68,18 +79,90 @@ public static class EffectProcessor
                     ctx.OpponentDealer.HealDamage(amount);
                 break;
             case EffectType.CardWinMagicStrike:
+                amount = ApplyPassiveStrikeAndMagicBonuses(EffectType.CardWinMagicStrike, amount, in ctx);
+                amount = ApplyStrikeCrit(amount, in ctx);
                 if (ctx.PlayerWon && ctx.OpponentDealer != null)
+                {
                     ctx.OpponentDealer.TakeDamage(amount, ignoreShield: true);
+                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(ctx.OpponentDealer, amount);
+                }
                 else if (!ctx.PlayerWon)
                     PlayerManager.Instance.TakeDamage(amount, ignoreShield: true);
                 break;
             case EffectType.CardWinPoison:
+                amount = ApplyPassivePoisonBonuses(amount, in ctx);
+                amount = ApplyPoisonCrit(amount, in ctx);
                 if (ctx.PlayerWon && ctx.OpponentDealer != null)
                     ctx.OpponentDealer.AddPoison(amount);
                 else if (!ctx.PlayerWon)
                     PlayerManager.Instance.AddPoison(amount);
                 break;
         }
+    }
+
+    private static int ApplyPassiveStrikeAndMagicBonuses(EffectType winEffectType, int amount, in EffectWinContext ctx)
+    {
+        if (!ctx.PlayerWon || ctx.OpponentDealer == null || ctx.Card == null)
+            return amount;
+
+        if (winEffectType == EffectType.CardWinMagicStrike)
+            amount += PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveMagicStrikeDamageBonus);
+
+        if (winEffectType == EffectType.CardWinStrike)
+        {
+            bool royal = PassiveUpgradeBonuses.IsRoyalOrAce(ctx.Card);
+            if (!royal)
+                amount += PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveStrikeDamageBonusNonRoyal);
+            else
+                amount += PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveStrikeDamageBonusRoyal);
+        }
+
+        return amount;
+    }
+
+    private static int ApplyPassiveShieldBonus(int amount, in EffectWinContext ctx)
+    {
+        if (!ctx.PlayerWon)
+            return amount;
+        return amount + PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveShieldBonus);
+    }
+
+    private static int ApplyPassivePoisonBonuses(int amount, in EffectWinContext ctx)
+    {
+        if (!ctx.PlayerWon || ctx.OpponentDealer == null || ctx.Card == null)
+            return amount;
+
+        bool royal = PassiveUpgradeBonuses.IsRoyalOrAce(ctx.Card);
+        if (!royal)
+            amount += PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassivePoisonBonusNonRoyal);
+        else
+            amount += PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassivePoisonBonusRoyal);
+
+        return amount;
+    }
+
+    private static int ApplyStrikeCrit(int amount, in EffectWinContext ctx)
+    {
+        if (!ctx.PlayerWon || ctx.OpponentDealer == null)
+            return amount;
+
+        int chance = PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveCritChance);
+        chance = Mathf.Min(100, chance);
+        if (chance > 0 && Random.Range(0, 100) < chance)
+            return amount * 2;
+        return amount;
+    }
+
+    private static int ApplyPoisonCrit(int amount, in EffectWinContext ctx)
+    {
+        if (!ctx.PlayerWon || ctx.OpponentDealer == null)
+            return amount;
+
+        int chance = PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassivePoisonCritChance);
+        chance = Mathf.Min(100, chance);
+        if (chance > 0 && Random.Range(0, 100) < chance)
+            return amount * 2;
+        return amount;
     }
 }
 
@@ -93,7 +176,20 @@ public enum EffectType
     CardWinShield,
     CardWinHeal,
     CardWinMagicStrike,
-    CardWinPoison
+    CardWinPoison,
+
+    UpgradePassiveMagicStrikeDamageBonus,
+    UpgradePassiveStrikeDamageBonusNonRoyal,
+    UpgradePassiveStrikeDamageBonusRoyal,
+    UpgradePassiveShieldBonus,
+    UpgradePassiveCritChance,
+    UpgradePassivePoisonBonusNonRoyal,
+    UpgradePassivePoisonBonusRoyal,
+    UpgradePassivePoisonCritChance,
+    /// <summary>value = chance percent to gain 5 gold when dealing damage to an enemy.</summary>
+    UpgradePassiveGoldOnDamageChance,
+    /// <summary>value = percent added to all gold income (multiple items stack).</summary>
+    UpgradePassiveGoldIncomeMultiplier
 }
 
 [System.Serializable]
