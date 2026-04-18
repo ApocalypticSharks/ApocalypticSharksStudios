@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ShopCardOfferDisplay : MonoBehaviour, IPointerClickHandler
+public class ShopCardOfferDisplay : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     private ShopCardOfferData offer;
@@ -10,6 +10,20 @@ public class ShopCardOfferDisplay : MonoBehaviour, IPointerClickHandler
     {
         if (offer == null)
             offer = GetComponent<ShopCardOfferData>() ?? GetComponentInParent<ShopCardOfferData>();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (offer == null)
+            offer = GetComponent<ShopCardOfferData>() ?? GetComponentInParent<ShopCardOfferData>();
+        if (offer?.card == null || UIManager.Instance == null)
+            return;
+        UIManager.Instance.ShowTooltip(offer.card.cardName, offer.card.description, eventData.position);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UIManager.Instance?.HideTooltip();
     }
 
     public void OnPointerClick(PointerEventData eventData)
