@@ -16,7 +16,25 @@ public class UpgradeDisplay : MonoBehaviour, IPointerClickHandler, IPointerEnter
     {
         if (data?.data == null || UIManager.Instance == null)
             return;
-        UIManager.Instance.ShowTooltip(data.data.Name, data.data.Description, eventData.position);
+        string title = data.data.Name;
+        string body = data.data.Description;
+        if (GameStateManager.Instance != null && GameStateManager.Instance.currentGameState == GameState.Shop)
+        {
+            if (data.isInInventory)
+            {
+                title = $"{data.data.Name} (Lv.{data.EffectiveLevel})";
+                body += $"\nSell: {UpgradeData.GetSellPrice(data.data, data.level)} gold";
+            }
+            else
+            {
+                title = $"{data.data.Name} → Lv.{data.level}";
+                body += $"\nPrice: {UpgradeData.GetBuyPrice(data.data, data.level)} gold";
+            }
+        }
+        else
+            title = $"{data.data.Name} (Lv.{data.EffectiveLevel})";
+
+        UIManager.Instance.ShowTooltip(title, body, eventData.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -32,15 +50,29 @@ public class UpgradeDisplay : MonoBehaviour, IPointerClickHandler, IPointerEnter
                 if (data.isInInventory)
                 {
                     GameStateManager.Instance.upgrades.Remove(data);
-                    PlayerManager.Instance.GetGold(data.data.Cost / 2);
+                    PlayerManager.Instance.GetGold(UpgradeData.GetSellPrice(data.data, data.level));
                     Destroy(gameObject);
                 }
-                else 
+                else
                 {
-                    GameStateManager.Instance.upgrades.Add(data);
-                    transform.SetParent(UIManager.Instance.ActiveUpgradeContainer);
-                    PlayerManager.Instance.SpendGold(data.data.Cost);
-                    data.isInInventory = true;
+                    int price = UpgradeData.GetBuyPrice(data.data, data.level);
+                    if (PlayerManager.Instance.gold < price)
+                        return;
+
+                    UpgradeData existing = UpgradeData.FindOwnedUpgrade(data.data);
+                    if (existing != null)
+                    {
+                        PlayerManager.Instance.SpendGold(price);
+                        existing.level = data.level;
+                        Destroy(gameObject);
+                    }
+                    else
+                    {
+                        PlayerManager.Instance.SpendGold(price);
+                        GameStateManager.Instance.upgrades.Add(data);
+                        transform.SetParent(UIManager.Instance.ActiveUpgradeContainer);
+                        data.isInInventory = true;
+                    }
                 }
                 break;
         }

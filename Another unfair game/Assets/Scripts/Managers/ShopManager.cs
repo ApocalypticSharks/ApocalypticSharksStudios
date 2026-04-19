@@ -82,7 +82,10 @@ public class ShopManager : MonoBehaviour
         if (upgradePrefab == null || UpgradeParent == null || updgrades == null || updgrades.Count == 0)
             return;
 
-        var remaining = updgrades.Where(u => u != null).Distinct().ToList();
+        var remaining = updgrades
+            .Where(u => u != null && UpgradeData.GetOwnedUpgradeLevel(u) < UpgradeSO.MaxLevel)
+            .Distinct()
+            .ToList();
         for (int i = 0; i < count && remaining.Count > 0; i++)
         {
             UpgradeSO picked = PickWeightedUnique(remaining, u => Mathf.Max(1, u.Rarity));
@@ -90,7 +93,10 @@ public class ShopManager : MonoBehaviour
                 break;
 
             GameObject item = Instantiate(upgradePrefab, UpgradeParent);
-            item.GetComponent<UpgradeData>().data = picked;
+            var ud = item.GetComponent<UpgradeData>();
+            ud.data = picked;
+            ud.level = UpgradeData.GetOwnedUpgradeLevel(picked) + 1;
+            ud.isInInventory = false;
             var upgradeImage = item.GetComponent<Image>();
             upgradeImage.sprite = picked.Sprite != null ? picked.Sprite : defaultUpgradeIcon;
             itemsForSale.Add(item);

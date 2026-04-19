@@ -61,8 +61,13 @@ public static class PassiveUpgradeBonuses
         {
             if (upgrade == null || upgrade.data == null || upgrade.data.onWinEffects == null)
                 continue;
+            int lv = upgrade.EffectiveLevel;
             foreach (EffectStruct e in upgrade.data.onWinEffects)
-                yield return e;
+            {
+                EffectStruct scaled = e;
+                scaled.value = UpgradeData.ScaledEffectValue(e.value, lv);
+                yield return scaled;
+            }
         }
     }
 }

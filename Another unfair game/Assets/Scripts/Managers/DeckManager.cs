@@ -89,9 +89,18 @@ public class DeckManager : MonoBehaviour
         
         hand.Add(cardInstance);
 
-        GameStateManager.Instance.upgrades.ForEach(effects =>
-        effects.data.onPlayEffects.ForEach(effect =>
-        effect.ApplyEffect(GameStateManager.Instance.currentGameState)));
+        foreach (UpgradeData upgrade in GameStateManager.Instance.upgrades)
+        {
+            if (upgrade?.data?.onPlayEffects == null)
+                continue;
+            int lv = upgrade.EffectiveLevel;
+            foreach (EffectStruct effect in upgrade.data.onPlayEffects)
+            {
+                EffectStruct scaled = effect;
+                scaled.value = UpgradeData.ScaledEffectValue(effect.value, lv);
+                scaled.ApplyEffect(GameStateManager.Instance.currentGameState);
+            }
+        }
     }
 
     public CardSO DrawFromShopDeck()

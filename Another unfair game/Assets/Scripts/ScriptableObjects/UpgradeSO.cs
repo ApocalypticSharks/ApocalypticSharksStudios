@@ -5,6 +5,8 @@ using static UnityEngine.GraphicsBuffer;
 [CreateAssetMenu(fileName = "New Upgrade", menuName = "Blackjack Rogue/Upgrade")]
 public class UpgradeSO : ScriptableObject
 {
+    public const int MaxLevel = 5;
+
     [SerializeField]
     public string Name;
     [SerializeField]

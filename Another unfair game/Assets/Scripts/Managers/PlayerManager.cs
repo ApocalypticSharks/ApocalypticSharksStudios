@@ -157,9 +157,14 @@ public class PlayerManager : MonoBehaviour
         {
             foreach (var upgrade in GameStateManager.Instance.upgrades)
             {
+                if (upgrade?.data?.onBustEffects == null)
+                    continue;
+                int lv = upgrade.EffectiveLevel;
                 foreach (var effect in upgrade.data.onBustEffects)
                 {
-                    effect.ApplyEffect(GameStateManager.Instance.currentGameState);
+                    EffectStruct scaled = effect;
+                    scaled.value = UpgradeData.ScaledEffectValue(effect.value, lv);
+                    scaled.ApplyEffect(GameStateManager.Instance.currentGameState);
                 }
             }
             GameStateManager.Instance.MoveToNextGameState (GameState.BattleResults);
