@@ -16,7 +16,7 @@ public class CardTooltipHover : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (_card == null || _card.data == null || UIManager.Instance == null)
+        if (_card == null || !_card.IsFaceUp || _card.data == null || UIManager.Instance == null)
             return;
         UIManager.Instance.ShowTooltip(_card.data.cardName, _card.data.description, eventData.position);
     }

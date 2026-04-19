@@ -4,11 +4,41 @@ using UnityEngine.UI;
 public class CardData : MonoBehaviour
 {
     public CardSO data;
+    [SerializeField] private bool _faceUp = true;
     public Image rankImage;
     public Image rankSecondImage;
     public Image rankImageReversed;
     public Image rankSecondImageReversed;
     public Image suitImage;
+
+    public bool IsFaceUp => _faceUp;
+
+    /// <summary>Face-down shows <c>BackImage</c> (if present) and hides rank/suit. Used for the dealer hole card.</summary>
+    public void SetFaceUp(bool faceUp)
+    {
+        _faceUp = faceUp;
+        Transform root = transform;
+        Transform frontT = root.Find("FrontImage");
+        Transform backT = root.Find("BackImage");
+        if (frontT != null && backT != null)
+        {
+            frontT.gameObject.SetActive(faceUp);
+            backT.gameObject.SetActive(!faceUp);
+        }
+
+        if (faceUp)
+        {
+            Initialize();
+        }
+        else
+        {
+            if (rankImage != null) rankImage.enabled = false;
+            if (rankSecondImage != null) rankSecondImage.enabled = false;
+            if (rankImageReversed != null) rankImageReversed.enabled = false;
+            if (rankSecondImageReversed != null) rankSecondImageReversed.enabled = false;
+            if (suitImage != null) suitImage.enabled = false;
+        }
+    }
 
     public void Initialize()
     {

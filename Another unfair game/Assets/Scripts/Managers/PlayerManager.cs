@@ -108,6 +108,7 @@ public class PlayerManager : MonoBehaviour
         {
             if (playerHand.Count == 2)
             {
+                BattleManager.Instance?.RevealAllDealerHoleCards();
                 GameStateManager.Instance.MoveToNextGameState(GameState.BattleResults);
             }
             else
@@ -167,6 +168,7 @@ public class PlayerManager : MonoBehaviour
                     scaled.ApplyEffect(GameStateManager.Instance.currentGameState);
                 }
             }
+            BattleManager.Instance?.RevealAllDealerHoleCards();
             GameStateManager.Instance.MoveToNextGameState (GameState.BattleResults);
         }
     }

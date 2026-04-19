@@ -21,6 +21,9 @@ public class Dealer : MonoBehaviour
     [Header("Behavior")]
     [SerializeField] private int standValue = 17;
 
+    private const int HoleCardIndex = 1;
+    private bool holeCardRevealed;
+
     // �������
     public System.Action OnDealerTurnStart;
     public System.Action OnDealerTurnEnd;
@@ -39,23 +42,82 @@ public class Dealer : MonoBehaviour
     public void DrawCard()
     {
         DeckManager.Instance.DrawFromGameDeck(dealerHand, delaerHandContainer);
-        currentHandValue = CalculateHandValue();
-        handValueText.text = currentHandValue.ToString();
+        RefreshHandValueUI();
     }
+
     public void DrawFromDealerDeck()
     {
+        holeCardRevealed = false;
         DeckManager.Instance.ShuffleDeck(dealerDeck);
         for (int i = 0; i < 2; i++)
         {
             Debug.Log("Dealer card drawn");
             CardSO card = dealerDeck[i];
             GameObject cardInstance = Instantiate(DeckManager.Instance.cardPrefab, delaerHandContainer);
-            cardInstance.gameObject.GetComponent<CardData>().data = card;
+            CardData cardData = cardInstance.GetComponent<CardData>();
+            cardData.data = card;
+            cardData.Initialize();
+            if (i == HoleCardIndex)
+                cardData.SetFaceUp(false);
             card.onPlayEffects.ForEach((effect) => effect.ApplyEffect(GameStateManager.Instance.currentGameState));
             dealerHand.Add(cardInstance);
         }
+        RefreshHandValueUI();
+    }
+
+    /// <summary>Flip the hole card (e.g. before dealer plays or at showdown). Safe to call multiple times.</summary>
+    public void RevealHoleCard()
+    {
+        if (holeCardRevealed || dealerHand.Count <= HoleCardIndex)
+            return;
+        CardData hole = dealerHand[HoleCardIndex].GetComponent<CardData>();
+        if (hole != null)
+            hole.SetFaceUp(true);
+        holeCardRevealed = true;
+        RefreshHandValueUI();
+    }
+
+    public void RefreshHandValueUI()
+    {
         currentHandValue = CalculateHandValue();
-        handValueText.text = currentHandValue.ToString();
+        if (handValueText == null)
+            return;
+        if (!holeCardRevealed && dealerHand.Count >= 2)
+            handValueText.text = $"Значение руки {CalculateVisibleHandValue()} + ?";
+        else
+            handValueText.text = currentHandValue.ToString();
+    }
+
+    /// <summary>Blackjack total of face-up cards only (hidden hole card excluded).</summary>
+    private int CalculateVisibleHandValue()
+    {
+        int totalValue = 0;
+        int aceCount = 0;
+
+        foreach (GameObject card in dealerHand)
+        {
+            CardData cd = card.GetComponent<CardData>();
+            if (cd == null || !cd.IsFaceUp || cd.data == null)
+                continue;
+
+            if (cd.data.rank == CardRank.Ace)
+            {
+                aceCount++;
+                totalValue += 1;
+            }
+            else
+            {
+                totalValue += cd.data.baseValue;
+            }
+        }
+
+        while (aceCount > 0 && totalValue + 10 <= 21)
+        {
+            totalValue += 10;
+            aceCount--;
+        }
+
+        return totalValue;
     }
     public bool ShouldHit()
     {

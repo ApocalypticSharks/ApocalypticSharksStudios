@@ -57,6 +57,7 @@ public class BattleManager : MonoBehaviour
     }
     public void EnemyTurn()
     {
+        RevealAllDealerHoleCards();
         foreach (var dealer in dealers)
         {
             activeDealer = dealer;
@@ -66,6 +67,18 @@ public class BattleManager : MonoBehaviour
             }
         }
         GameStateManager.Instance.MoveToNextGameState(GameState.BattleResults);
+    }
+
+    /// <summary>Show dealer hole cards before showdown or dealer draw (blackjack rules).</summary>
+    public void RevealAllDealerHoleCards()
+    {
+        if (dealers == null)
+            return;
+        foreach (Dealer dealer in dealers)
+        {
+            if (dealer != null)
+                dealer.RevealHoleCard();
+        }
     }
     public void BattleResults()
     {
