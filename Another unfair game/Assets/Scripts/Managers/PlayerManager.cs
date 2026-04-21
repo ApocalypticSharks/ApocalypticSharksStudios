@@ -10,6 +10,9 @@ public class PlayerManager : MonoBehaviour
     public Transform playerHandContainer;
     public int playerHealth;
     public int gold;
+    [Header("Matchsticks")]
+    [Tooltip("Сжигание карт ПКМ в бою")]
+    public int matchsticks = 3;
 
     [Header("UI")]
     public TMP_Text handValue;
@@ -99,9 +102,25 @@ public class PlayerManager : MonoBehaviour
         gold -= amount;
         UIManager.Instance.ChangeGoldValue();
     }
+
+    public bool TrySpendMatchsticks(int amount)
+    {
+        if (amount <= 0 || matchsticks < amount)
+            return false;
+        matchsticks -= amount;
+        UIManager.Instance?.ChangeMatchsticksValue();
+        return true;
+    }
+
     public void PlayerHit()
     {
         DeckManager.Instance.DrawFromGameDeck(playerHand, playerHandContainer);
+        RefreshHandStateAfterModify();
+    }
+
+    /// <summary>После добора или сброса карты: пересчёт очков, 21 / буст.</summary>
+    public void RefreshHandStateAfterModify()
+    {
         currentHandValue = CalculateHandValue();
         handValue.text = currentHandValue.ToString();
         if (currentHandValue == 21)

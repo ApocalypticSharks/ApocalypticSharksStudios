@@ -40,8 +40,11 @@ public class CardSO : ScriptableObject
     public List<EffectStruct> onDiscardEffects;
 
     [Header("Meta Info")]
-    public int matchstickCost = 0; // Стоимость в спичках для сжигания
+    public int matchstickCost = 0; // Стоимость в спичках для сжигания (0 = по умолчанию 1)
     public int shopCost = 10; // Стоимость в магазине
+
+    /// <summary>Фактическая цена сжигания: если в ассете 0 — считается 1.</summary>
+    public int GetMatchstickBurnCost() => matchstickCost > 0 ? matchstickCost : 1;
 
     // Быстрое получение значения для отображения
     public string GetValueText()

@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public GameObject StateSwitchPanel;
     public Transform ActiveUpgradeContainer;
     public TMP_Text GoldAmount;
+    [SerializeField] private TMP_Text matchsticksText;
 
     [Header("Tooltip")]
     [SerializeField] private Vector2 tooltipScreenOffset = new Vector2(18f, -18f);
@@ -34,6 +35,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        ChangeMatchsticksValue();
+    }
+
     public void ChangePanel(GameState gameState)
     {
         HideTooltip();
@@ -49,6 +55,12 @@ public class UIManager : MonoBehaviour
     public void ChangeGoldValue()
     {
         GoldAmount.text = PlayerManager.Instance.gold.ToString();
+    }
+
+    public void ChangeMatchsticksValue()
+    {
+        if (matchsticksText != null && PlayerManager.Instance != null)
+            matchsticksText.text = PlayerManager.Instance.matchsticks.ToString();
     }
 
     public void ShowTooltip(string title, string description, Vector2 screenPosition)

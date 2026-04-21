@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3849532948689074625}
   - component: {fileID: 1445599561012944719}
   - component: {fileID: 1445599561012944720}
+  - component: {fileID: 1445599561012944721}
   m_Layer: 5
   m_Name: FrontImage
   m_TagString: Untagged
@@ -88,6 +89,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8a9b0c1d2e3f405162738495a6b7c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardTooltipHover
+--- !u!114 &1445599561012944721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819170283235167330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e8a1f3029b4d5e6a7c80123456789a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHandCardBurn
 --- !u!1 &1645762679947319130
 GameObject:
   m_ObjectHideFlags: 0
