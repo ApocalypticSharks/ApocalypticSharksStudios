@@ -89,6 +89,8 @@ public class DeckManager : MonoBehaviour
         
         hand.Add(cardInstance);
 
+        TryApplyPoisonedCardDrawUpgrade(card, hand);
+
         foreach (UpgradeData upgrade in GameStateManager.Instance.upgrades)
         {
             if (upgrade?.data?.onPlayEffects == null)
@@ -115,6 +117,37 @@ public class DeckManager : MonoBehaviour
         return card;
     }
 
+    private static void TryApplyPoisonedCardDrawUpgrade(CardSO card, List<GameObject> hand)
+    {
+        if (card == null || PlayerManager.Instance == null || hand == null)
+            return;
+        if (hand == PlayerManager.Instance.playerHand)
+            return;
+        if (PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveOpponentDrawPoisonCardAppliesPoison) <= 0)
+            return;
+        if (!card.HasPoisonWinEffect())
+            return;
+        if (BattleManager.Instance?.dealers == null)
+            return;
+        Dealer owner = null;
+        foreach (Dealer d in BattleManager.Instance.dealers)
+        {
+            if (d != null && d.dealerHand == hand)
+            {
+                owner = d;
+                break;
+            }
+        }
+        if (owner == null || owner.dealerHealth <= 0 || card.onWinEffects == null)
+            return;
+        var ctx = EffectWinContext.ForPoisonedCardsDealerDraw(card, owner);
+        foreach (EffectStruct effect in card.onWinEffects)
+        {
+            if (effect.type == EffectType.CardWinPoison)
+                effect.ApplyWinEffect(in ctx);
+        }
+    }
+
     // Восстановление колоды из сброса
     public void ReshuffleDiscardPile()
     {
@@ -127,18 +160,33 @@ public class DeckManager : MonoBehaviour
     }
 
     // Сброс карты (без эффектов)
-    public void DiscardCard(GameObject card, List<GameObject> hand, bool toDiscardPile = true)
+    public void DiscardCard(GameObject card, List<GameObject> hand, bool toDiscardPile = true, bool fromPlayerMatchstickBurn = false)
     {
         if (hand.Contains(card))
         {
             hand.Remove(card);
-            if(toDiscardPile)
+            CardData cardData = card.GetComponent<CardData>();
+            CardSO cardSo = cardData != null ? cardData.data : null;
+
+            if (fromPlayerMatchstickBurn && cardSo != null && cardSo.HasPoisonWinEffect())
             {
-                discardPile.Add(card.gameObject.GetComponent<CardData>().data);
+                int smokeStacks = PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassivePoisonAllEnemiesOnPoisonCardBurn);
+                if (smokeStacks > 0 && BattleManager.Instance?.dealers != null)
+                {
+                    foreach (Dealer d in BattleManager.Instance.dealers)
+                    {
+                        if (d != null && d.dealerHealth > 0)
+                            d.AddPoison(smokeStacks);
+                    }
+                }
             }
 
+            if (toDiscardPile && cardSo != null)
+                discardPile.Add(cardSo);
+
             // Применяем эффекты "при сбросе"
-            ApplyCardEffects(card.gameObject.GetComponent<CardData>().data.onDiscardEffects);
+            if (cardSo != null)
+                ApplyCardEffects(cardSo.onDiscardEffects);
 
             Destroy(card);
             //if (hand == GetPlayerHand())

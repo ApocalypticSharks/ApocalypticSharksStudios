@@ -1,6 +1,21 @@
 using System.Linq;
 using UnityEngine;
 
+public static class PoisonUpgradeEffects
+{
+    public static void ApplyPoisonSpreadToOtherDealers(Dealer primaryTarget, int stacksPerOtherEnemy)
+    {
+        if (stacksPerOtherEnemy <= 0 || primaryTarget == null || BattleManager.Instance?.dealers == null)
+            return;
+        foreach (Dealer d in BattleManager.Instance.dealers)
+        {
+            if (d == null || d.dealerHealth <= 0 || d == primaryTarget)
+                continue;
+            d.AddPoison(stacksPerOtherEnemy);
+        }
+    }
+}
+
 public static class EffectProcessor
 {
     public static void ProcessEffect(EffectStruct effect, GameState phase)
@@ -61,6 +76,7 @@ public static class EffectProcessor
                 {
                     ctx.OpponentDealer.TakeDamage(amount, ignoreShield: false);
                     PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(ctx.OpponentDealer, amount);
+                    ApplyBonusPoisonOnNonPoisonDamageDealer(in ctx);
                 }
                 else if (!ctx.PlayerWon)
                     PlayerManager.Instance.TakeDamage(amount, ignoreShield: false);
@@ -85,6 +101,7 @@ public static class EffectProcessor
                 {
                     ctx.OpponentDealer.TakeDamage(amount, ignoreShield: true);
                     PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(ctx.OpponentDealer, amount);
+                    ApplyBonusPoisonOnNonPoisonDamageDealer(in ctx);
                 }
                 else if (!ctx.PlayerWon)
                     PlayerManager.Instance.TakeDamage(amount, ignoreShield: true);
@@ -93,7 +110,12 @@ public static class EffectProcessor
                 amount = ApplyPassivePoisonBonuses(amount, in ctx);
                 amount = ApplyPoisonCrit(amount, in ctx);
                 if (ctx.PlayerWon && ctx.OpponentDealer != null)
+                {
                     ctx.OpponentDealer.AddPoison(amount);
+                    int spread = PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassivePoisonSpreadToOtherEnemiesOnCardPoison);
+                    if (spread > 0 && !ctx.SuppressPoisonFlaskSpread)
+                        PoisonUpgradeEffects.ApplyPoisonSpreadToOtherDealers(ctx.OpponentDealer, spread);
+                }
                 else if (!ctx.PlayerWon)
                     PlayerManager.Instance.AddPoison(amount);
                 break;
@@ -164,6 +186,15 @@ public static class EffectProcessor
             return amount * 2;
         return amount;
     }
+
+    private static void ApplyBonusPoisonOnNonPoisonDamageDealer(in EffectWinContext ctx)
+    {
+        if (!ctx.PlayerWon || ctx.OpponentDealer == null)
+            return;
+        int bonus = PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveNonPoisonDamageAddsPoison);
+        if (bonus > 0)
+            ctx.OpponentDealer.AddPoison(bonus);
+    }
 }
 
 public enum EffectType
@@ -189,7 +220,18 @@ public enum EffectType
     /// <summary>value = chance percent to gain 5 gold when dealing damage to an enemy.</summary>
     UpgradePassiveGoldOnDamageChance,
     /// <summary>value = percent added to all gold income (multiple items stack).</summary>
-    UpgradePassiveGoldIncomeMultiplier
+    UpgradePassiveGoldIncomeMultiplier,
+
+    /// <summary>When your winning card applies CardWinPoison to a dealer, each other living dealer gains this many poison stacks (scaled per upgrade level).</summary>
+    UpgradePassivePoisonSpreadToOtherEnemiesOnCardPoison,
+    /// <summary>Extra full poison tick waves at round start (total waves = max(1, 1 + sum of scaled values)).</summary>
+    UpgradePassiveExtraPoisonTicksPerRound,
+    /// <summary>When you burn a card with a poison win effect (matchsticks), each living dealer gains this many poison stacks.</summary>
+    UpgradePassivePoisonAllEnemiesOnPoisonCardBurn,
+    /// <summary>When a dealer draws from the shared deck and the card has CardWinPoison, that poison applies to them as if they lost the showdown.</summary>
+    UpgradePassiveOpponentDrawPoisonCardAppliesPoison,
+    /// <summary>CardWinStrike / CardWinMagicStrike also add this many poison stacks when you win the hand.</summary>
+    UpgradePassiveNonPoisonDamageAddsPoison
 }
 
 [System.Serializable]

@@ -129,11 +129,16 @@ public class BattleManager : MonoBehaviour
 
     public void StartNextRound()
     {
-        PlayerManager.Instance.TickPoisonAtRoundStart();
-        foreach (var dealer in dealers)
+        int extraPoisonTickWaves = PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveExtraPoisonTicksPerRound);
+        int poisonTickWaves = Mathf.Max(1, 1 + extraPoisonTickWaves);
+        for (int wave = 0; wave < poisonTickWaves; wave++)
         {
-            if (dealer.dealerHealth > 0)
-                dealer.TickPoisonAtRoundStart();
+            PlayerManager.Instance.TickPoisonAtRoundStart();
+            foreach (var dealer in dealers)
+            {
+                if (dealer.dealerHealth > 0)
+                    dealer.TickPoisonAtRoundStart();
+            }
         }
 
         DeckManager.Instance.DiscradAllCards(PlayerManager.Instance.playerHand);

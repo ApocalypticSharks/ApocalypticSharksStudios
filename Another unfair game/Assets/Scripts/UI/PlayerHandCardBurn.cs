@@ -37,7 +37,7 @@ public class PlayerHandCardBurn : MonoBehaviour, IPointerClickHandler
             return;
 
         UIManager.Instance?.HideTooltip();
-        DeckManager.Instance.DiscardCard(cardGo, PlayerManager.Instance.playerHand);
+        DeckManager.Instance.DiscardCard(cardGo, PlayerManager.Instance.playerHand, true, true);
         PlayerManager.Instance.RefreshHandStateAfterModify();
     }
 }

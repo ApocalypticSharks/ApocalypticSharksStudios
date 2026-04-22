@@ -21,7 +21,7 @@ public class CardSO : ScriptableObject
     public CardRank rank;
 
     [Header("Game Values")]
-    public int baseValue; // Основное значение для блекджека
+    public int baseValue; //    
     public bool isAce = false;
 
     [Header("Card Type")]
@@ -31,7 +31,7 @@ public class CardSO : ScriptableObject
     [Header("Special Properties")]
     public bool isCursed = false;
     public bool isBlessed = false;
-    public bool isConsumable = false; // Сгорает после использования
+    public bool isConsumable = false; //   
 
     [Header("Effects")]
     public List<EffectStruct> onPlayEffects;
@@ -40,13 +40,25 @@ public class CardSO : ScriptableObject
     public List<EffectStruct> onDiscardEffects;
 
     [Header("Meta Info")]
-    public int matchstickCost = 0; // Стоимость в спичках для сжигания (0 = по умолчанию 1)
-    public int shopCost = 10; // Стоимость в магазине
+    public int matchstickCost = 0; //     (0 =   1)
+    public int shopCost = 10; //  
 
-    /// <summary>Фактическая цена сжигания: если в ассете 0 — считается 1.</summary>
+    /// <summary>  :   0  1.</summary>
     public int GetMatchstickBurnCost() => matchstickCost > 0 ? matchstickCost : 1;
 
-    // Быстрое получение значения для отображения
+    public bool HasPoisonWinEffect()
+    {
+        if (onWinEffects == null)
+            return false;
+        foreach (EffectStruct e in onWinEffects)
+        {
+            if (e.type == EffectType.CardWinPoison)
+                return true;
+        }
+        return false;
+    }
+
+    //     
     public string GetValueText()
     {
         if (rank == CardRank.Ace) return "A";
@@ -56,7 +68,7 @@ public class CardSO : ScriptableObject
         return baseValue.ToString();
     }
 
-    // Для туза: выбор значения
+    //  :  
     public int GetValue(bool useHighAce = true)
     {
         if (isAce) return useHighAce ? 11 : 1;
