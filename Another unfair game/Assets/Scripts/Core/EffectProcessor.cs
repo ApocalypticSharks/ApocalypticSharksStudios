@@ -119,6 +119,10 @@ public static class EffectProcessor
                 else if (!ctx.PlayerWon)
                     PlayerManager.Instance.AddPoison(amount);
                 break;
+            case EffectType.CardWinCoin:
+                if (ctx.PlayerWon && PlayerManager.Instance != null)
+                    PlayerManager.Instance.GetGold(amount);
+                break;
         }
     }
 
@@ -231,7 +235,10 @@ public enum EffectType
     /// <summary>When a dealer draws from the shared deck and the card has CardWinPoison, that poison applies to them as if they lost the showdown.</summary>
     UpgradePassiveOpponentDrawPoisonCardAppliesPoison,
     /// <summary>CardWinStrike / CardWinMagicStrike also add this many poison stacks when you win the hand.</summary>
-    UpgradePassiveNonPoisonDamageAddsPoison
+    UpgradePassiveNonPoisonDamageAddsPoison,
+
+    /// <summary>On winning the showdown, gain gold equal to this card value (subject to passive gold income bonuses).</summary>
+    CardWinCoin
 }
 
 [System.Serializable]

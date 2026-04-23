@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737aa1f13f6900e4ca9e719d84d56396, type: 3}
+  m_Name: Coin_QueenHearts
+  m_EditorClassIdentifier: Assembly-CSharp::CardSO
+  cardName: Монета - Queen of Hearts
+  description: "On win: gain gold equal to this card value."
+  cardSprite: {fileID: -6555575649291838755, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  suitSprite: {fileID: 5542925698761986857, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  RankSprite: {fileID: -4877040715876287241, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  RankSecondarySprite: {fileID: 0}
+  cardBackSprite: {fileID: 1530772536873026181, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  price: 20
+  suit: 0
+  rank: 12
+  baseValue: 10
+  isAce: 0
+  cardType: 0
+  rarity: 1
+  isCursed: 0
+  isBlessed: 0
+  isConsumable: 0
+  onPlayEffects: []
+  onWinEffects:
+  - type: 24
+    value: 0
+    description: Coin
+  onLoseEffects: []
+  onDiscardEffects: []
+  matchstickCost: 0
+  shopCost: 12

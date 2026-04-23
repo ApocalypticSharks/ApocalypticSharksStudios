@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: ToxicSmoke
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
   Name: Toxic Smoke
-  Description: Burning a card that has a poison win effect (matchsticks) applies poison stacks to every living enemy (per level).
+  Description: Burning a card that has a poison win effect (matchsticks) applies
+    poison stacks to every living enemy (per level).
   EffectType: 21
   Cost: 115
   Rarity: 36
-  Sprite: {fileID: -5280976845425323816, guid: d4d18ac0ee33c3248b25430488331885, type: 3}
+  Sprite: {fileID: -6392489595578712000, guid: 1db2433811bca254ab6b117f3e8d6906, type: 3}
   onPlayEffects: []
   onWinEffects:
   - type: 21

@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: PoisonFlask
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
   Name: Poison Flask
-  Description: When a winning card applies poison to a dealer, each other living enemy gains poison stacks equal to this upgrade's level (base 1 per level).
+  Description: When a winning card applies poison to a dealer, each other living
+    enemy gains poison stacks equal to this upgrade's level (base 1 per level).
   EffectType: 19
   Cost: 120
   Rarity: 35
-  Sprite: {fileID: -5280976845425323816, guid: d4d18ac0ee33c3248b25430488331885, type: 3}
+  Sprite: {fileID: -3239334460183922764, guid: 1db2433811bca254ab6b117f3e8d6906, type: 3}
   onPlayEffects: []
   onWinEffects:
   - type: 19

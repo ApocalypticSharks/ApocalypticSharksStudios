@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: PoisonedCards
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
   Name: Poisoned Cards
-  Description: When an enemy draws from the shared deck a card with poison, that poison applies to them (active while owned; strength scales with level).
+  Description: When an enemy draws from the shared deck a card with poison, that
+    poison applies to them (active while owned; strength scales with level).
   EffectType: 22
   Cost: 118
   Rarity: 33
-  Sprite: {fileID: -5280976845425323816, guid: d4d18ac0ee33c3248b25430488331885, type: 3}
+  Sprite: {fileID: -6185494661855012084, guid: 1db2433811bca254ab6b117f3e8d6906, type: 3}
   onPlayEffects: []
   onWinEffects:
   - type: 22

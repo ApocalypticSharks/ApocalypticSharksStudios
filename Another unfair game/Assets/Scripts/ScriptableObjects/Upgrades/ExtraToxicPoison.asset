@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: ExtraToxicPoison
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
   Name: Extra Toxic Poison
-  Description: At each new round start, poison ticks once more per upgrade level for everyone (1 base + level extra waves).
+  Description: At each new round start, poison ticks once more per upgrade level
+    for everyone (1 base + level extra waves).
   EffectType: 20
   Cost: 125
   Rarity: 34
-  Sprite: {fileID: -5280976845425323816, guid: d4d18ac0ee33c3248b25430488331885, type: 3}
+  Sprite: {fileID: -1202796011845585099, guid: 1db2433811bca254ab6b117f3e8d6906, type: 3}
   onPlayEffects: []
   onWinEffects:
   - type: 20
