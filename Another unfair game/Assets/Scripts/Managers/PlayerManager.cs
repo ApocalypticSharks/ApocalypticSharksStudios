@@ -45,15 +45,33 @@ public class PlayerManager : MonoBehaviour
         startNewBattle.onClick.AddListener(() => BattleManager.Instance.StartNewBattle());
     }
 
-    public void TakeDamage(int damage, bool ignoreShield = false)
+    public void TakeDamage(int damage, bool ignoreShield = false, Dealer attackingDealer = null)
     {
-        if (!ignoreShield && shield > 0)
+        int initialHit = Mathf.Max(0, damage);
+        int incoming = initialHit;
+        int shieldBefore = shield;
+
+        if (!ignoreShield && shield > 0 && incoming > 0)
         {
-            int absorbed = Mathf.Min(shield, damage);
+            int absorbed = Mathf.Min(shield, incoming);
             shield -= absorbed;
-            damage -= absorbed;
+            incoming -= absorbed;
         }
-        playerHealth -= damage;
+
+        playerHealth -= incoming;
+
+        if (!ignoreShield && shieldBefore > 0 && shield == 0)
+            PassiveUpgradeBonuses.OnPlayerShieldBrokenShieldShards();
+
+        if (!ignoreShield && attackingDealer != null && attackingDealer.dealerHealth > 0 && initialHit > 0)
+        {
+            int thorn = PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveReflectDamageWhenHit);
+            if (thorn > 0)
+            {
+                attackingDealer.TakeDamage(thorn, ignoreShield: false);
+                PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(attackingDealer, thorn);
+            }
+        }
     }
 
     public void AddShield(int amount)

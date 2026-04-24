@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91b07116a9cf464da7a20facf98ac85, type: 3}
+  m_Name: ShieldBash
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
+  Name: Shield Bash
+  Description: After CardWinStrike or winning-hand damage, deal extra physical damage
+    to that enemy equal to your current shield.
+  EffectType: 26
+  Cost: 110
+  Rarity: 40
+  Sprite: {fileID: 520683780257296564, guid: a3ecf4804e5bded40b42150436ab1504, type: 3}
+  onPlayEffects: []
+  onWinEffects:
+  - type: 26
+    value: 1
+    description: 
+  onBustEffects: []
+  onLoseEffects: []
+  onDiscardEffects: []

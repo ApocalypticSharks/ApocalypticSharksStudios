@@ -39,8 +39,9 @@ public class BattleManager : MonoBehaviour
         {
             StartBossBattle();
         }
-        else 
-        { 
+        else
+        {
+            ApplyBattleStartShield();
             InitializeEnemies();
             InitializeStartingHands();
             GameStateManager.Instance.MoveToNextGameState(GameState.BattlePlayerTurn);
@@ -50,6 +51,7 @@ public class BattleManager : MonoBehaviour
     {
         PlayerManager.Instance.shield = 0;
         PlayerManager.Instance.poisonStacks = 0;
+        ApplyBattleStartShield();
 
         InitializeBoss();
         InitializeStartingHands();
@@ -91,27 +93,25 @@ public class BattleManager : MonoBehaviour
                 if (p <= 21 && d > 21)
                 {
                     Debug.Log($"Damage dealt to enemy: {p}");
-                    dealer.TakeDamage(p);
-                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(dealer, p);
+                    EffectProcessor.PlayerDealsPhysicalDamageToDealer(dealer, p, null);
                     ApplyWinningHandCardEffects(true, dealer, PlayerManager.Instance.playerHand);
                 }
                 else if (p > 21 && d <= 21)
                 {
                     Debug.Log($"Damage dealt to player: {d}");
-                    PlayerManager.Instance.TakeDamage(d);
+                    PlayerManager.Instance.TakeDamage(d, ignoreShield: false, attackingDealer: dealer);
                     ApplyWinningHandCardEffects(false, dealer, dealer.dealerHand);
                 }
                 else if (p > d)
                 {
                     Debug.Log($"Damage dealt to enemy: {p}");
-                    dealer.TakeDamage(p);
-                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(dealer, p);
+                    EffectProcessor.PlayerDealsPhysicalDamageToDealer(dealer, p, null);
                     ApplyWinningHandCardEffects(true, dealer, PlayerManager.Instance.playerHand);
                 }
                 else if (p < d)
                 {
                     Debug.Log($"Damage dealt to player: {d}");
-                    PlayerManager.Instance.TakeDamage(d);
+                    PlayerManager.Instance.TakeDamage(d, ignoreShield: false, attackingDealer: dealer);
                     ApplyWinningHandCardEffects(false, dealer, dealer.dealerHand);
                 }
             }
@@ -190,6 +190,13 @@ public class BattleManager : MonoBehaviour
         {
             PlayerManager.Instance.PlayerHit();
         }
+    }
+
+    private static void ApplyBattleStartShield()
+    {
+        int amount = PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveBattleStartShield);
+        if (amount > 0 && PlayerManager.Instance != null)
+            PlayerManager.Instance.AddShield(amount);
     }
 
     private static void ApplyWinningHandCardEffects(bool playerWon, Dealer dealer, List<GameObject> winningHand)

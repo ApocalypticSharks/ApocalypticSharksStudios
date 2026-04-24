@@ -29,23 +29,26 @@ public static class EffectProcessor
                 {
                     var targetDealer = BattleManager.Instance.dealers.First(dealer => dealer.dealerHealth > 0);
                     int dmg = PlayerManager.Instance.playerHand.Count * effect.value;
-                    targetDealer.TakeDamage(dmg);
-                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(targetDealer, dmg);
+                    CardSO src = topCard.GetComponent<CardData>()?.data;
+                    PlayerDealsPhysicalDamageToDealer(targetDealer, dmg, src);
                 }
                 else if (phase == GameState.BattleEnemyTurn)
                 {
-                    PlayerManager.Instance.TakeDamage(BattleManager.Instance.activeDealer.GetDealerHand().Count * effect.value);
+                    PlayerManager.Instance.TakeDamage(
+                        BattleManager.Instance.activeDealer.GetDealerHand().Count * effect.value,
+                        ignoreShield: false,
+                        attackingDealer: BattleManager.Instance.activeDealer);
                 }
                 break;
             case EffectType.Overcharge:
                 var handValue = PlayerManager.Instance.CalculateHandValue();
+                CardSO overSrc = topCard.GetComponent<CardData>()?.data;
 
                 for (int i = 0; i < 21 - handValue; i++)
                 {
                     var randomEnemy = Random.Range(0, BattleManager.Instance.dealers.Count);
                     Dealer ov = BattleManager.Instance.dealers[randomEnemy];
-                    ov.TakeDamage(1);
-                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(ov, 1);
+                    PlayerDealsPhysicalDamageToDealer(ov, 1, overSrc);
                 }
                 break;
             case EffectType.HealingHeart:
@@ -63,6 +66,21 @@ public static class EffectProcessor
         }
     }
 
+    /// <summary>
+    /// Single entry for player-dealt physical damage: dealer HP, gold-on-hit, dirty-gear poison, shield bash.
+    /// Use for strikes, Overcharge ticks, hand-value wins, and play-phase damage cards.
+    /// </summary>
+    public static void PlayerDealsPhysicalDamageToDealer(Dealer dealer, int amount, CardSO sourceCard = null)
+    {
+        if (dealer == null || amount <= 0 || dealer.dealerHealth <= 0)
+            return;
+        dealer.TakeDamage(amount, ignoreShield: false);
+        PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(dealer, amount);
+        var poisonCtx = new EffectWinContext(sourceCard, playerWon: true, opponentDealer: dealer);
+        ApplyBonusPoisonOnNonPoisonDamageDealer(in poisonCtx);
+        PassiveUpgradeBonuses.ApplyShieldBashAfterPhysicalDamageToDealer(dealer);
+    }
+
     public static void ProcessWinEffect(EffectStruct effect, in EffectWinContext ctx)
     {
         int amount = ctx.Card != null ? Mathf.Max(1, ctx.Card.baseValue) : Mathf.Max(1, effect.value);
@@ -73,18 +91,21 @@ public static class EffectProcessor
                 amount = ApplyPassiveStrikeAndMagicBonuses(EffectType.CardWinStrike, amount, in ctx);
                 amount = ApplyStrikeCrit(amount, in ctx);
                 if (ctx.PlayerWon && ctx.OpponentDealer != null)
-                {
-                    ctx.OpponentDealer.TakeDamage(amount, ignoreShield: false);
-                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(ctx.OpponentDealer, amount);
-                    ApplyBonusPoisonOnNonPoisonDamageDealer(in ctx);
-                }
+                    PlayerDealsPhysicalDamageToDealer(ctx.OpponentDealer, amount, ctx.Card);
                 else if (!ctx.PlayerWon)
-                    PlayerManager.Instance.TakeDamage(amount, ignoreShield: false);
+                    PlayerManager.Instance.TakeDamage(amount, ignoreShield: false, attackingDealer: ctx.OpponentDealer);
                 break;
             case EffectType.CardWinShield:
                 amount = ApplyPassiveShieldBonus(amount, in ctx);
                 if (ctx.PlayerWon)
-                    PlayerManager.Instance.AddShield(amount);
+                {
+                    int shieldApplications = 1;
+                    int doubleShieldChance = Mathf.Min(100, PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveShieldDoubleBlockChance));
+                    if (doubleShieldChance > 0 && Random.Range(0, 100) < doubleShieldChance)
+                        shieldApplications = 2;
+                    for (int s = 0; s < shieldApplications; s++)
+                        PlayerManager.Instance.AddShield(amount);
+                }
                 else if (ctx.OpponentDealer != null)
                     ctx.OpponentDealer.AddShield(amount);
                 break;
@@ -104,7 +125,7 @@ public static class EffectProcessor
                     ApplyBonusPoisonOnNonPoisonDamageDealer(in ctx);
                 }
                 else if (!ctx.PlayerWon)
-                    PlayerManager.Instance.TakeDamage(amount, ignoreShield: true);
+                    PlayerManager.Instance.TakeDamage(amount, ignoreShield: true, attackingDealer: ctx.OpponentDealer);
                 break;
             case EffectType.CardWinPoison:
                 amount = ApplyPassivePoisonBonuses(amount, in ctx);
@@ -238,7 +259,18 @@ public enum EffectType
     UpgradePassiveNonPoisonDamageAddsPoison,
 
     /// <summary>On winning the showdown, gain gold equal to this card value (subject to passive gold income bonuses).</summary>
-    CardWinCoin
+    CardWinCoin,
+
+    /// <summary>When you take damage from a dealer hit, that dealer takes this much physical damage (scaled per level).</summary>
+    UpgradePassiveReflectDamageWhenHit,
+    /// <summary>After any player physical damage to a dealer (strike, Overcharge tick, hand win, play-phase damage), deal extra physical damage equal to your current shield (owned if sum &gt; 0).</summary>
+    UpgradePassiveShieldBashOnPhysicalDamage,
+    /// <summary>Percent chance (max 100) to gain shield twice from your winning <see cref="CardWinShield"/> card effect.</summary>
+    UpgradePassiveShieldDoubleBlockChance,
+    /// <summary>When your shield is depleted to 0 by a blockable hit, each living enemy takes physical damage equal to their current hand value (gate if sum &gt; 0).</summary>
+    UpgradePassiveShieldShardsWhenBroken,
+    /// <summary>Shield gained at the start of each battle (scaled).</summary>
+    UpgradePassiveBattleStartShield
 }
 
 [System.Serializable]

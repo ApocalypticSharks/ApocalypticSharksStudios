@@ -49,6 +49,39 @@ public static class PassiveUpgradeBonuses
             PlayerManager.Instance.GetGold(5);
     }
 
+    /// <summary>After physical damage to a dealer (strikes, Overcharge, hand wins, play-phase damage, etc.).</summary>
+    public static void ApplyShieldBashAfterPhysicalDamageToDealer(Dealer dealer)
+    {
+        if (dealer == null || dealer.dealerHealth <= 0 || PlayerManager.Instance == null)
+            return;
+        if (SumPassiveValue(EffectType.UpgradePassiveShieldBashOnPhysicalDamage) <= 0)
+            return;
+        int s = PlayerManager.Instance.shield;
+        if (s <= 0)
+            return;
+        dealer.TakeDamage(s, ignoreShield: false);
+        OnPlayerDealtDamageToDealer(dealer, s);
+    }
+
+    /// <summary>Player shield just dropped to 0 from blocking a hit.</summary>
+    public static void OnPlayerShieldBrokenShieldShards()
+    {
+        if (SumPassiveValue(EffectType.UpgradePassiveShieldShardsWhenBroken) <= 0)
+            return;
+        if (BattleManager.Instance?.dealers == null)
+            return;
+        foreach (Dealer d in BattleManager.Instance.dealers)
+        {
+            if (d == null || d.dealerHealth <= 0)
+                continue;
+            int dmg = Mathf.Max(0, d.currentHandValue);
+            if (dmg <= 0)
+                continue;
+            d.TakeDamage(dmg, ignoreShield: false);
+            OnPlayerDealtDamageToDealer(d, dmg);
+        }
+    }
+
     private static IEnumerable<EffectStruct> EnumeratePassiveEffects()
     {
         List<UpgradeData> upgrades = GameStateManager.Instance != null

@@ -2192,6 +2192,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c1a9f0e1d2b34a5689f0e1d2b3c4a503, type: 2}
   - {fileID: 11400000, guid: c1a9f0e1d2b34a5689f0e1d2b3c4a504, type: 2}
   - {fileID: 11400000, guid: c1a9f0e1d2b34a5689f0e1d2b3c4a505, type: 2}
+  - {fileID: 11400000, guid: e2e3f405162738495a6b7c8d9e0f1a06, type: 2}
+  - {fileID: 11400000, guid: e2e3f405162738495a6b7c8d9e0f1a07, type: 2}
+  - {fileID: 11400000, guid: e2e3f405162738495a6b7c8d9e0f1a08, type: 2}
+  - {fileID: 11400000, guid: e2e3f405162738495a6b7c8d9e0f1a09, type: 2}
+  - {fileID: 11400000, guid: e2e3f405162738495a6b7c8d9e0f1a0a, type: 2}
   upgradePrefab: {fileID: 2829437554270448337, guid: c7562f3158f5fdd4cbc9b29bfdd15a6d, type: 3}
   defaultUpgradeIcon: {fileID: 0}
   shopCardPool:
