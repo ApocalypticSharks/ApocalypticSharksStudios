@@ -103,11 +103,11 @@ public class Dealer : MonoBehaviour
             if (cd.data.rank == CardRank.Ace)
             {
                 aceCount++;
-                totalValue += 1;
+                totalValue += PassiveUpgradeBonuses.GetBlackjackCardContribution(cd.data, forPlayerHand: false);
             }
             else
             {
-                totalValue += cd.data.baseValue;
+                totalValue += PassiveUpgradeBonuses.GetBlackjackCardContribution(cd.data, forPlayerHand: false);
             }
         }
 
@@ -142,18 +142,18 @@ public class Dealer : MonoBehaviour
 
         foreach (GameObject card in dealerHand)
         {
-            if (card.GetComponent<CardData>().data.rank == CardRank.Ace)
+            CardSO d = card.GetComponent<CardData>().data;
+            if (d.rank == CardRank.Ace)
             {
                 aceCount++;
-                totalValue += 1; // ������� ������� ���� ��� 1
+                totalValue += PassiveUpgradeBonuses.GetBlackjackCardContribution(d, forPlayerHand: false);
             }
             else
             {
-                totalValue += card.GetComponent<CardData>().data.baseValue;
+                totalValue += PassiveUpgradeBonuses.GetBlackjackCardContribution(d, forPlayerHand: false);
             }
         }
 
-        // �������� ������������ ���� ��� 11, ���� ��� �������
         while (aceCount > 0 && totalValue + 10 <= 21)
         {
             totalValue += 10;

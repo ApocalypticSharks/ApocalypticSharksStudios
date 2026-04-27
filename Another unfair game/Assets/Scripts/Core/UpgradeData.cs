@@ -22,7 +22,8 @@ public class UpgradeData : MonoBehaviour
         if (so == null)
             return 0;
         int L = Mathf.Clamp(targetLevel, 1, UpgradeSO.MaxLevel);
-        return Mathf.Max(1, so.Cost * L);
+        int raw = Mathf.Max(1, so.Cost * L);
+        return PassiveUpgradeBonuses.GetShopGoldPriceAfterDiscount(raw);
     }
 
     public static int GetSellPrice(UpgradeSO so, int currentLevel)

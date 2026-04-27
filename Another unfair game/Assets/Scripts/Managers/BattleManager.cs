@@ -33,6 +33,7 @@ public class BattleManager : MonoBehaviour
     {
         PlayerManager.Instance.shield = 0;
         PlayerManager.Instance.poisonStacks = 0;
+        PlayerManager.Instance.ClearGreedRoundBonus();
 
         currentBattleNumber += 1;
         if (currentBattleNumber > maxBattlesCount)
@@ -51,6 +52,7 @@ public class BattleManager : MonoBehaviour
     {
         PlayerManager.Instance.shield = 0;
         PlayerManager.Instance.poisonStacks = 0;
+        PlayerManager.Instance.ClearGreedRoundBonus();
         ApplyBattleStartShield();
 
         InitializeBoss();
@@ -129,6 +131,8 @@ public class BattleManager : MonoBehaviour
 
     public void StartNextRound()
     {
+        PlayerManager.Instance.ClearGreedRoundBonus();
+
         int extraPoisonTickWaves = PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveExtraPoisonTicksPerRound);
         int poisonTickWaves = Mathf.Max(1, 1 + extraPoisonTickWaves);
         for (int wave = 0; wave < poisonTickWaves; wave++)
@@ -154,6 +158,7 @@ public class BattleManager : MonoBehaviour
     {
         PlayerManager.Instance.shield = 0;
         PlayerManager.Instance.poisonStacks = 0;
+        PlayerManager.Instance.ClearGreedRoundBonus();
 
         DeckManager.Instance.DiscradAllCards(PlayerManager.Instance.playerHand);
         foreach (var dealer in dealers)

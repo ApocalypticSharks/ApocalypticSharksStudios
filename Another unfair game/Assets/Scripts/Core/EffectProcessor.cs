@@ -74,8 +74,11 @@ public static class EffectProcessor
     {
         if (dealer == null || amount <= 0 || dealer.dealerHealth <= 0)
             return;
-        dealer.TakeDamage(amount, ignoreShield: false);
-        PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(dealer, amount);
+        int total = amount;
+        if (PlayerManager.Instance != null)
+            total += PlayerManager.Instance.GreedPhysicalDamageBonusThisRound;
+        dealer.TakeDamage(total, ignoreShield: false);
+        PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(dealer, total);
         var poisonCtx = new EffectWinContext(sourceCard, playerWon: true, opponentDealer: dealer);
         ApplyBonusPoisonOnNonPoisonDamageDealer(in poisonCtx);
         PassiveUpgradeBonuses.ApplyShieldBashAfterPhysicalDamageToDealer(dealer);
@@ -270,7 +273,14 @@ public enum EffectType
     /// <summary>When your shield is depleted to 0 by a blockable hit, each living enemy takes physical damage equal to their current hand value (gate if sum &gt; 0).</summary>
     UpgradePassiveShieldShardsWhenBroken,
     /// <summary>Shield gained at the start of each battle (scaled).</summary>
-    UpgradePassiveBattleStartShield
+    UpgradePassiveBattleStartShield,
+
+    /// <summary>Player cards count this much lower per card for blackjack total; dealer cards this much higher (scaled per level).</summary>
+    UpgradePassiveOverweight,
+    /// <summary>Shop gold prices reduced by this many percent (stacking), final price rounded up, min 1 gold.</summary>
+    UpgradePassiveShopDiscountPercent,
+    /// <summary>Each coin-themed card drawn to your hand this round adds its base value to all physical damage until the round ends.</summary>
+    UpgradePassiveGreedCoinCardPhysicalDamage
 }
 
 [System.Serializable]

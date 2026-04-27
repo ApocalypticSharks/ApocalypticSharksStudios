@@ -28,6 +28,9 @@ public class PlayerManager : MonoBehaviour
     public int shield;
     public int poisonStacks;
 
+    /// <summary>Bonus added to each physical damage packet this blackjack round (Greed upgrade).</summary>
+    public int GreedPhysicalDamageBonusThisRound { get; private set; }
+
     private void Awake()
     {
         // Singleton pattern
@@ -161,6 +164,20 @@ public class PlayerManager : MonoBehaviour
         GameStateManager.Instance.MoveToNextGameState(GameState.BattleEnemyTurn);
     }
 
+    public void ClearGreedRoundBonus()
+    {
+        GreedPhysicalDamageBonusThisRound = 0;
+    }
+
+    public void RegisterCoinCardPlayedForGreed(CardSO card)
+    {
+        if (card == null || PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveGreedCoinCardPhysicalDamage) <= 0)
+            return;
+        if (!card.CountsAsCoinCardForGreed())
+            return;
+        GreedPhysicalDamageBonusThisRound += Mathf.Max(1, card.baseValue);
+    }
+
     public int CalculateHandValue()
     {
         int totalValue = 0;
@@ -168,14 +185,15 @@ public class PlayerManager : MonoBehaviour
 
         foreach (GameObject card in playerHand)
         {
-            if (card.GetComponent<CardData>().data.rank == CardRank.Ace)
+            CardSO data = card.GetComponent<CardData>().data;
+            if (data.rank == CardRank.Ace)
             {
                 aceCount++;
-                totalValue += 1; // ??????? ??????? ???? ??? 1
+                totalValue += PassiveUpgradeBonuses.GetBlackjackCardContribution(data, forPlayerHand: true);
             }
             else
             {
-                totalValue += card.GetComponent<CardData>().data.baseValue;
+                totalValue += PassiveUpgradeBonuses.GetBlackjackCardContribution(data, forPlayerHand: true);
             }
         }
 

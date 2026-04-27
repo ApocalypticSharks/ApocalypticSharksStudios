@@ -14,7 +14,7 @@ public class ShopBoosterOffer : MonoBehaviour, IPointerClickHandler
         if (ShopManager.Instance == null)
             return;
 
-        int cost = ShopManager.Instance.boosterGoldCost;
+        int cost = PassiveUpgradeBonuses.GetShopGoldPriceAfterDiscount(ShopManager.Instance.boosterGoldCost);
         if (PlayerManager.Instance.gold < cost)
             return;
 

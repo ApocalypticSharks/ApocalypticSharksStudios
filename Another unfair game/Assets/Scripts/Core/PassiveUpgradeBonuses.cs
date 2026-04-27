@@ -32,6 +32,29 @@ public static class PassiveUpgradeBonuses
         return SumPassiveValue(EffectType.UpgradePassiveGoldIncomeMultiplier);
     }
 
+    /// <summary>Blackjack contribution of one card for hand total (aces use low ace branch before soft upgrade).</summary>
+    public static int GetBlackjackCardContribution(CardSO data, bool forPlayerHand)
+    {
+        if (data == null)
+            return 0;
+        int mag = SumPassiveValue(EffectType.UpgradePassiveOverweight);
+        int delta = mag > 0 ? (forPlayerHand ? -mag : mag) : 0;
+        if (data.rank == CardRank.Ace)
+            return Mathf.Max(1, 1 + delta);
+        return Mathf.Max(1, data.baseValue + delta);
+    }
+
+    /// <summary>Shop buy prices after discount passives (percent off, rounded up, at least 1).</summary>
+    public static int GetShopGoldPriceAfterDiscount(int baseGold)
+    {
+        if (baseGold <= 0)
+            return 0;
+        int pct = Mathf.Clamp(SumPassiveValue(EffectType.UpgradePassiveShopDiscountPercent), 0, 95);
+        if (pct <= 0)
+            return baseGold;
+        return Mathf.Max(1, Mathf.CeilToInt(baseGold * (100f - pct) / 100f));
+    }
+
     /// <summary>
     /// When the player deals damage to a dealer (hand value or card effects). Rolls Thief Hood.
     /// </summary>

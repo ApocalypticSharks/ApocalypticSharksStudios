@@ -33,7 +33,7 @@ public class ShopCardOfferDisplay : MonoBehaviour, IPointerClickHandler, IPointe
         if (GameStateManager.Instance.currentGameState != GameState.Shop || offer == null || offer.card == null)
             return;
 
-        int cost = offer.card.shopCost;
+        int cost = PassiveUpgradeBonuses.GetShopGoldPriceAfterDiscount(offer.card.shopCost);
         if (offer.isPurchased)
         {
             if (DeckManager.Instance.RemoveCardFromDeck(offer.card))

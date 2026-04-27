@@ -91,6 +91,11 @@ public class DeckManager : MonoBehaviour
 
         TryApplyPoisonedCardDrawUpgrade(card, hand);
 
+        if (PlayerManager.Instance != null && hand == PlayerManager.Instance.playerHand
+            && BattleManager.Instance != null && BattleManager.Instance.dealers != null
+            && BattleManager.Instance.dealers.Count > 0)
+            PlayerManager.Instance.RegisterCoinCardPlayedForGreed(card);
+
         foreach (UpgradeData upgrade in GameStateManager.Instance.upgrades)
         {
             if (upgrade?.data?.onPlayEffects == null)

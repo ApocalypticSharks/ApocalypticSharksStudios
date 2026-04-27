@@ -58,6 +58,27 @@ public class CardSO : ScriptableObject
         return false;
     }
 
+    public bool CountsAsCoinCardForGreed()
+    {
+        if (ListHasCoinEffect(onPlayEffects))
+            return true;
+        if (ListHasCoinEffect(onWinEffects))
+            return true;
+        return false;
+    }
+
+    private static bool ListHasCoinEffect(List<EffectStruct> list)
+    {
+        if (list == null)
+            return false;
+        foreach (EffectStruct e in list)
+        {
+            if (e.type == EffectType.CardWinCoin || e.type == EffectType.MoneyBag)
+                return true;
+        }
+        return false;
+    }
+
     //     
     public string GetValueText()
     {

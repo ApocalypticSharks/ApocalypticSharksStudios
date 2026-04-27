@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91b07116a9cf464da7a20facf98ac85, type: 3}
+  m_Name: Overweight
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSO
+  Name: Overweight
+  Description: Your cards count this much lower per card for blackjack totals; enemy cards count this much higher (scaled per level).
+  EffectType: 30
+  Cost: 130
+  Rarity: 28
+  Sprite: {fileID: 0}
+  onPlayEffects: []
+  onWinEffects:
+  - type: 30
+    value: 1
+    description: 
+  onBustEffects: []
+  onLoseEffects: []
+  onDiscardEffects: []
