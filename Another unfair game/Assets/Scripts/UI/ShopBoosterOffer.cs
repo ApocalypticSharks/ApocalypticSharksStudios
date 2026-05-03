@@ -24,8 +24,16 @@ public class ShopBoosterOffer : MonoBehaviour, IPointerClickHandler
         IReadOnlyList<CardSO> pulled = ShopManager.Instance.PullBoosterCards(3);
         foreach (CardSO card in pulled)
         {
-            if (card != null)
-                DeckManager.Instance.AddCardToDeck(card);
+            if (card == null || DeckManager.Instance == null)
+                continue;
+            if (DeckManager.Instance.PlayerLibraryContains(card))
+            {
+                int compensation = Mathf.CeilToInt(card.shopCost * 0.5f);
+                if (compensation > 0 && PlayerManager.Instance != null)
+                    PlayerManager.Instance.GetGold(compensation);
+                continue;
+            }
+            DeckManager.Instance.AddCardToDeck(card);
         }
 
         Destroy(gameObject);

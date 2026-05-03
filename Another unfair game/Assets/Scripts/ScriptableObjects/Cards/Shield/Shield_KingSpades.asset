@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Shield_KingSpades
   m_EditorClassIdentifier: Assembly-CSharp::CardSO
   cardName: Shield - King of Spades
-  description: "On win: gain shield equal to this card value."
+  description: 'On win: gain shield equal to this card value.'
   cardSprite: {fileID: -6555575649291838755, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
   suitSprite: {fileID: 3599973415465183345, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  actionSprite: {fileID: 100665763937561807, guid: 7af8a5fd267fdf548bc723217e54d401, type: 3}
   RankSprite: {fileID: 8048101208271225017, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
   RankSecondarySprite: {fileID: 0}
   cardBackSprite: {fileID: 1530772536873026181, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
@@ -24,7 +25,7 @@ MonoBehaviour:
   rank: 13
   baseValue: 10
   isAce: 0
-  cardType: 0
+  cardType: 1
   rarity: 1
   isCursed: 0
   isBlessed: 0

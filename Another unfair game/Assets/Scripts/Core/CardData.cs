@@ -10,6 +10,9 @@ public class CardData : MonoBehaviour
     public Image rankImageReversed;
     public Image rankSecondImageReversed;
     public Image suitImage;
+    [Tooltip("Corner suit pips (e.g. SuitImage (1) / (2)); same sprite as base standard card.")]
+    [SerializeField] private Image suitImageCorner1;
+    [SerializeField] private Image suitImageCorner2;
 
     public bool IsFaceUp => _faceUp;
 
@@ -36,7 +39,7 @@ public class CardData : MonoBehaviour
             if (rankSecondImage != null) rankSecondImage.enabled = false;
             if (rankImageReversed != null) rankImageReversed.enabled = false;
             if (rankSecondImageReversed != null) rankSecondImageReversed.enabled = false;
-            if (suitImage != null) suitImage.enabled = false;
+            SetSuitImagesActive(false);
         }
     }
 
@@ -53,8 +56,8 @@ public class CardData : MonoBehaviour
             rankImage.sprite = data.RankSprite;
         if (rankImageReversed != null)
             rankImageReversed.sprite = data.RankSprite;
-        if (suitImage != null)
-            suitImage.sprite = data.suitSprite;
+        ApplyCornerSuitSprites(data.suitSprite);
+        ApplyCenterDisplaySprite();
         bool showSecondDigit = data.rank == CardRank.Ten && data.RankSecondarySprite != null;
         if (rankSecondImage != null)
         {
@@ -66,6 +69,42 @@ public class CardData : MonoBehaviour
             rankSecondImageReversed.sprite = showSecondDigit ? data.RankSecondarySprite : null;
             rankSecondImageReversed.enabled = showSecondDigit;
         }
+    }
+
+    void ApplyCornerSuitSprites(Sprite suit)
+    {
+        bool show = suit != null;
+        void Set(Image img)
+        {
+            if (img == null)
+                return;
+            img.sprite = suit;
+            img.enabled = show;
+        }
+        Set(suitImageCorner1);
+        Set(suitImageCorner2);
+    }
+
+    /// <summary>Center (Action): Standard cards show suit; special cards show <see cref="CardSO.actionSprite"/>.</summary>
+    void ApplyCenterDisplaySprite()
+    {
+        if (suitImage == null || data == null)
+            return;
+        Sprite s = data.cardType == CardType.Standard
+            ? data.suitSprite
+            : (data.actionSprite != null ? data.actionSprite : data.suitSprite);
+        suitImage.sprite = s;
+        suitImage.enabled = s != null;
+    }
+
+    void SetSuitImagesActive(bool active)
+    {
+        if (suitImage != null)
+            suitImage.enabled = active;
+        if (suitImageCorner1 != null)
+            suitImageCorner1.enabled = active;
+        if (suitImageCorner2 != null)
+            suitImageCorner2.enabled = active;
     }
 
     /// <summary>Battle cards use a child "FrontImage"; shop offer uses a root <see cref="Image"/>.</summary>

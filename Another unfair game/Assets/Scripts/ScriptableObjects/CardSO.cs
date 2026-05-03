@@ -11,6 +11,8 @@ public class CardSO : ScriptableObject
     public string description;
     public Sprite cardSprite;
     public Sprite suitSprite;
+    [Tooltip("Center icon for non-Standard cards. Standard playing cards use suit in the center instead.")]
+    public Sprite actionSprite;
     public Sprite RankSprite;
     public Sprite RankSecondarySprite;
     public Sprite cardBackSprite;
@@ -104,5 +106,9 @@ public enum CardRank
     Two = 2, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
     Jack, Queen, King, Ace, Joker
 }
-public enum CardType { Standard, Curse, Blessing, Gambit, Relic }
+public enum CardType
+{
+    Standard,
+    Action,
+}
 public enum Rarity { Common, Uncommon, Rare, Epic, Legendary }

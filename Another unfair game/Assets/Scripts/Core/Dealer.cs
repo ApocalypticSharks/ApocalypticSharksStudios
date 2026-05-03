@@ -194,6 +194,15 @@ public class Dealer : MonoBehaviour
         return currentScore;
     }
 
+    /// <summary>Reduces shield only (e.g. magic rupture); does not affect HP.</summary>
+    public void DamageShieldOnly(int amount)
+    {
+        if (amount <= 0)
+            return;
+        int absorbed = Mathf.Min(shield, amount);
+        shield -= absorbed;
+    }
+
     public void AddShield(int amount)
     {
         shield += Mathf.Max(0, amount);

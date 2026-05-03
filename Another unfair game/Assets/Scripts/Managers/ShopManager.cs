@@ -115,7 +115,10 @@ public class ShopManager : MonoBehaviour
             return;
 
         GameObject cardPrefab = DeckManager.Instance.cardPrefab;
-        var remaining = shopCardPool.Where(c => c != null).Distinct().ToList();
+        var remaining = shopCardPool
+            .Where(c => c != null && !DeckManager.Instance.PlayerLibraryContains(c))
+            .Distinct()
+            .ToList();
         for (int i = 0; i < count && remaining.Count > 0; i++)
         {
             CardSO picked = PickWeightedUnique(remaining, c => CardRarityWeight(c.rarity));

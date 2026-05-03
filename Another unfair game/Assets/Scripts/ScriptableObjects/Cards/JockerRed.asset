@@ -16,7 +16,9 @@ MonoBehaviour:
   description: Red Joker
   cardSprite: {fileID: -6555575649291838755, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
   suitSprite: {fileID: 0}
+  actionSprite: {fileID: 0}
   RankSprite: {fileID: 0}
+  RankSecondarySprite: {fileID: 0}
   cardBackSprite: {fileID: 1530772536873026181, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
   price: 20
   suit: 4

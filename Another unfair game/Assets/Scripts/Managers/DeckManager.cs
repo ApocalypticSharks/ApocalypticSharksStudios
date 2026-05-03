@@ -268,6 +268,34 @@ public class DeckManager : MonoBehaviour
     public int GetDeckCount() => gameDeck.Count;
     public int GetDiscardCount() => discardPile.Count;
 
+    /// <summary>Whether this <see cref="CardSO"/> is already in the draw pile, discard, or the player hand (shop should not sell duplicates).</summary>
+    public bool PlayerLibraryContains(CardSO card)
+    {
+        if (card == null)
+            return false;
+        foreach (CardSO c in gameDeck)
+        {
+            if (c == card)
+                return true;
+        }
+        foreach (CardSO c in discardPile)
+        {
+            if (c == card)
+                return true;
+        }
+        if (PlayerManager.Instance?.playerHand == null)
+            return false;
+        foreach (GameObject go in PlayerManager.Instance.playerHand)
+        {
+            if (go == null)
+                continue;
+            CardData cd = go.GetComponent<CardData>();
+            if (cd != null && cd.data == card)
+                return true;
+        }
+        return false;
+    }
+
     // Подсчет очков в руке (для блекджека)
     //public int CalculateHandValue(List<CardSO> hand)
     //{

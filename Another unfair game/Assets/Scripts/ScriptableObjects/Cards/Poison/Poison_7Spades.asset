@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Poison_7Spades
   m_EditorClassIdentifier: Assembly-CSharp::CardSO
   cardName: Poison - 7 of Spades
-  description: "On win: apply poison stacks equal to this card's value. At round start, take damage equal to current stacks, then stacks decrease by 1."
+  description: 'On win: apply poison stacks equal to this card''s value. At round
+    start, take damage equal to current stacks, then stacks decrease by 1.'
   cardSprite: {fileID: -6555575649291838755, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
   suitSprite: {fileID: 3599973415465183345, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  actionSprite: {fileID: -2235351154195819768, guid: 7af8a5fd267fdf548bc723217e54d401, type: 3}
   RankSprite: {fileID: -6663811380663864060, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
   RankSecondarySprite: {fileID: 0}
   cardBackSprite: {fileID: 1530772536873026181, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
@@ -24,7 +26,7 @@ MonoBehaviour:
   rank: 7
   baseValue: 7
   isAce: 0
-  cardType: 0
+  cardType: 1
   rarity: 2
   isCursed: 0
   isBlessed: 0

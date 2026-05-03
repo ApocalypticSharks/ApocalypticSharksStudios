@@ -123,9 +123,36 @@ public static class EffectProcessor
                 amount = ApplyStrikeCrit(amount, in ctx);
                 if (ctx.PlayerWon && ctx.OpponentDealer != null)
                 {
-                    ctx.OpponentDealer.TakeDamage(amount, ignoreShield: true);
-                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(ctx.OpponentDealer, amount);
+                    Dealer target = ctx.OpponentDealer;
+                    target.TakeDamage(amount, ignoreShield: true);
+                    PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(target, amount);
                     ApplyBonusPoisonOnNonPoisonDamageDealer(in ctx);
+
+                    if (PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveMagicStrikeDamagesShieldHalf) > 0)
+                    {
+                        int toShield = Mathf.FloorToInt(amount / 2f);
+                        if (toShield > 0)
+                            target.DamageShieldOnly(toShield);
+                    }
+
+                    int magPoisonMult = PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveMagicStrikeBonusDamagePerPoisonStack);
+                    if (magPoisonMult > 0 && target.poisonStacks > 0)
+                    {
+                        int extraMagic = target.poisonStacks * magPoisonMult;
+                        target.TakeDamage(extraMagic, ignoreShield: true);
+                        PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(target, extraMagic);
+                    }
+
+                    if (PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveMagicStrikeSplashesToOtherEnemies) > 0
+                        && BattleManager.Instance?.dealers != null)
+                    {
+                        foreach (Dealer other in BattleManager.Instance.dealers)
+                        {
+                            if (other == null || other == target || other.dealerHealth <= 0)
+                                continue;
+                            PassiveUpgradeBonuses.NotifyMagicRadiationZeroHit(other);
+                        }
+                    }
                 }
                 else if (!ctx.PlayerWon)
                     PlayerManager.Instance.TakeDamage(amount, ignoreShield: true, attackingDealer: ctx.OpponentDealer);
@@ -280,7 +307,14 @@ public enum EffectType
     /// <summary>Shop gold prices reduced by this many percent (stacking), final price rounded up, min 1 gold.</summary>
     UpgradePassiveShopDiscountPercent,
     /// <summary>Each coin-themed card drawn to your hand this round adds its base value to all physical damage until the round ends.</summary>
-    UpgradePassiveGreedCoinCardPhysicalDamage
+    UpgradePassiveGreedCoinCardPhysicalDamage,
+
+    /// <summary>When your CardWinMagicStrike wins, floor(magicDamage/2) is also applied to the target shield only.</summary>
+    UpgradePassiveMagicStrikeDamagesShieldHalf,
+    /// <summary>When your CardWinMagicStrike wins, extra magic damage = target poison stacks times this passive sum (scaled per level).</summary>
+    UpgradePassiveMagicStrikeBonusDamagePerPoisonStack,
+    /// <summary>When your CardWinMagicStrike wins, each other living enemy receives a zero-damage &quot;hit&quot; that still runs on-hit procs (e.g. gold chance).</summary>
+    UpgradePassiveMagicStrikeSplashesToOtherEnemies
 }
 
 [System.Serializable]

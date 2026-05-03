@@ -21,7 +21,7 @@ MonoBehaviour:
   rank: 4
   baseValue: 4
   isAce: 0
-  cardType: 0
+  cardType: 1
   rarity: 0
   isCursed: 0
   isBlessed: 0

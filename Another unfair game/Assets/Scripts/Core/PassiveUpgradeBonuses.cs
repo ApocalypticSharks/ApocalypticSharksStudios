@@ -63,6 +63,20 @@ public static class PassiveUpgradeBonuses
         if (damage <= 0 || dealer == null || GameStateManager.Instance == null)
             return;
 
+        TryRollGoldOnDamageHit();
+    }
+
+    /// <summary>Magic radiation: no HP/shield change, but runs the same on-hit proc as dealing damage (e.g. Thief Hood).</summary>
+    public static void NotifyMagicRadiationZeroHit(Dealer dealer)
+    {
+        if (dealer == null || dealer.dealerHealth <= 0 || GameStateManager.Instance == null)
+            return;
+
+        TryRollGoldOnDamageHit();
+    }
+
+    private static void TryRollGoldOnDamageHit()
+    {
         int chancePercent = SumPassiveValue(EffectType.UpgradePassiveGoldOnDamageChance);
         if (chancePercent <= 0)
             return;
