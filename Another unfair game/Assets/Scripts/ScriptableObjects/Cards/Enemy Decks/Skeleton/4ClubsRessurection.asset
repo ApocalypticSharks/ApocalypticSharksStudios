@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardSO
   cardName: 4 of Clubs Ressurection
   description: 
-  cardSprite: {fileID: 21300000, guid: 3f84a84c07b1aa641816679132663e7d, type: 3}
-  cardBackSprite: {fileID: 21300000, guid: 3f84a84c07b1aa641816679132663e7d, type: 3}
+  cardSprite: {fileID: -6555575649291838755, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  suitSprite: {fileID: -1421651443703068562, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  actionSprite: {fileID: 816070466, guid: 5c2a1cdac762e2947a3d606cefc6fd80, type: 3}
+  RankSprite: {fileID: 6220208007999549204, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  RankSecondarySprite: {fileID: 0}
+  cardBackSprite: {fileID: 1530772536873026181, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
   price: 0
   suit: 2
   rank: 4

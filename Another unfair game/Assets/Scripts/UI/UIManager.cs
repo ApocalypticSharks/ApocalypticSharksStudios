@@ -13,6 +13,9 @@ public class UIManager : MonoBehaviour
     public Transform ActiveUpgradeContainer;
     public TMP_Text GoldAmount;
     [SerializeField] private TMP_Text matchsticksText;
+    [Header("Combo HUD")]
+    [SerializeField] private TMP_Text comboStreakText;
+    [SerializeField] private TMP_Text nextTypeHintText;
 
     [Header("Tooltip")]
     [SerializeField] private Vector2 tooltipScreenOffset = new Vector2(18f, -18f);
@@ -43,13 +46,17 @@ public class UIManager : MonoBehaviour
     public void ChangePanel(GameState gameState)
     {
         HideTooltip();
-        BattlePanel.SetActive(new GameState[] { GameState.BattleStart,
+        bool battleVisible = new GameState[] { GameState.BattleStart,
             GameState.BattlePlayerTurn,
             GameState.BattleEnemyTurn,
             GameState.BattleResults,
-            GameState.BattleEnd }.Contains(gameState));
+            GameState.BattleEnd }.Contains(gameState);
+        BattlePanel.SetActive(battleVisible);
         ShopPanel.SetActive(gameState == GameState.Shop);
         StateSwitchPanel.SetActive(false);
+        if (battleVisible)
+            EnsureComboHudBuilt();
+        UpdateComboHud(ComboEngine.TypeTransitionStreak, ComboEngine.SuitTransitionStreak, ComboEngine.ExpectedNextType);
     }
 
     public void ChangeGoldValue()
@@ -61,6 +68,20 @@ public class UIManager : MonoBehaviour
     {
         if (matchsticksText != null && PlayerManager.Instance != null)
             matchsticksText.text = PlayerManager.Instance.matchsticks.ToString();
+    }
+
+    public void UpdateComboHud(int typeStreak, int suitStreak, CardType? expectedNextType)
+    {
+        EnsureComboHudBuilt();
+        if (comboStreakText != null)
+            comboStreakText.text = $"Combo: type x{Mathf.Max(1, typeStreak + 1)} | suit x{Mathf.Max(1, suitStreak + 1)}";
+        if (nextTypeHintText != null)
+        {
+            string hint = expectedNextType.HasValue
+                ? $"Next type bonus: {expectedNextType.Value}"
+                : "Next type bonus: draw first card";
+            nextTypeHintText.text = hint;
+        }
     }
 
     public void ShowTooltip(string title, string description, Vector2 screenPosition)
@@ -172,6 +193,41 @@ public class UIManager : MonoBehaviour
         le.minWidth = 80f;
         le.preferredWidth = -1f;
         le.flexibleWidth = 1f;
+        return tmp;
+    }
+
+    private void EnsureComboHudBuilt()
+    {
+        if (BattlePanel == null)
+            return;
+        RectTransform battleRt = BattlePanel.transform as RectTransform;
+        if (battleRt == null)
+            return;
+        if (comboStreakText == null)
+            comboStreakText = BuildComboLine("ComboStreakText", battleRt, new Vector2(-16f, -14f), 19f, FontStyles.Bold);
+        if (nextTypeHintText == null)
+            nextTypeHintText = BuildComboLine("ComboHintText", battleRt, new Vector2(-16f, -40f), 14f, FontStyles.Normal);
+    }
+
+    private static TMP_Text BuildComboLine(string name, RectTransform parent, Vector2 anchoredPos, float size, FontStyles style)
+    {
+        var go = new GameObject(name, typeof(RectTransform));
+        go.transform.SetParent(parent, false);
+        RectTransform rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = new Vector2(1f, 1f);
+        rt.anchorMax = new Vector2(1f, 1f);
+        rt.pivot = new Vector2(1f, 1f);
+        rt.anchoredPosition = anchoredPos;
+        rt.sizeDelta = new Vector2(430f, 24f);
+
+        var tmp = go.AddComponent<TextMeshProUGUI>();
+        tmp.fontSize = size;
+        tmp.fontStyle = style;
+        tmp.color = Color.white;
+        tmp.alignment = TextAlignmentOptions.TopRight;
+        tmp.enableWordWrapping = false;
+        if (TMP_Settings.defaultFontAsset != null)
+            tmp.font = TMP_Settings.defaultFontAsset;
         return tmp;
     }
 }

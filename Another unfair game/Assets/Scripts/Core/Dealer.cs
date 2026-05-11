@@ -14,6 +14,7 @@ public class Dealer : MonoBehaviour
     public int dealerHealth;
     public int shield;
     public int poisonStacks;
+    public int ignoreNextHarmfulEffects;
     public bool isActive;
     [Header("UI")]
     public TMP_Text handValueText;
@@ -34,6 +35,7 @@ public class Dealer : MonoBehaviour
         dealerHealth = dealerData.dealerHealth;
         shield = 0;
         poisonStacks = 0;
+        ignoreNextHarmfulEffects = 0;
         gameObject.GetComponent<Image>().sprite = dealerData.sprite;
         dealerDeck = dealerData.dealerDeck;
         DrawFromDealerDeck();
@@ -168,6 +170,10 @@ public class Dealer : MonoBehaviour
     // ��������� ����� (����� ����� ���������)
     public void TakeDamage(int damage, bool ignoreShield = false)
     {
+        if (damage <= 0)
+            return;
+        if (TryConsumeHarmfulEffectBlock())
+            return;
         if (!ignoreShield && shield > 0)
         {
             int absorbed = Mathf.Min(shield, damage);
@@ -199,6 +205,8 @@ public class Dealer : MonoBehaviour
     {
         if (amount <= 0)
             return;
+        if (TryConsumeHarmfulEffectBlock())
+            return;
         int absorbed = Mathf.Min(shield, amount);
         shield -= absorbed;
     }
@@ -215,7 +223,17 @@ public class Dealer : MonoBehaviour
 
     public void AddPoison(int amount)
     {
+        if (amount <= 0)
+            return;
+        if (TryConsumeHarmfulEffectBlock())
+            return;
         poisonStacks += Mathf.Max(0, amount);
+    }
+
+    /// <summary>Zombie trait: ignores the next harmful incoming effect (damage, poison, shield damage).</summary>
+    public void GrantIgnoreNextHarmfulEffect()
+    {
+        ignoreNextHarmfulEffects += 1;
     }
 
     public void TickPoisonAtRoundStart()
@@ -239,6 +257,14 @@ public class Dealer : MonoBehaviour
         }
 
         return hasAce && handValue == 7;
+    }
+
+    private bool TryConsumeHarmfulEffectBlock()
+    {
+        if (ignoreNextHarmfulEffects <= 0)
+            return false;
+        ignoreNextHarmfulEffects -= 1;
+        return true;
     }
 }
 

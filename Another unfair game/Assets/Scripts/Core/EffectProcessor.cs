@@ -18,6 +18,17 @@ public static class PoisonUpgradeEffects
 
 public static class EffectProcessor
 {
+    private static bool _hasLastPlayerResolvedWinEffect;
+    private static EffectType _lastPlayerResolvedWinEffectType;
+    private static int _lastPlayerResolvedWinEffectAmount;
+
+    public static void ResetPlayerWinEffectMemory()
+    {
+        _hasLastPlayerResolvedWinEffect = false;
+        _lastPlayerResolvedWinEffectType = default;
+        _lastPlayerResolvedWinEffectAmount = 0;
+    }
+
     public static void ProcessEffect(EffectStruct effect, GameState phase)
     {
         Debug.Log($"Processing effect: {effect.type} with value {effect.value}");
@@ -87,6 +98,7 @@ public static class EffectProcessor
     public static void ProcessWinEffect(EffectStruct effect, in EffectWinContext ctx)
     {
         int amount = ctx.Card != null ? Mathf.Max(1, ctx.Card.baseValue) : Mathf.Max(1, effect.value);
+        amount = ApplyComboMagnitudeBonus(amount, in ctx);
 
         switch (effect.type)
         {
@@ -94,7 +106,10 @@ public static class EffectProcessor
                 amount = ApplyPassiveStrikeAndMagicBonuses(EffectType.CardWinStrike, amount, in ctx);
                 amount = ApplyStrikeCrit(amount, in ctx);
                 if (ctx.PlayerWon && ctx.OpponentDealer != null)
+                {
                     PlayerDealsPhysicalDamageToDealer(ctx.OpponentDealer, amount, ctx.Card);
+                    RememberPlayerResolvedWinEffect(effect.type, amount);
+                }
                 else if (!ctx.PlayerWon)
                     PlayerManager.Instance.TakeDamage(amount, ignoreShield: false, attackingDealer: ctx.OpponentDealer);
                 break;
@@ -108,13 +123,17 @@ public static class EffectProcessor
                         shieldApplications = 2;
                     for (int s = 0; s < shieldApplications; s++)
                         PlayerManager.Instance.AddShield(amount);
+                    RememberPlayerResolvedWinEffect(effect.type, amount * shieldApplications);
                 }
                 else if (ctx.OpponentDealer != null)
                     ctx.OpponentDealer.AddShield(amount);
                 break;
             case EffectType.CardWinHeal:
                 if (ctx.PlayerWon)
+                {
                     PlayerManager.Instance.HealDamage(amount);
+                    RememberPlayerResolvedWinEffect(effect.type, amount);
+                }
                 else if (ctx.OpponentDealer != null)
                     ctx.OpponentDealer.HealDamage(amount);
                 break;
@@ -126,6 +145,7 @@ public static class EffectProcessor
                     Dealer target = ctx.OpponentDealer;
                     target.TakeDamage(amount, ignoreShield: true);
                     PassiveUpgradeBonuses.OnPlayerDealtDamageToDealer(target, amount);
+                    RememberPlayerResolvedWinEffect(effect.type, amount);
                     ApplyBonusPoisonOnNonPoisonDamageDealer(in ctx);
 
                     if (PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveMagicStrikeDamagesShieldHalf) > 0)
@@ -163,6 +183,7 @@ public static class EffectProcessor
                 if (ctx.PlayerWon && ctx.OpponentDealer != null)
                 {
                     ctx.OpponentDealer.AddPoison(amount);
+                    RememberPlayerResolvedWinEffect(effect.type, amount);
                     int spread = PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassivePoisonSpreadToOtherEnemiesOnCardPoison);
                     if (spread > 0 && !ctx.SuppressPoisonFlaskSpread)
                         PoisonUpgradeEffects.ApplyPoisonSpreadToOtherDealers(ctx.OpponentDealer, spread);
@@ -172,7 +193,101 @@ public static class EffectProcessor
                 break;
             case EffectType.CardWinCoin:
                 if (ctx.PlayerWon && PlayerManager.Instance != null)
+                {
                     PlayerManager.Instance.GetGold(amount);
+                    RememberPlayerResolvedWinEffect(effect.type, amount);
+                }
+                break;
+            case EffectType.CardWinIgnoreNextHarmfulEffect:
+                if (!ctx.PlayerWon && ctx.OpponentDealer != null)
+                    ctx.OpponentDealer.GrantIgnoreNextHarmfulEffect();
+                break;
+            case EffectType.CardWinLink:
+                if (ctx.PlayerWon && ctx.OpponentDealer != null)
+                {
+                    if (ComboEngine.LastTransitionBridgedTypesFor(true))
+                    {
+                        PlayerDealsPhysicalDamageToDealer(ctx.OpponentDealer, amount, ctx.Card);
+                        RememberPlayerResolvedWinEffect(EffectType.CardWinStrike, amount);
+                    }
+                    else
+                    {
+                        int shield = Mathf.Max(1, Mathf.FloorToInt(amount * 0.5f));
+                        PlayerManager.Instance?.AddShield(shield);
+                        RememberPlayerResolvedWinEffect(EffectType.CardWinShield, shield);
+                    }
+                }
+                else if (!ctx.PlayerWon)
+                {
+                    if (ComboEngine.LastTransitionBridgedTypesFor(false))
+                        PlayerManager.Instance.TakeDamage(amount, ignoreShield: false, attackingDealer: ctx.OpponentDealer);
+                    else if (ctx.OpponentDealer != null)
+                        ctx.OpponentDealer.AddShield(Mathf.Max(1, Mathf.FloorToInt(amount * 0.5f)));
+                }
+                break;
+            case EffectType.CardWinEcho:
+                if (!ctx.PlayerWon || !_hasLastPlayerResolvedWinEffect)
+                    break;
+                int echoedAmount = Mathf.Max(1, Mathf.CeilToInt(_lastPlayerResolvedWinEffectAmount * 0.5f));
+                ApplyEchoedPlayerEffect(_lastPlayerResolvedWinEffectType, echoedAmount, in ctx);
+                break;
+        }
+    }
+
+    private static int ApplyComboMagnitudeBonus(int amount, in EffectWinContext ctx)
+    {
+        if (amount <= 0)
+            return amount;
+        int pct = ComboEngine.GetCurrentComboPercentBonus(ctx.PlayerWon);
+        if (pct <= 0)
+            return amount;
+        return Mathf.Max(1, Mathf.CeilToInt(amount * (100f + pct) / 100f));
+    }
+
+    private static void RememberPlayerResolvedWinEffect(EffectType type, int amount)
+    {
+        if (amount <= 0)
+            return;
+        if (type == EffectType.CardWinEcho)
+            return;
+        _hasLastPlayerResolvedWinEffect = true;
+        _lastPlayerResolvedWinEffectType = type;
+        _lastPlayerResolvedWinEffectAmount = amount;
+    }
+
+    private static void ApplyEchoedPlayerEffect(EffectType sourceType, int amount, in EffectWinContext ctx)
+    {
+        if (amount <= 0)
+            return;
+        switch (sourceType)
+        {
+            case EffectType.CardWinStrike:
+            case EffectType.CardWinMagicStrike:
+            case EffectType.CardWinLink:
+                if (ctx.OpponentDealer != null)
+                {
+                    PlayerDealsPhysicalDamageToDealer(ctx.OpponentDealer, amount, ctx.Card);
+                    RememberPlayerResolvedWinEffect(EffectType.CardWinStrike, amount);
+                }
+                break;
+            case EffectType.CardWinPoison:
+                if (ctx.OpponentDealer != null)
+                {
+                    ctx.OpponentDealer.AddPoison(amount);
+                    RememberPlayerResolvedWinEffect(EffectType.CardWinPoison, amount);
+                }
+                break;
+            case EffectType.CardWinShield:
+                PlayerManager.Instance?.AddShield(amount);
+                RememberPlayerResolvedWinEffect(EffectType.CardWinShield, amount);
+                break;
+            case EffectType.CardWinHeal:
+                PlayerManager.Instance?.HealDamage(amount);
+                RememberPlayerResolvedWinEffect(EffectType.CardWinHeal, amount);
+                break;
+            case EffectType.CardWinCoin:
+                PlayerManager.Instance?.GetGold(amount);
+                RememberPlayerResolvedWinEffect(EffectType.CardWinCoin, amount);
                 break;
         }
     }
@@ -314,7 +429,20 @@ public enum EffectType
     /// <summary>When your CardWinMagicStrike wins, extra magic damage = target poison stacks times this passive sum (scaled per level).</summary>
     UpgradePassiveMagicStrikeBonusDamagePerPoisonStack,
     /// <summary>When your CardWinMagicStrike wins, each other living enemy receives a zero-damage &quot;hit&quot; that still runs on-hit procs (e.g. gold chance).</summary>
-    UpgradePassiveMagicStrikeSplashesToOtherEnemies
+    UpgradePassiveMagicStrikeSplashesToOtherEnemies,
+
+    /// <summary>Card repeats half of the last resolved player card win effect in this showdown.</summary>
+    CardWinEcho,
+    /// <summary>On win: if previous resolved card had a different type, deal damage; otherwise gain shield.</summary>
+    CardWinLink,
+    /// <summary>If last transition was Standard &lt;-&gt; Action, grants combo bonus percent.</summary>
+    UpgradePassiveBridgeCapacitorComboPercent,
+    /// <summary>Per suit transition streak step, grants additional combo bonus percent (capped globally).</summary>
+    UpgradePassiveSuitResonatorComboPercentPerStep,
+    /// <summary>When type-combo breaks, gain immediate safety shield (and diamond draw adds same gold).</summary>
+    UpgradePassiveSafetyValveOnComboBreak,
+    /// <summary>On win (enemy): ignore next incoming harmful effect (damage, poison, shield-only damage).</summary>
+    CardWinIgnoreNextHarmfulEffect
 }
 
 [System.Serializable]

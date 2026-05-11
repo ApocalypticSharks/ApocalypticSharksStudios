@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737aa1f13f6900e4ca9e719d84d56396, type: 3}
+  m_Name: Link_5Diamonds
+  m_EditorClassIdentifier: Assembly-CSharp::CardSO
+  cardName: Link - 5 of Diamonds
+  description: 'On win: if previous resolved card had another type, deals damage.
+    Otherwise grants shield.'
+  cardSprite: {fileID: -6555575649291838755, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  suitSprite: {fileID: -5378756458226701737, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  actionSprite: {fileID: -7389354431750318016, guid: 2e1dc57c9f5760143b5464943c72594f, type: 3}
+  RankSprite: {fileID: -4596500826337777618, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  RankSecondarySprite: {fileID: 0}
+  cardBackSprite: {fileID: 1530772536873026181, guid: 4859236fa041de54c98d0579b0a39ea3, type: 3}
+  price: 20
+  suit: 1
+  rank: 5
+  baseValue: 5
+  isAce: 0
+  cardType: 1
+  rarity: 2
+  isCursed: 0
+  isBlessed: 0
+  isConsumable: 0
+  onPlayEffects: []
+  onWinEffects:
+  - type: 37
+    value: 5
+    description: Link
+  onLoseEffects: []
+  onDiscardEffects: []
+  matchstickCost: 0
+  shopCost: 12

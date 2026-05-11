@@ -34,6 +34,7 @@ public class BattleManager : MonoBehaviour
         PlayerManager.Instance.shield = 0;
         PlayerManager.Instance.poisonStacks = 0;
         PlayerManager.Instance.ClearGreedRoundBonus();
+        ComboEngine.ResetRoundState();
 
         currentBattleNumber += 1;
         if (currentBattleNumber > maxBattlesCount)
@@ -53,6 +54,7 @@ public class BattleManager : MonoBehaviour
         PlayerManager.Instance.shield = 0;
         PlayerManager.Instance.poisonStacks = 0;
         PlayerManager.Instance.ClearGreedRoundBonus();
+        ComboEngine.ResetRoundState();
         ApplyBattleStartShield();
 
         InitializeBoss();
@@ -132,6 +134,7 @@ public class BattleManager : MonoBehaviour
     public void StartNextRound()
     {
         PlayerManager.Instance.ClearGreedRoundBonus();
+        ComboEngine.ResetRoundState();
 
         int extraPoisonTickWaves = PassiveUpgradeBonuses.SumPassiveValue(EffectType.UpgradePassiveExtraPoisonTicksPerRound);
         int poisonTickWaves = Mathf.Max(1, 1 + extraPoisonTickWaves);
@@ -159,22 +162,25 @@ public class BattleManager : MonoBehaviour
         PlayerManager.Instance.shield = 0;
         PlayerManager.Instance.poisonStacks = 0;
         PlayerManager.Instance.ClearGreedRoundBonus();
+        ComboEngine.ResetRoundState();
 
         DeckManager.Instance.DiscradAllCards(PlayerManager.Instance.playerHand);
-        foreach (var dealer in dealers)
+        foreach (Dealer dealer in dealers)
         {
-            for (int i = 0; i < 2; i++)
-            {
-                DeckManager.Instance.DiscardCard(dealer.dealerHand[i], dealer.dealerHand, false);
-            }
-            DeckManager.Instance.DiscradAllCards(dealer.dealerHand);
+            if (dealer == null)
+                continue;
+            while (dealer.dealerHand.Count > 0)
+                DeckManager.Instance.DiscardCard(dealer.dealerHand[0], dealer.dealerHand, false);
             Destroy(dealer.gameObject);
         }
+        dealers.Clear();
+        activeDealer = null;
         DeckManager.Instance.ReshuffleDiscardPile();
         GameStateManager.Instance.MoveToNextGameState(GameState.Shop);
     }
     public void InitializeEnemies()
     {
+        DestroyAllDealers();
         int randomComposition = Random.Range(0, GameStateManager.Instance.currentFloor.dealerCompositions.Count);
         foreach (var dealer in GameStateManager.Instance.currentFloor.dealerCompositions[randomComposition].dealers)
         {
@@ -185,9 +191,22 @@ public class BattleManager : MonoBehaviour
     }
     public void InitializeBoss()
     {
+        DestroyAllDealers();
         GameObject dealerInstance = Instantiate(dealerPrefab, dealerEntities);
         dealerInstance.gameObject.GetComponent<Dealer>().Initialize(GameStateManager.Instance.currentFloor.bossDealer);
         dealers.Add(dealerInstance.gameObject.GetComponent<Dealer>());
+    }
+
+    /// <summary>Clears stale dealer references (e.g. after battle) so the next spawn does not keep destroyed <see cref="Dealer"/> in <see cref="dealers"/>.</summary>
+    private void DestroyAllDealers()
+    {
+        foreach (Dealer dealer in dealers)
+        {
+            if (dealer != null)
+                Destroy(dealer.gameObject);
+        }
+        dealers.Clear();
+        activeDealer = null;
     }
     public void InitializeStartingHands()
     {
@@ -208,11 +227,14 @@ public class BattleManager : MonoBehaviour
     {
         if (winningHand == null)
             return;
+        if (playerWon)
+            EffectProcessor.ResetPlayerWinEffectMemory();
         foreach (GameObject cardGo in winningHand)
         {
             CardData cardData = cardGo.GetComponent<CardData>();
             if (cardData == null || cardData.data == null)
                 continue;
+            ComboEngine.RegisterCardResolved(cardData.data, playerWon);
             List<EffectStruct> effects = cardData.data.onWinEffects;
             if (effects == null || effects.Count == 0)
                 continue;

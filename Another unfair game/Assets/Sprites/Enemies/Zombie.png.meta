@@ -378,6 +378,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Zombie_12
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 634
+        width: 30
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8be1b49933aad974ea47985213bb93eb
+      internalID: -1000029700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -398,6 +420,7 @@ TextureImporter:
       Zombie_1: -244400889
       Zombie_10: -955831569
       Zombie_11: -710542980
+      Zombie_12: -1000029700
       Zombie_2: -884993994
       Zombie_3: 2093286140
       Zombie_4: -1719983831
