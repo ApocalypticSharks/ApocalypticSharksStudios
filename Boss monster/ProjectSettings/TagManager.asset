@@ -6,6 +6,7 @@ TagManager:
   tags:
   - bullet
   - meleeHitBox
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
+  - Obstacle
   - 
   - 
   - 

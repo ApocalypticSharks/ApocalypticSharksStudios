@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9c2d3e4f5678901234ab5c6d7e8f90, type: 3}
+  m_Name: Visitor_Buck
+  m_EditorClassIdentifier: 
+  DisplayName: Buck
+  Kind: 0
+  Description: A fearless bruiser built for close fights.
+  UnitClass: {fileID: 11400000, guid: 2f0f0000000000000000000000000003, type: 2}
+  Traits:
+  - {fileID: 11400000, guid: b222ef7a9096808659f6edea9e68bfba, type: 2}
+  EventText: 
+  AcceptLabel: Accept
+  RejectLabel: Refuse
+  AcceptGold: 0
+  AcceptReputation: 0
+  AcceptHeat: 0
+  RejectGold: 0
+  RejectReputation: 0
+  RejectHeat: 0
+  AcceptReputationBonus: 1
+  RejectReputationPenalty: 1

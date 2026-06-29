@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: 15eafded022e50e40bcd0070eaa11fa7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4285594618037716695
+    second: Sheriff_0
+  - first:
+      213: -7855178032350817821
+    second: Sheriff_1
+  - first:
+      213: -3592621217270048001
+    second: Sheriff_2
+  - first:
+      213: 5640948830885179588
+    second: Sheriff_3
+  - first:
+      213: 441630611447440114
+    second: Sheriff_4
+  - first:
+      213: 7566193146060071010
+    second: Sheriff_5
+  - first:
+      213: 4921527291174117659
+    second: Sheriff_6
+  - first:
+      213: 6695595470001452483
+    second: Sheriff_7
+  - first:
+      213: 3070348424703639079
+    second: Sheriff_8
+  - first:
+      213: 5495203605455177704
+    second: Sheriff_9
+  - first:
+      213: -7262371458829643742
+    second: Sheriff_10
+  - first:
+      213: -9136974755930953826
+    second: Sheriff_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sheriff_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 159
+        width: 61
+        height: 81
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9293984a6628684c0800000000000000
+      internalID: -4285594618037716695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sheriff_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 159
+        width: 42
+        height: 81
+      alignment: 9
+      pivot: {x: 0.3, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e11746b23dccf290800000000000000
+      internalID: -7855178032350817821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sheriff_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 159
+        width: 42
+        height: 81
+      alignment: 9
+      pivot: {x: 0.3, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffa56149902742ec0800000000000000
+      internalID: -3592621217270048001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sheriff_3
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 159
+        width: 62
+        height: 77
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c0f01d131da84e40800000000000000
+      internalID: 5640948830885179588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sheriff_4
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 159
+        width: 52
+        height: 77
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f2634583bcf02600800000000000000
+      internalID: 441630611447440114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sheriff_5
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 159
+        width: 47
+        height: 77
+      alignment: 9
+      pivot: {x: 0.4, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 260e7e43494800960800000000000000
+      internalID: 7566193146060071010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sheriff_6
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 159
+        width: 62
+        height: 77
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b11e2d6fef6cc4440800000000000000
+      internalID: 4921527291174117659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sheriff_7
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 159
+        width: 47
+        height: 77
+      alignment: 9
+      pivot: {x: 0.4, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c5b62dea988bec50800000000000000
+      internalID: 6695595470001452483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sheriff_8
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 159
+        width: 42
+        height: 81
+      alignment: 9
+      pivot: {x: 0.3, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72ef327ff911c9a20800000000000000
+      internalID: 3070348424703639079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sheriff_9
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 159
+        width: 62
+        height: 77
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e70a977092e24c40800000000000000
+      internalID: 5495203605455177704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sheriff_10
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 159
+        width: 42
+        height: 81
+      alignment: 9
+      pivot: {x: 0.3, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2201689c2afd63b90800000000000000
+      internalID: -7262371458829643742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sheriff_11
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 159
+        width: 47
+        height: 77
+      alignment: 9
+      pivot: {x: 0.4, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9726078ed1f23180800000000000000
+      internalID: -9136974755930953826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 98922242591bd4a479d8a804ea4af12f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Sheriff_0: -4285594618037716695
+      Sheriff_1: -7855178032350817821
+      Sheriff_10: -7262371458829643742
+      Sheriff_11: -9136974755930953826
+      Sheriff_2: -3592621217270048001
+      Sheriff_3: 5640948830885179588
+      Sheriff_4: 441630611447440114
+      Sheriff_5: 7566193146060071010
+      Sheriff_6: 4921527291174117659
+      Sheriff_7: 6695595470001452483
+      Sheriff_8: 3070348424703639079
+      Sheriff_9: 5495203605455177704
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

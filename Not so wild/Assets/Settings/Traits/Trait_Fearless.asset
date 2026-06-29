@@ -1,0 +1,44 @@
+﻿%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8b1c2d3e4f5678901234ab5c6d7e8f, type: 3}
+  m_Name: Trait_Fearless
+  m_EditorClassIdentifier: 
+  DisplayName: Fearless
+  Description: Stress never increases.
+  CannotBuild: 0
+  WorkBonuses: []
+  DefenseBonus: 0
+  AccuracyBonus: 0
+  AttackRangeBonus: 0
+  AttackCooldownMultiplier: 1
+  ExtraTargets: 0
+  MultiTargetAccuracyPenalty: 0
+  AccuracyScalesWithDistance: 0
+  MeleeDamageBonus: 0
+  DailyGoldBonus: 0
+  ReputationBonus: 0
+  HeatBonus: 0
+  RaidRiskBonus: 0
+  StartingHealthBonus: 0
+  StartingMoodBonus: 4
+  StartingStressBonus: -10
+  DailyHealthDelta: 0
+  DailyMoodDelta: 0
+  DailyStressDelta: 0
+  DoesNotUseResidentCapacity: 0
+  PreventsStressGain: 1
+  RaidStressMultiplier: 1
+  HospitalWorkBonus: 0
+  CannotWorkAtChurch: 0
+  StressWithoutChurch: 0
+  ChurchEffectMultiplier: 1
+

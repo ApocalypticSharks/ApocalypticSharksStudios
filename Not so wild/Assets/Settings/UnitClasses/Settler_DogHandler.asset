@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f6a9b67bc4c47f29b73d0a17fc28a43, type: 3}
+  m_Name: Settler_DogHandler
+  m_EditorClassIdentifier: 
+  DisplayName: Dog Handler
+  Faction: 0
+  Tier: 6
+  AttackKind: 0
+  Abilities: 16
+  MaxHp: 7
+  Attack: 2
+  Accuracy: 65
+  MoveSpeed: 2.55
+  AttackRange: 0.75
+  AttackCooldown: 1.05
+  TargetCount: 1
+  MultiTargetAccuracyPenalty: 0
+  TauntRadius: 1.4
+  HealRange: 0.8
+  HealAmount: 2
+  AreaRadius: 0.75
+  RicochetCount: 0
+  RicochetDamageMultiplier: 0.75
+  ConeRange: 1.1
+  ConeAngle: 70
+  AllyHasteMultiplier: 0.75
+  AllyHasteSeconds: 4
+  ExecuteHealthThreshold: 0.25
+  ExecuteBuffMultiplier: 0.75
+  ExecuteBuffSeconds: 5

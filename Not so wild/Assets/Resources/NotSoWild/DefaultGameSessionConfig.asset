@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1e4f5678901234ab5c6d7e8f901234, type: 3}
+  m_Name: DefaultGameSessionConfig
+  m_EditorClassIdentifier: 
+  StartingGold: 20
+  StartingReputation: 10
+  StartingDefense: 2
+  StartingMayor: {fileID: 11400000, guid: d1d1d1d1e2e2e2e2f3f3f3f4f4f4f4f4, type: 2}
+  MaxResidents: 5
+  TargetTimeSeconds: 420
+  TownTickIntervalSeconds: 60
+  VisitorSpawnIntervalMin: 8
+  VisitorSpawnIntervalMax: 22
+  VisitorMoveSpeed: 2.5
+  ResidentPatrolSpeed: 1.4
+  DecisionTimeLimit: 15
+  RaidIntervalMinSeconds: 15
+  RaidIntervalMaxSeconds: 30
+  BaseRaidPower: 4
+  RaidPowerPerMinute: 1
+  RaidPowerPerAttack: 2
+  RaidBanditClass: {fileID: 11400000, guid: 2f0f0000000000000000000000000011, type: 2}
+  RaidBanditLeaderClass: {fileID: 11400000, guid: 2f0f0000000000000000000000000016, type: 2}
+  FirstLeaderRaid: 3
+  RaidFailureGoldLoss: 12
+  RaidFailureReputationLoss: 4
+  RaidSuccessReputationGain: 2

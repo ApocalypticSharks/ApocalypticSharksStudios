@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: 48e725a59aa6b8143b8ff42f32c00d31
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5808602918032143202
+    second: wearables_0
+  - first:
+      213: 6031578010490924899
+    second: wearables_1
+  - first:
+      213: -2341543785421765302
+    second: wearables_2
+  - first:
+      213: 182892358188394221
+    second: wearables_3
+  - first:
+      213: -1984093771896919116
+    second: wearables_4
+  - first:
+      213: 2024819059779741910
+    second: wearables_5
+  - first:
+      213: -6110264246260639872
+    second: wearables_6
+  - first:
+      213: 1170366164636693694
+    second: wearables_7
+  - first:
+      213: -2186448441303529425
+    second: wearables_8
+  - first:
+      213: 6991843523641593216
+    second: wearables_9
+  - first:
+      213: 6711490855874891309
+    second: wearables_10
+  - first:
+      213: -5686678870313667667
+    second: wearables_11
+  - first:
+      213: -6893945853388860643
+    second: wearables_12
+  - first:
+      213: -1363813648346653871
+    second: wearables_13
+  - first:
+      213: 4081337391950466965
+    second: wearables_14
+  - first:
+      213: -3232823567577023327
+    second: wearables_15
+  - first:
+      213: 5376675248551377267
+    second: wearables_16
+  - first:
+      213: 1542179178781049639
+    second: wearables_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: wearables_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 204
+        width: 22
+        height: 27
+      alignment: 9
+      pivot: {x: 0.9967708, y: 0.50000054}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9c856ddb62b36fa0800000000000000
+      internalID: -5808602918032143202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_1
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 209
+        width: 27
+        height: 12
+      alignment: 9
+      pivot: {x: 0.5000003, y: 1.0768089}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36f6e5e6e3874b350800000000000000
+      internalID: 6031578010490924899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_2
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 219
+        width: 37
+        height: 17
+      alignment: 9
+      pivot: {x: 0.5000002, y: -0.035732493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4589eb455a218fd0800000000000000
+      internalID: -2341543785421765302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_3
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 219
+        width: 32
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5000005, y: -0.020425705}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de6e3f971a3c98200800000000000000
+      internalID: 182892358188394221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_4
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 214
+        width: 32
+        height: 17
+      alignment: 9
+      pivot: {x: 0.44307852, y: 0.4142842}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bbe4050a351774e0800000000000000
+      internalID: -1984093771896919116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_5
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 204
+        width: 17
+        height: 7
+      alignment: 9
+      pivot: {x: -0.057162117, y: 1.1765573}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d8ac98f43a991c10800000000000000
+      internalID: 2024819059779741910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_6
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 149
+        width: 22
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5165588, y: 0.9802128}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0875dd5aa0bf33ba0800000000000000
+      internalID: -6110264246260639872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_7
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 154
+        width: 37
+        height: 17
+      alignment: 9
+      pivot: {x: 0.5000002, y: -0.057162117}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb47e4c63d9fd3010800000000000000
+      internalID: 1170366164636693694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_8
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 154
+        width: 37
+        height: 17
+      alignment: 9
+      pivot: {x: 0.4999998, y: -0.014303768}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2885681abc28a1e0800000000000000
+      internalID: -2186448441303529425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_9
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 154
+        width: 37
+        height: 17
+      alignment: 9
+      pivot: {x: 0.5000004, y: -0.035732493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08dc5cfe3a4080160800000000000000
+      internalID: 6991843523641593216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_10
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 154
+        width: 22
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5000007, y: 1.0133306}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2e84b9df51042d50800000000000000
+      internalID: 6711490855874891309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_11
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 109
+        width: 22
+        height: 22
+      alignment: 9
+      pivot: {x: 0.50000006, y: 0.99677205}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da3fb3f52bbd411b0800000000000000
+      internalID: -5686678870313667667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_12
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 114
+        width: 27
+        height: 12
+      alignment: 9
+      pivot: {x: 0.5000003, y: 0.9857324}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d13daf3a5c8c350a0800000000000000
+      internalID: -6893945853388860643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_13
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 114
+        width: 27
+        height: 12
+      alignment: 9
+      pivot: {x: 0.5000003, y: 1.0464491}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15bd77e66b2c21de0800000000000000
+      internalID: -1363813648346653871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_14
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 114
+        width: 22
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.98021215}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59f0abfebb2d3a830800000000000000
+      internalID: 4081337391950466965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_15
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 74
+        width: 22
+        height: 12
+      alignment: 9
+      pivot: {x: -0.046448793, y: 1.0768076}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ac7f01f714b223d0800000000000000
+      internalID: -3232823567577023327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_16
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 74
+        width: 32
+        height: 22
+      alignment: 9
+      pivot: {x: 0.48861647, y: -0.0133295925}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3793a86d6a9cd9a40800000000000000
+      internalID: 5376675248551377267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wearables_17
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 74
+        width: 32
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5000005, y: 0.0032289678}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7238f33dacbe66510800000000000000
+      internalID: 1542179178781049639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: daa67bd9b2338d34c9f10abbbc55b600
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      wearables_0: -5808602918032143202
+      wearables_1: 6031578010490924899
+      wearables_10: 6711490855874891309
+      wearables_11: -5686678870313667667
+      wearables_12: -6893945853388860643
+      wearables_13: -1363813648346653871
+      wearables_14: 4081337391950466965
+      wearables_15: -3232823567577023327
+      wearables_16: 5376675248551377267
+      wearables_17: 1542179178781049639
+      wearables_2: -2341543785421765302
+      wearables_3: 182892358188394221
+      wearables_4: -1984093771896919116
+      wearables_5: 2024819059779741910
+      wearables_6: -6110264246260639872
+      wearables_7: 1170366164636693694
+      wearables_8: -2186448441303529425
+      wearables_9: 6991843523641593216
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: e2a61758ad8abef469c585016bb0bbf9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5382380698129540891
+    second: Huntsman_0
+  - first:
+      213: -6897835623297230021
+    second: Huntsman_1
+  - first:
+      213: 339433172617694771
+    second: Huntsman_2
+  - first:
+      213: 4139685981099358050
+    second: Huntsman_3
+  - first:
+      213: 1478107429664852786
+    second: Huntsman_4
+  - first:
+      213: 2139179369447541962
+    second: Huntsman_5
+  - first:
+      213: 1773758381441923535
+    second: Huntsman_6
+  - first:
+      213: -5807343633793170722
+    second: Huntsman_7
+  - first:
+      213: -1042127832277809891
+    second: Huntsman_8
+  - first:
+      213: -5571435408688831153
+    second: Huntsman_9
+  - first:
+      213: 2153432647877751231
+    second: Huntsman_10
+  - first:
+      213: -3035603427309070024
+    second: Huntsman_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Huntsman_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 159
+        width: 57
+        height: 77
+      alignment: 9
+      pivot: {x: 0.4, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b172ee55abe02ba40800000000000000
+      internalID: 5382380698129540891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Huntsman_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 159
+        width: 37
+        height: 77
+      alignment: 9
+      pivot: {x: 0.35, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3b55520c07f540a0800000000000000
+      internalID: -6897835623297230021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Huntsman_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 159
+        width: 37
+        height: 77
+      alignment: 9
+      pivot: {x: 0.35, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33e8cde0ca8e5b400800000000000000
+      internalID: 339433172617694771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Huntsman_3
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 159
+        width: 57
+        height: 72
+      alignment: 9
+      pivot: {x: 0.4, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2677711877e137930800000000000000
+      internalID: 4139685981099358050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Huntsman_4
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 159
+        width: 47
+        height: 72
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23b0a0d30ea438410800000000000000
+      internalID: 1478107429664852786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Huntsman_5
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 159
+        width: 42
+        height: 72
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: accc3ca7d44efad10800000000000000
+      internalID: 2139179369447541962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Huntsman_6
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 159
+        width: 57
+        height: 72
+      alignment: 9
+      pivot: {x: 0.4, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc9b733a9d7ad9810800000000000000
+      internalID: 1773758381441923535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Huntsman_7
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 159
+        width: 42
+        height: 72
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed2c123dbbb286fa0800000000000000
+      internalID: -5807343633793170722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Huntsman_8
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 159
+        width: 37
+        height: 77
+      alignment: 9
+      pivot: {x: 0.35, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d15888a024e9981f0800000000000000
+      internalID: -1042127832277809891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Huntsman_9
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 159
+        width: 57
+        height: 72
+      alignment: 9
+      pivot: {x: 0.4, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f45a118b3094ea2b0800000000000000
+      internalID: -5571435408688831153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Huntsman_10
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 159
+        width: 37
+        height: 77
+      alignment: 9
+      pivot: {x: 0.35, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb17b78759782ed10800000000000000
+      internalID: 2153432647877751231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Huntsman_11
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 159
+        width: 42
+        height: 72
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 839d84424ce5fd5d0800000000000000
+      internalID: -3035603427309070024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 4cfc533c27dac674bb6f431058685bbf
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Huntsman_0: 5382380698129540891
+      Huntsman_1: -6897835623297230021
+      Huntsman_10: 2153432647877751231
+      Huntsman_11: -3035603427309070024
+      Huntsman_2: 339433172617694771
+      Huntsman_3: 4139685981099358050
+      Huntsman_4: 1478107429664852786
+      Huntsman_5: 2139179369447541962
+      Huntsman_6: 1773758381441923535
+      Huntsman_7: -5807343633793170722
+      Huntsman_8: -1042127832277809891
+      Huntsman_9: -5571435408688831153
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: b0493f3670a1cc548adaff3cd291a5b3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5140541302677035762
+    second: crater_medium_topdown_0
+  - first:
+      213: -3424292914038635531
+    second: crater_medium_topdown_1
+  - first:
+      213: 5294110178191561834
+    second: crater_medium_topdown_2
+  - first:
+      213: -6376088001867019195
+    second: crater_medium_topdown_3
+  - first:
+      213: 6831510820752743313
+    second: crater_medium_topdown_4
+  - first:
+      213: -817765718465193960
+    second: crater_medium_topdown_5
+  - first:
+      213: 4768558181649184764
+    second: crater_medium_topdown_6
+  - first:
+      213: 2033873409744085678
+    second: crater_medium_topdown_7
+  - first:
+      213: 276505240514390286
+    second: crater_medium_topdown_8
+  - first:
+      213: 698067017514617804
+    second: crater_medium_topdown_9
+  - first:
+      213: -6079873158662235185
+    second: crater_medium_topdown_10
+  - first:
+      213: -6221079878471573594
+    second: crater_medium_topdown_11
+  - first:
+      213: -3942648862844057890
+    second: crater_medium_topdown_12
+  - first:
+      213: 8727002859596838330
+    second: crater_medium_topdown_13
+  - first:
+      213: -2183290794224418948
+    second: crater_medium_topdown_14
+  - first:
+      213: 3525650292508361309
+    second: crater_medium_topdown_15
+  - first:
+      213: 4735186677335621049
+    second: crater_medium_topdown_16
+  - first:
+      213: -2336384661825646985
+    second: crater_medium_topdown_17
+  - first:
+      213: -2239746191202714392
+    second: crater_medium_topdown_18
+  - first:
+      213: 5042366863569497285
+    second: crater_medium_topdown_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: crater_medium_topdown_0
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 857
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fad94b341fd65740800000000000000
+      internalID: 5140541302677035762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_1
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 846
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f307d3ccb77a70d0800000000000000
+      internalID: -3424292914038635531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_2
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 831
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6453ec5825787940800000000000000
+      internalID: 5294110178191561834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_3
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 845
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54c06188eb59387a0800000000000000
+      internalID: -6376088001867019195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_4
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 819
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19b543685e66ece50800000000000000
+      internalID: 6831510820752743313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_5
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 841
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 818d3696966b6a4f0800000000000000
+      internalID: -817765718465193960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_6
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 826
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf77bfbb6625d2240800000000000000
+      internalID: 4768558181649184764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_7
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 23
+        width: 828
+        height: 819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea2a8e91715c93c10800000000000000
+      internalID: 2033873409744085678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_8
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 663
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e09e46f1d0856d300800000000000000
+      internalID: 276505240514390286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_9
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 580
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccb0060014800b900800000000000000
+      internalID: 698067017514617804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_10
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 497
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcb51822393ff9ba0800000000000000
+      internalID: -6079873158662235185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_11
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 497
+        width: 33
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6af1f5cafc84aa9a0800000000000000
+      internalID: -6221079878471573594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_12
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 485
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed605109fb5e849c0800000000000000
+      internalID: -3942648862844057890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_13
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 408
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab57618fcda8c1970800000000000000
+      internalID: 8727002859596838330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_14
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 403
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7f7fd8179463b1e0800000000000000
+      internalID: -2183290794224418948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_15
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 339
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d528637e240ade030800000000000000
+      internalID: 3525650292508361309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_16
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 308
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bd70c7e133c6b140800000000000000
+      internalID: 4735186677335621049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_17
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 9
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77e063d578e739fd0800000000000000
+      internalID: -2336384661825646985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_18
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 18
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ecf35ea4b2dae0e0800000000000000
+      internalID: -2239746191202714392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater_medium_topdown_19
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 1
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cca24262f51af540800000000000000
+      internalID: 5042366863569497285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      crater_medium_topdown_0: 5140541302677035762
+      crater_medium_topdown_1: -3424292914038635531
+      crater_medium_topdown_10: -6079873158662235185
+      crater_medium_topdown_11: -6221079878471573594
+      crater_medium_topdown_12: -3942648862844057890
+      crater_medium_topdown_13: 8727002859596838330
+      crater_medium_topdown_14: -2183290794224418948
+      crater_medium_topdown_15: 3525650292508361309
+      crater_medium_topdown_16: 4735186677335621049
+      crater_medium_topdown_17: -2336384661825646985
+      crater_medium_topdown_18: -2239746191202714392
+      crater_medium_topdown_19: 5042366863569497285
+      crater_medium_topdown_2: 5294110178191561834
+      crater_medium_topdown_3: -6376088001867019195
+      crater_medium_topdown_4: 6831510820752743313
+      crater_medium_topdown_5: -817765718465193960
+      crater_medium_topdown_6: 4768558181649184764
+      crater_medium_topdown_7: 2033873409744085678
+      crater_medium_topdown_8: 276505240514390286
+      crater_medium_topdown_9: 698067017514617804
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

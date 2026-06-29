@@ -20,6 +20,8 @@ MonoBehaviour:
   reloadSpeed: 3
   meleeDamage: 20
   name: Bolt rifle
-  sprite: {fileID: 0}
+  ammoItemId: ammo_rifle
+  sprite: {fileID: 21300000, guid: ebf43f534089a4a4c9e897e04bda961f, type: 3}
   auto: 0
   isMelee: 0
+  equippedLengthRatio: 1.05

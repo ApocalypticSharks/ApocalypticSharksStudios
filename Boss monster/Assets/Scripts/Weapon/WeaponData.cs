@@ -5,11 +5,15 @@ public class WeaponData : ScriptableObject
 {
     [SerializeField] private int ammoAmount, fireSpread, fireRate, meleeRate, damage, reloadSpeed, meleeDamage;
     [SerializeField] private string name;
+    [SerializeField] private string ammoItemId;
     [SerializeField] private Sprite sprite;
     [SerializeField] private bool auto, isMelee;
+    [SerializeField] private float equippedLengthRatio;
 
     public string Name
         { get { return name; } }
+    public string AmmoItemId
+        { get { return ammoItemId; } }
     public Sprite Sprite
         { get { return sprite; } }
     public int AmmoAmount
@@ -30,4 +34,6 @@ public class WeaponData : ScriptableObject
         { get { return auto; } }
     public bool IsMelee
         { get { return isMelee; } }
+    public float EquippedLengthRatio
+        { get { return equippedLengthRatio; } }
 }

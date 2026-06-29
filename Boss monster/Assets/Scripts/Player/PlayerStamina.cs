@@ -1,56 +1,82 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
 public class PlayerStamina : NetworkBehaviour
 {
-    public float Value, staminaRecoverCooldown, staminaRecoverDelay;
+    [SerializeField] private float maxStamina = 100f;
+    [SerializeField] private float staminaRecoverDelay = 4f;
+    [SerializeField] private float sprintDrainRate = 20f;
+    [SerializeField] private float recoverRate = 10f;
     [SerializeField] private PlayerScript playerScript;
+
+    public NetworkVariable<float> Value = new NetworkVariable<float>(100f);
+    public NetworkVariable<float> RecoverCooldown = new NetworkVariable<float>(0f);
+    public float MaxValue => maxStamina;
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsServer)
+        {
+            Value.Value = maxStamina;
+            RecoverCooldown.Value = 0f;
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (playerScript.isSprinting && playerScript.rigidbody2D.velocity != Vector2.zero)
-        {
-            if (TryUseStamina(20))
-            {
-                playerScript.playerSpeed = playerScript.sprintSpeed;
-                staminaRecoverCooldown += staminaRecoverDelay;
-            }
-        }
-        else if (!playerScript.isSprinting)
-        {
-            playerScript.playerSpeed = playerScript.walkSpeed;
-            Debug.Log("here");
-            StaminaRecover();
-        }
+        if (IsServer)
+            SimulateStamina();
 
-        Value = Mathf.Clamp(Value, 0, 100);
-        staminaRecoverCooldown = Mathf.Clamp(staminaRecoverCooldown, 0, staminaRecoverDelay);
+        if (IsOwner)
+            ApplyMovementSpeed();
     }
 
-    private bool TryUseStamina(float amount)
+    private void SimulateStamina()
     {
-        if (Value > 0)
+        if (playerScript.IsDead)
+            return;
+
+        bool sprinting = playerScript.IsSprinting.Value
+            && !playerScript.IsCarryingReliquary()
+            && playerScript.rigidbody2D.linearVelocity.sqrMagnitude > 0.01f;
+
+        if (sprinting)
         {
-            Value -= amount * Time.deltaTime;
-            return true;
-        }
-        playerScript.StopActions();
-        return false;
-    }
-    private void StaminaRecover()
-    {
-        if (Value < 100)
-        {
-            if (staminaRecoverCooldown > 0)
+            if (Value.Value > 0f)
             {
-                Debug.Log("here1");
-                staminaRecoverCooldown -= Time.deltaTime;
+                Value.Value = Mathf.Max(0f, Value.Value - sprintDrainRate * Time.fixedDeltaTime);
+                RecoverCooldown.Value = staminaRecoverDelay;
             }
             else
             {
-                Value += 10 * Time.deltaTime;
+                playerScript.StopSprintFromStamina();
             }
         }
+        else if (Value.Value < maxStamina)
+        {
+            if (RecoverCooldown.Value > 0f)
+                RecoverCooldown.Value = Mathf.Max(0f, RecoverCooldown.Value - Time.fixedDeltaTime);
+            else
+                Value.Value = Mathf.Min(maxStamina, Value.Value + recoverRate * Time.fixedDeltaTime);
+        }
+    }
+
+    private void ApplyMovementSpeed()
+    {
+        if (playerScript.IsDead)
+            return;
+
+        if (playerScript.IsCarryingReliquary())
+        {
+            playerScript.playerSpeed = playerScript.walkSpeed;
+            if (IsOwner)
+                playerScript.IsSprinting.Value = false;
+            return;
+        }
+
+        if (playerScript.IsSprinting.Value && Value.Value > 0f)
+            playerScript.playerSpeed = playerScript.sprintSpeed;
+        else
+            playerScript.playerSpeed = playerScript.walkSpeed;
     }
 }
