@@ -1,0 +1,34 @@
+# Unity generated folders
+/Library/
+/Temp/
+/Obj/
+/Build/
+/Builds/
+/Logs/
+/UserSettings/
+/MemoryCaptures/
+
+# IDE and OS noise
+/.vs/
+/.vscode/
+/.idea/
+*.csproj
+*.sln
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+
+# Unity crash and local debug output
+/sysinfo.txt
+*.stackdump
+
+# Keep Unity assets and their metadata tracked.
+!Assets/**/*.png
+!Assets/**/*.meta
